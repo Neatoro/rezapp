@@ -1,0 +1,10 @@
+{
+    "name": "rezapp",
+    "version": "1.0.0",
+    "scripts": {
+        "prettify": "prettier --write ."
+    },
+    "devDependencies": {
+        "prettier": "^2.8.1"
+    }
+}
