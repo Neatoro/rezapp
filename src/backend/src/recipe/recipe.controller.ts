@@ -1,5 +1,9 @@
-import { Controller, Get } from '@nestjs/common';
-import { ListRecipesResponse } from './recipe.interface';
+import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Recipe } from './recipe.entity';
+import {
+    CreateRecipeRequestDto,
+    ListRecipesResponse,
+} from './recipe.interface';
 import { RecipeService } from './recipe.service';
 
 @Controller('/recipe')
@@ -11,5 +15,10 @@ export class RecipeController {
         return {
             recipes: await this.recipeService.list(),
         };
+    }
+
+    @Post()
+    async create(@Body() dto: CreateRecipeRequestDto): Promise<Recipe> {
+        return this.recipeService.create(dto);
     }
 }
