@@ -18,7 +18,7 @@ export class RecipeService {
     create(dto: CreateRecipeRequestDto): Promise<Recipe> {
         return this.recipeRepository.save({
             name: dto.name,
-            description: dto.description,
+            description: dto.description
         });
     }
 }

@@ -2,7 +2,7 @@ import { Body, Controller, Get, Post } from '@nestjs/common';
 import { Recipe } from './recipe.entity';
 import {
     CreateRecipeRequestDto,
-    ListRecipesResponse,
+    ListRecipesResponse
 } from './recipe.interface';
 import { RecipeService } from './recipe.service';
 
@@ -13,7 +13,7 @@ export class RecipeController {
     @Get()
     async list(): Promise<ListRecipesResponse> {
         return {
-            recipes: await this.recipeService.list(),
+            recipes: await this.recipeService.list()
         };
     }
 

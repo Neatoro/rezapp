@@ -11,11 +11,11 @@ import { RecipeModule } from '../recipe/recipe.module';
                 const providedConfig = await loadDatabaseConfiguration();
                 return {
                     ...providedConfig,
-                    entities: [Recipe],
+                    entities: [Recipe]
                 };
-            },
+            }
         }),
-        RecipeModule,
-    ],
+        RecipeModule
+    ]
 })
 export class AppModule {}

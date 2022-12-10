@@ -5,6 +5,7 @@
         "prettify": "prettier --write ."
     },
     "devDependencies": {
-        "prettier": "^2.8.1"
+        "prettier": "^2.8.1",
+        "prettier-plugin-svelte": "^2.9.0"
     }
 }
