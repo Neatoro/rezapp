@@ -7,7 +7,7 @@
 <div class="md:w-1/2 mx-auto">
     {#if data.recipe.image}
         <img
-            class="object-cover drop-shadow-md rounded-xl h-72 mx-auto"
+            class="drop-shadow-md rounded-xl max-h-72 mx-auto mb-4"
             src={`/api/recipe/${data.recipe.id}/image`}
             alt={data.recipe.name}
         />
