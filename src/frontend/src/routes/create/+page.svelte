@@ -13,7 +13,19 @@
     let name = '';
     let description = '';
     let steps = [{ description: '' }];
-    let images;
+    let images = [];
+
+    let preview_image;
+
+    $: {
+        if (images.length > 0) {
+            const reader = new FileReader();
+            reader.onload = () => {
+                preview_image = reader.result;
+            };
+            reader.readAsDataURL(images[0]);
+        }
+    }
 
     async function saveRecipe() {
         const response = await fetch('/api/recipe', {
@@ -85,6 +97,14 @@
 
             <div>
                 <Label for="dropzone" class="mb-2">Vorschaubild</Label>
+                {#if preview_image}
+                    <img
+                        class="drop-shadow-md rounded-xl mb-4 w-32"
+                        src={preview_image}
+                        alt="Vorschaubild des Rezeptes"
+                    />
+                {/if}
+
                 <Dropzone id="dropzone" bind:files={images}>
                     <svg
                         aria-hidden="true"
