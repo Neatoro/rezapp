@@ -1,10 +1,15 @@
 <script>
-    import { Card } from 'flowbite-svelte';
+    import { Button, Card, Toolbar } from 'flowbite-svelte';
 
     export let data;
 </script>
 
-{#each data.recipes as recipe}
+<Toolbar>
+    <Button href="/create"><svg class="icon icon-plus"><use xlink:href="icons.svg#icon-plus"></use></svg></Button>
+</Toolbar>
+
+<div class="my-4">
+    {#each data.recipes as recipe}
     <Card>
         <h5
             class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
@@ -15,4 +20,5 @@
             {recipe.description}
         </p>
     </Card>
-{/each}
+    {/each}
+</div>
