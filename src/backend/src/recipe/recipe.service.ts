@@ -13,18 +13,23 @@ export class RecipeService {
         private readonly stepRepository: Repository<Recipe>
     ) {}
 
-    list(): Promise<Recipe[]> {
-        return this.recipeRepository.find({
+    async list(): Promise<Recipe[]> {
+        const recipes = await this.recipeRepository.find({
             relations: {
                 steps: true
             }
         });
+
+        return recipes.map((recipe) => ({
+            ...recipe,
+            steps: recipe.steps.sort((stepA, stepB) => stepA.order - stepB.order)
+        }));
     }
 
     async create(dto: CreateRecipeRequestDto): Promise<Recipe> {
         const steps = await Promise.all(
-            dto.steps.map((step) =>
-                this.stepRepository.save({ description: step })
+            dto.steps.map((step, index) =>
+                this.stepRepository.save({ description: step, order: index })
             )
         );
         return await this.recipeRepository.save({

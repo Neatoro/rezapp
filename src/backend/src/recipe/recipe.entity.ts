@@ -29,6 +29,9 @@ export class RecipeStep {
     @Column()
     description: string;
 
+    @Column('int')
+    order: number;
+
     @ManyToOne(() => Recipe, (recipe) => recipe.steps)
     recipe: Recipe;
 }
