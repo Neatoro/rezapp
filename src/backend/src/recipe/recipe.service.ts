@@ -14,16 +14,7 @@ export class RecipeService {
     ) {}
 
     async list(): Promise<Recipe[]> {
-        const recipes = await this.recipeRepository.find({
-            relations: {
-                steps: true
-            }
-        });
-
-        return recipes.map((recipe) => ({
-            ...recipe,
-            steps: recipe.steps.sort((stepA, stepB) => stepA.order - stepB.order)
-        }));
+        return await this.recipeRepository.find();
     }
 
     async get(id: string): Promise<Recipe> {
