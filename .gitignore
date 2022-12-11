@@ -1,6 +1,7 @@
 node_modules
 dist
 src/backend/ormconfig.json
+src/backend/images
 *.db
 
 .DS_Store

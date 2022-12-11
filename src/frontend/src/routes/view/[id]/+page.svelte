@@ -5,6 +5,14 @@
 </script>
 
 <div class="md:w-1/2 mx-auto">
+    {#if data.recipe.image}
+        <img
+            class="object-cover drop-shadow-md rounded-xl h-72 mx-auto"
+            src={`/api/recipe/${data.recipe.id}/image`}
+            alt={data.recipe.name}
+        />
+    {/if}
+
     <h1
         class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
     >

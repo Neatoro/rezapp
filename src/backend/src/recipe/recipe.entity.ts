@@ -17,6 +17,9 @@ export class Recipe {
     @Column()
     description: string;
 
+    @Column({ default: false })
+    image: boolean;
+
     @OneToMany(() => RecipeStep, (step) => step.recipe)
     steps: RecipeStep[];
 }

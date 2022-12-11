@@ -5,16 +5,18 @@
         Textarea,
         Button,
         Tabs,
-        TabItem
+        TabItem,
+        Dropzone
     } from 'flowbite-svelte';
     import { goto } from '$app/navigation';
 
     let name = '';
     let description = '';
     let steps = [{ description: '' }];
+    let images;
 
     async function saveRecipe() {
-        await fetch('/api/recipe', {
+        const response = await fetch('/api/recipe', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -27,6 +29,18 @@
                     .map((step) => step.description)
             })
         });
+
+        if (images.length > 0) {
+            const recipe = await response.json();
+            const image = images[0];
+            const formData = new FormData();
+            formData.append('file', image);
+
+            await fetch(`/api/recipe/${recipe.id}/image`, {
+                method: 'PUT',
+                body: formData
+            });
+        }
 
         goto('/');
     }
@@ -67,6 +81,33 @@
                     rows="4"
                     name="description"
                 />
+            </div>
+
+            <div>
+                <Label for="dropzone" class="mb-2">Vorschaubild</Label>
+                <Dropzone id="dropzone" bind:files={images}>
+                    <svg
+                        aria-hidden="true"
+                        class="mb-3 w-10 h-10 text-gray-400"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                        ><path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
+                        /></svg
+                    >
+                    <p class="mb-2 text-sm text-gray-500 dark:text-gray-400">
+                        <span class="font-semibold">Click to upload</span> or drag
+                        and drop
+                    </p>
+                    <p class="text-xs text-gray-500 dark:text-gray-400">
+                        SVG, PNG, JPG or GIF (MAX. 800x400px)
+                    </p>
+                </Dropzone>
             </div>
         </TabItem>
 

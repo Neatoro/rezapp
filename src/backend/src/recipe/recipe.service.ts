@@ -3,6 +3,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Recipe, RecipeStep } from './recipe.entity';
 import { CreateRecipeRequestDto } from './recipe.interface';
+import { writeFile, readFile } from 'fs/promises';
+import { resolve } from 'path';
 
 @Injectable()
 export class RecipeService {
@@ -46,5 +48,17 @@ export class RecipeService {
             description: dto.description,
             steps: steps
         });
+    }
+
+    async uploadImage(id: string, file: Buffer) {
+        await writeFile(resolve(process.cwd(), 'images', id), file);
+        const template = await this.recipeRepository.findOne({ where: { id } });
+        template.image = true;
+        await this.recipeRepository.save(template);
+    }
+
+    async getImage(id: string) {
+        const file = await readFile(resolve(process.cwd(), 'images', id));
+        return file;
     }
 }

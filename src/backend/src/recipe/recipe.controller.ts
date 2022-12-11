@@ -1,4 +1,16 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import {
+    Body,
+    Controller,
+    Get,
+    Header,
+    Param,
+    Post,
+    Put,
+    UploadedFile,
+    UseInterceptors,
+    Response
+} from '@nestjs/common';
+import { FileInterceptor } from '@nestjs/platform-express';
 import { Recipe } from './recipe.entity';
 import {
     CreateRecipeRequestDto,
@@ -20,6 +32,22 @@ export class RecipeController {
     @Get(':id')
     async get(@Param('id') id: string): Promise<Recipe> {
         return await this.recipeService.get(id);
+    }
+
+    @Get(':id/image')
+    @Header('content-type', 'image/jpeg')
+    async getImage(@Param('id') id: string, @Response() res) {
+        const image = await this.recipeService.getImage(id);
+        res.end(image);
+    }
+
+    @Put(':id/image')
+    @UseInterceptors(FileInterceptor('file'))
+    async uploadImage(
+        @Param('id') id: string,
+        @UploadedFile() file: Express.Multer.File
+    ) {
+        await this.recipeService.uploadImage(id, file.buffer);
     }
 
     @Post()

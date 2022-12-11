@@ -16,7 +16,7 @@
     class="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 my-4"
 >
     {#each data.recipes as recipe}
-        <Card>
+        <Card img={recipe.image ? `/api/recipe/${recipe.id}/image` : ''}>
             <h5
                 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
             >
