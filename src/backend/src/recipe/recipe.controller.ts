@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { Recipe } from './recipe.entity';
 import {
     CreateRecipeRequestDto,
@@ -15,6 +15,11 @@ export class RecipeController {
         return {
             recipes: await this.recipeService.list()
         };
+    }
+
+    @Get(':id')
+    async get(@Param('id') id: string): Promise<Recipe> {
+        return await this.recipeService.get(id);
     }
 
     @Post()

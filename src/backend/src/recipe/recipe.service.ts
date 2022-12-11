@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { DataSource, Repository } from 'typeorm';
+import { Repository } from 'typeorm';
 import { Recipe, RecipeStep } from './recipe.entity';
 import { CreateRecipeRequestDto } from './recipe.interface';
 
@@ -24,6 +24,22 @@ export class RecipeService {
             ...recipe,
             steps: recipe.steps.sort((stepA, stepB) => stepA.order - stepB.order)
         }));
+    }
+
+    async get(id: string): Promise<Recipe> {
+        const recipe = await this.recipeRepository.findOne({
+            where: {
+                id
+            },
+            relations: {
+                steps: true
+            }
+        });
+
+        return {
+            ...recipe,
+            steps: recipe.steps.sort((stepA, stepB) => stepA.order - stepB.order)
+        };
     }
 
     async create(dto: CreateRecipeRequestDto): Promise<Recipe> {
