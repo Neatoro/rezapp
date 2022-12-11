@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { loadDatabaseConfiguration } from '../database/config-loader';
-import { Recipe } from '../recipe/recipe.entity';
+import { Recipe, RecipeStep } from '../recipe/recipe.entity';
 import { RecipeModule } from '../recipe/recipe.module';
 
 @Module({
@@ -11,7 +11,7 @@ import { RecipeModule } from '../recipe/recipe.module';
                 const providedConfig = await loadDatabaseConfiguration();
                 return {
                     ...providedConfig,
-                    entities: [Recipe]
+                    entities: [Recipe, RecipeStep]
                 };
             }
         }),

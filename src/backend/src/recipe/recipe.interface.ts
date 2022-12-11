@@ -1,4 +1,4 @@
-import { IsNotEmpty } from 'class-validator';
+import { IsNotEmpty, IsString } from 'class-validator';
 import { Recipe } from './recipe.entity';
 
 export interface ListRecipesResponse {
@@ -11,4 +11,7 @@ export class CreateRecipeRequestDto {
 
     @IsNotEmpty()
     description: string;
+
+    @IsString({ each: true })
+    steps: string[] = [];
 }
