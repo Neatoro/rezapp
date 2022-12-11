@@ -25,4 +25,3 @@
         {/each}
     </section>
 </div>
-

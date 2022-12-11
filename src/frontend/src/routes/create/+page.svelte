@@ -1,5 +1,12 @@
 <script>
-    import { Label, Input, Textarea, Button, Tabs, TabItem } from 'flowbite-svelte';
+    import {
+        Label,
+        Input,
+        Textarea,
+        Button,
+        Tabs,
+        TabItem
+    } from 'flowbite-svelte';
     import { goto } from '$app/navigation';
 
     let name = '';
@@ -25,10 +32,7 @@
     }
 
     function addStep() {
-        steps = [
-            ...steps,
-            { description: '' }
-        ];
+        steps = [...steps, { description: '' }];
     }
 </script>
 
@@ -54,7 +58,8 @@
             </div>
 
             <div>
-                <Label for="description" class="mb-2">Rezept-Beschreibung</Label>
+                <Label for="description" class="mb-2">Rezept-Beschreibung</Label
+                >
                 <Textarea
                     bind:value={description}
                     id="description"
@@ -68,17 +73,19 @@
         <TabItem>
             <span slot="title">Arbeitsschritte</span>
 
-            {#each steps as step, i }
-            <div>
-                <Label for="description" class="mb-2">{i + 1}. Arbeitsschritt</Label>
-                <Textarea
-                    bind:value={step.description}
-                    id="description"
-                    placeholder="Schrittbeschreibung"
-                    rows="4"
-                    name="description"
-                />
-            </div>
+            {#each steps as step, i}
+                <div>
+                    <Label for="description" class="mb-2"
+                        >{i + 1}. Arbeitsschritt</Label
+                    >
+                    <Textarea
+                        bind:value={step.description}
+                        id="description"
+                        placeholder="Schrittbeschreibung"
+                        rows="4"
+                        name="description"
+                    />
+                </div>
             {/each}
 
             <Button on:click={addStep}>Schritt hinzufügen</Button>

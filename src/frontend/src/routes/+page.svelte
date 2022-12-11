@@ -28,7 +28,9 @@
                 {recipe.description}
             </p>
 
-            <Button class="mt-4 w-fit" href={"/view/" + recipe.id}>Anzeigen</Button>
+            <Button class="mt-4 w-fit" href={'/view/' + recipe.id}
+                >Anzeigen</Button
+            >
         </Card>
     {/each}
 </div>

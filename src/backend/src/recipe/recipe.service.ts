@@ -29,7 +29,9 @@ export class RecipeService {
 
         return {
             ...recipe,
-            steps: recipe.steps.sort((stepA, stepB) => stepA.order - stepB.order)
+            steps: recipe.steps.sort(
+                (stepA, stepB) => stepA.order - stepB.order
+            )
         };
     }
 
