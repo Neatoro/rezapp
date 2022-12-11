@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsString } from 'class-validator';
+import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
 import { Recipe } from './recipe.entity';
 
 export interface ListRecipesResponse {
@@ -13,5 +13,6 @@ export class CreateRecipeRequestDto {
     description: string;
 
     @IsString({ each: true })
-    steps: string[] = [];
+    @IsOptional()
+    steps: string[];
 }
