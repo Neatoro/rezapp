@@ -1,7 +1,15 @@
 <script>
-    import { P } from 'flowbite-svelte';
+    import { P, SpeedDial, SpeedDialButton } from 'flowbite-svelte';
+    import { goto } from '$app/navigation';
 
     export let data;
+
+    async function deleteRecipe() {
+        await fetch(`/api/recipe/${data.recipe.id}`, {
+            method: 'DELETE'
+        });
+        goto('/');
+    }
 </script>
 
 <div class="md:w-1/2 mx-auto">
@@ -33,3 +41,11 @@
         {/each}
     </section>
 </div>
+
+<SpeedDial defaultClass="fixed right-6 bottom-6" pill={false}>
+    <SpeedDialButton on:click={deleteRecipe} name="Löschen">
+        <svg class="icon icon-bin"
+            ><use xlink:href="/icons.svg#icon-bin" /></svg
+        >
+    </SpeedDialButton>
+</SpeedDial>

@@ -8,7 +8,8 @@ import {
     Put,
     UploadedFile,
     UseInterceptors,
-    Response
+    Response,
+    Delete
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { Recipe } from './recipe.entity';
@@ -32,6 +33,11 @@ export class RecipeController {
     @Get(':id')
     async get(@Param('id') id: string): Promise<Recipe> {
         return await this.recipeService.get(id);
+    }
+
+    @Delete(':id')
+    async delete(@Param('id') id: string) {
+        await this.recipeService.delete(id);
     }
 
     @Get(':id/image')

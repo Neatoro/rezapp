@@ -35,6 +35,6 @@ export class RecipeStep {
     @Column('int')
     order: number;
 
-    @ManyToOne(() => Recipe, (recipe) => recipe.steps)
+    @ManyToOne(() => Recipe, (recipe) => recipe.steps, { onDelete: 'CASCADE' })
     recipe: Recipe;
 }

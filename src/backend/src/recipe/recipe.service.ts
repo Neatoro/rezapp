@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Recipe, RecipeStep } from './recipe.entity';
 import { CreateRecipeRequestDto } from './recipe.interface';
-import { writeFile, readFile } from 'fs/promises';
+import { writeFile, readFile, access, rm } from 'fs/promises';
 import { resolve } from 'path';
 
 @Injectable()
@@ -50,15 +50,27 @@ export class RecipeService {
         });
     }
 
+    async delete(id: string) {
+        await this.recipeRepository.delete(id);
+        try {
+            await access(this.getImagePath(id));
+            await rm(this.getImagePath(id));
+        } catch {}
+    }
+
     async uploadImage(id: string, file: Buffer) {
-        await writeFile(resolve(process.cwd(), 'images', id), file);
+        await writeFile(this.getImagePath(id), file);
         const template = await this.recipeRepository.findOne({ where: { id } });
         template.image = true;
         await this.recipeRepository.save(template);
     }
 
     async getImage(id: string) {
-        const file = await readFile(resolve(process.cwd(), 'images', id));
+        const file = await readFile(this.getImagePath(id));
         return file;
+    }
+
+    private getImagePath(id: string) {
+        return resolve(process.cwd(), 'images', id);
     }
 }
