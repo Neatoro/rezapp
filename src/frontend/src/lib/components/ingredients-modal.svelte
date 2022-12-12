@@ -12,8 +12,11 @@
         TableSearch
     } from 'flowbite-svelte';
     import { createEventDispatcher } from 'svelte';
+    import CreateIngredientModal from './create-ingredient-modal.svelte';
 
     const dispatch = createEventDispatcher();
+
+    let newIngredientModalOpen = false;
 
     export let open = false;
     export let ingredients;
@@ -71,9 +74,16 @@
         });
         open = false;
     }
+
+    function newIngredient(event) {
+        dispatch('newIngredient', event.detail);
+    }
 </script>
 
-<Modal class="min-h-3/4" title="Zutaten hinzufügen" bind:open>
+<Modal title="Zutaten hinzufügen" bind:open>
+    <Button on:click={() => (newIngredientModalOpen = true)}
+        >Neue Zutat erstellen</Button
+    >
     <TableSearch striped={true} bind:inputValue={searchQuery}>
         <TableHead>
             <TableHeadCell><span class="sr-only">Auswählen</span></TableHeadCell
@@ -130,3 +140,8 @@
         >
     </svelte:fragment>
 </Modal>
+
+<CreateIngredientModal
+    bind:open={newIngredientModalOpen}
+    on:created={newIngredient}
+/>

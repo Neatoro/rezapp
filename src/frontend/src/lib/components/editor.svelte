@@ -54,6 +54,10 @@
     function addStep() {
         steps = [...steps, { description: '' }];
     }
+
+    function newIngredient(event) {
+        dispatch('newIngredient', event.detail);
+    }
 </script>
 
 <form class="md:w-1/2 mx-auto">
@@ -146,7 +150,7 @@
             <Button on:click={addStep}>Schritt hinzufügen</Button>
         </TabItem>
 
-        <TabItem open>
+        <TabItem>
             <span slot="title">Zutaten</span>
             <Button on:click={() => (ingredientsModalOpen = true)}
                 >Hinzufügen</Button
@@ -157,6 +161,7 @@
                 {ingredients}
                 on:select={(event) =>
                     (selectedIngredients = event.detail.ingredients)}
+                on:newIngredient={newIngredient}
             />
 
             <Table striped={true}>

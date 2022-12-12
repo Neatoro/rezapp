@@ -35,6 +35,14 @@
 
         goto('/');
     }
+
+    function newIngredient(event) {
+        data.ingredients = [...data.ingredients, event.detail];
+    }
 </script>
 
-<Editor on:save={saveRecipe} ingredients={data.ingredients} />
+<Editor
+    on:save={saveRecipe}
+    ingredients={data.ingredients}
+    on:newIngredient={newIngredient}
+/>
