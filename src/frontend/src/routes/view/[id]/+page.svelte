@@ -1,8 +1,10 @@
 <script>
-    import { P, SpeedDial, SpeedDialButton } from 'flowbite-svelte';
+    import { Modal, P, SpeedDial, SpeedDialButton, Button } from 'flowbite-svelte';
     import { goto } from '$app/navigation';
 
     export let data;
+
+    let deleteModal = false;
 
     async function deleteRecipe() {
         await fetch(`/api/recipe/${data.recipe.id}`, {
@@ -43,9 +45,17 @@
 </div>
 
 <SpeedDial defaultClass="fixed right-6 bottom-6" pill={false}>
-    <SpeedDialButton on:click={deleteRecipe} name="Löschen">
+    <SpeedDialButton on:click={() => deleteModal = true} name="Löschen">
         <svg class="icon icon-bin"
             ><use xlink:href="/icons.svg#icon-bin" /></svg
         >
     </SpeedDialButton>
 </SpeedDial>
+
+<Modal title="Löschen" bind:open={deleteModal} autoclose>
+    <P>Möchtest du das Rezept "{data.recipe.name}" wirklich löschen?</P>
+    <svelte:fragment slot='footer'>
+        <Button>Abbrechen</Button>
+        <Button color="red" on:click={deleteRecipe}>Löschen</Button>
+    </svelte:fragment>
+</Modal>
