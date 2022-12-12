@@ -1,6 +1,8 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { loadDatabaseConfiguration } from '../database/config-loader';
+import { Ingredient } from '../ingredient/ingredient.entity';
+import { IngredientModule } from '../ingredient/ingredient.module';
 import { Recipe, RecipeStep } from '../recipe/recipe.entity';
 import { RecipeModule } from '../recipe/recipe.module';
 
@@ -11,11 +13,12 @@ import { RecipeModule } from '../recipe/recipe.module';
                 const providedConfig = await loadDatabaseConfiguration();
                 return {
                     ...providedConfig,
-                    entities: [Recipe, RecipeStep]
+                    entities: [Recipe, RecipeStep, Ingredient]
                 };
             }
         }),
-        RecipeModule
+        RecipeModule,
+        IngredientModule
     ]
 })
 export class AppModule {}

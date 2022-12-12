@@ -6,9 +6,16 @@
         Button,
         Tabs,
         TabItem,
-        Dropzone
+        Dropzone,
+        Table,
+        TableBody,
+        TableBodyCell,
+        TableBodyRow,
+        TableHead,
+        TableHeadCell
     } from 'flowbite-svelte';
     import { createEventDispatcher } from 'svelte';
+    import IngredientsModal from './ingredients-modal.svelte';
 
     const dispatch = createEventDispatcher();
 
@@ -16,6 +23,11 @@
     let description = '';
     let steps = [{ description: '' }];
     let images = [];
+    let selectedIngredients = [];
+
+    let ingredientsModalOpen = false;
+
+    export let ingredients;
 
     let preview_image;
 
@@ -34,7 +46,8 @@
             name,
             description,
             steps,
-            images
+            images,
+            ingredients: selectedIngredients.map((ingredient) => ingredient.id)
         });
     }
 
@@ -131,6 +144,55 @@
             {/each}
 
             <Button on:click={addStep}>Schritt hinzufügen</Button>
+        </TabItem>
+
+        <TabItem open>
+            <span slot="title">Zutaten</span>
+            <Button on:click={() => (ingredientsModalOpen = true)}
+                >Hinzufügen</Button
+            >
+
+            <IngredientsModal
+                bind:open={ingredientsModalOpen}
+                {ingredients}
+                on:select={(event) =>
+                    (selectedIngredients = event.detail.ingredients)}
+            />
+
+            <Table striped={true}>
+                <TableHead>
+                    <TableHeadCell>Zutat</TableHeadCell>
+                    <TableHeadCell>
+                        <span class="sr-only"> Bearbeiten </span>
+                    </TableHeadCell>
+                    <TableHeadCell>
+                        <span class="sr-only"> Löschen </span>
+                    </TableHeadCell>
+                </TableHead>
+                <TableBody class="divide-y">
+                    {#each selectedIngredients as ingredient}
+                        <TableBodyRow>
+                            <TableBodyCell>{ingredient.name}</TableBodyCell>
+                            <TableBodyCell>
+                                <a
+                                    href="#"
+                                    class="font-medium text-blue-600 hover:underline dark:text-blue-500"
+                                >
+                                    Bearbeiten
+                                </a>
+                            </TableBodyCell>
+                            <TableBodyCell>
+                                <a
+                                    href="#"
+                                    class="font-medium text-red-600 hover:underline dark:text-red-500"
+                                >
+                                    Löschen
+                                </a>
+                            </TableBodyCell>
+                        </TableBodyRow>
+                    {/each}
+                </TableBody>
+            </Table>
         </TabItem>
     </Tabs>
 

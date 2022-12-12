@@ -1,10 +1,13 @@
 import {
     Column,
     Entity,
+    JoinTable,
+    ManyToMany,
     ManyToOne,
     OneToMany,
     PrimaryGeneratedColumn
 } from 'typeorm';
+import { Ingredient } from '../ingredient/ingredient.entity';
 
 @Entity()
 export class Recipe {
@@ -22,6 +25,10 @@ export class Recipe {
 
     @OneToMany(() => RecipeStep, (step) => step.recipe)
     steps: RecipeStep[];
+
+    @ManyToMany(() => Ingredient, (ingredient) => ingredient.recipes)
+    @JoinTable()
+    ingredients: Ingredient[];
 }
 
 @Entity()

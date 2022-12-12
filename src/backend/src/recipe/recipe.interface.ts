@@ -15,4 +15,8 @@ export class CreateRecipeRequestDto {
     @IsString({ each: true })
     @IsOptional()
     steps: string[];
+
+    @IsString({ each: true })
+    @IsOptional()
+    ingredients: string[];
 }

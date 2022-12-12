@@ -25,7 +25,8 @@ export class RecipeService {
                 id
             },
             relations: {
-                steps: true
+                steps: true,
+                ingredients: true
             }
         });
 
@@ -46,7 +47,10 @@ export class RecipeService {
         return await this.recipeRepository.save({
             name: dto.name,
             description: dto.description,
-            steps: steps
+            steps: steps,
+            ingredients: dto.ingredients.map((ingredient) => ({
+                id: ingredient
+            }))
         });
     }
 

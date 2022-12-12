@@ -2,8 +2,10 @@
     import { goto } from '$app/navigation';
     import Editor from '$lib/components/editor.svelte';
 
+    export let data;
+
     async function saveRecipe({ detail }) {
-        const { name, description, steps, images } = detail;
+        const { name, description, steps, images, ingredients } = detail;
         const response = await fetch('/api/recipe', {
             method: 'POST',
             headers: {
@@ -12,6 +14,7 @@
             body: JSON.stringify({
                 name,
                 description,
+                ingredients,
                 steps: steps
                     .filter((step) => step.description !== '')
                     .map((step) => step.description)
@@ -34,4 +37,4 @@
     }
 </script>
 
-<Editor on:save={saveRecipe} />
+<Editor on:save={saveRecipe} ingredients={data.ingredients} />

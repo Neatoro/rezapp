@@ -1,5 +1,17 @@
 <script>
-    import { Modal, P, SpeedDial, SpeedDialButton, Button } from 'flowbite-svelte';
+    import {
+        Modal,
+        P,
+        SpeedDial,
+        SpeedDialButton,
+        Button,
+        Table,
+        TableBody,
+        TableBodyCell,
+        TableBodyRow,
+        TableHead,
+        TableHeadCell
+    } from 'flowbite-svelte';
     import { goto } from '$app/navigation';
 
     export let data;
@@ -35,6 +47,27 @@
         <h2
             class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white"
         >
+            Zutaten
+        </h2>
+
+        <Table>
+            <TableHead>
+                <TableHeadCell>Zutat</TableHeadCell>
+            </TableHead>
+            <TableBody class="divide-y">
+                {#each data.recipe.ingredients as ingredient}
+                    <TableBodyRow>
+                        <TableBodyCell>{ingredient.name}</TableBodyCell>
+                    </TableBodyRow>
+                {/each}
+            </TableBody>
+        </Table>
+    </section>
+
+    <section class="mt-8">
+        <h2
+            class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white"
+        >
             Arbeitsschritte
         </h2>
 
@@ -45,16 +78,15 @@
 </div>
 
 <SpeedDial defaultClass="fixed right-6 bottom-6" pill={false}>
-    <SpeedDialButton on:click={() => deleteModal = true} name="Löschen">
-        <svg class="icon icon-bin"
-            ><use xlink:href="/icons.svg#icon-bin" /></svg
+    <SpeedDialButton on:click={() => (deleteModal = true)} name="Löschen">
+        <svg class="icon icon-bin"><use xlink:href="/icons.svg#icon-bin" /></svg
         >
     </SpeedDialButton>
 </SpeedDial>
 
 <Modal title="Löschen" bind:open={deleteModal} autoclose>
     <P>Möchtest du das Rezept "{data.recipe.name}" wirklich löschen?</P>
-    <svelte:fragment slot='footer'>
+    <svelte:fragment slot="footer">
         <Button>Abbrechen</Button>
         <Button color="red" on:click={deleteRecipe}>Löschen</Button>
     </svelte:fragment>
