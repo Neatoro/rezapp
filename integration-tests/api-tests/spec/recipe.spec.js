@@ -12,11 +12,11 @@ describe('Recipe', () => {
         profileHelper.close();
     });
 
-    describe('list', () => {
-        beforeEach(async () => {
-            await profileHelper.cleanSetup();
-        });
+    beforeEach(async () => {
+        await profileHelper.cleanSetup();
+    });
 
+    describe('list', () => {
         it('should return an empty list when no recipes exists', async () => {
             const response = await fetch('http://localhost:8080/recipe');
             const data = await response.json();
@@ -43,6 +43,17 @@ describe('Recipe', () => {
                     }
                 ]
             });
+        });
+    });
+
+    describe('get', () => {
+        it('should 404 if recipe does not exists', async () => {
+            const response = await fetch(
+                'http://localhost:8080/recipe/foo-bar'
+            );
+            const data = await response.json();
+
+            expect(response.status).toBe(404);
         });
     });
 });

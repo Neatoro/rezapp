@@ -29,10 +29,16 @@ export class RecipeService {
             relations: ['steps', 'ingredients', 'ingredients.ingredient']
         });
 
-        return {
-            ...recipe,
-            steps: recipe.steps.sort((stepA, stepB) => stepA.rank - stepB.rank)
-        };
+        if (recipe) {
+            return {
+                ...recipe,
+                steps: recipe.steps.sort(
+                    (stepA, stepB) => stepA.rank - stepB.rank
+                )
+            };
+        } else {
+            return undefined;
+        }
     }
 
     private async createRecipeIngredient({ ingredient, amount, unit }) {
