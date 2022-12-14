@@ -41,6 +41,10 @@
         }
     }
 
+    $: addableIngredients = ingredients.filter(
+        (ingredient) => !selectedIngredients.includes(ingredient)
+    );
+
     async function saveRecipe() {
         dispatch('save', {
             name,
@@ -53,6 +57,19 @@
 
     function addStep() {
         steps = [...steps, { description: '' }];
+    }
+
+    function selectIngredients(event) {
+        selectedIngredients = [
+            ...selectedIngredients,
+            ...event.detail.ingredients
+        ];
+    }
+
+    function removeIngredient(id) {
+        selectedIngredients = selectedIngredients.filter(
+            (ingredient) => ingredient.id !== id
+        );
     }
 
     function newIngredient(event) {
@@ -158,9 +175,8 @@
 
             <IngredientsModal
                 bind:open={ingredientsModalOpen}
-                {ingredients}
-                on:select={(event) =>
-                    (selectedIngredients = event.detail.ingredients)}
+                ingredients={addableIngredients}
+                on:select={selectIngredients}
                 on:newIngredient={newIngredient}
             />
 
@@ -187,12 +203,13 @@
                                 </a>
                             </TableBodyCell>
                             <TableBodyCell>
-                                <a
-                                    href="#"
+                                <button
+                                    on:click={() =>
+                                        removeIngredient(ingredient.id)}
                                     class="font-medium text-red-600 hover:underline dark:text-red-500"
                                 >
                                     Löschen
-                                </a>
+                                </button>
                             </TableBodyCell>
                         </TableBodyRow>
                     {/each}

@@ -38,6 +38,8 @@
 
     $: searchQuery, (page = 0);
 
+    $: open, (selection = {});
+
     $: {
         pageHelper = {
             max: filteredItems.length,
