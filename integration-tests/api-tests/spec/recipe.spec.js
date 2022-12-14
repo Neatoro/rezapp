@@ -51,9 +51,43 @@ describe('Recipe', () => {
             const response = await fetch(
                 'http://localhost:8080/recipe/foo-bar'
             );
-            const data = await response.json();
 
             expect(response.status).toBe(404);
+        });
+
+        it('should return correct recipe', async () => {
+            await profileHelper.apply('test-recipe');
+
+            const response = await fetch(
+                'http://localhost:8080/recipe/7ae7b1d7-f081-4203-ae9d-2839201d942d'
+            );
+            const data = await response.json();
+
+            expect(response.status).toBe(200);
+            expect(data).toEqual({
+                id: '7ae7b1d7-f081-4203-ae9d-2839201d942d',
+                name: 'Test',
+                description: 'Test',
+                image: false,
+                steps: [
+                    {
+                        id: '8dae1913-517f-4d5e-9c23-14cb1a5b3cb3',
+                        description: 'Test',
+                        rank: 0
+                    }
+                ],
+                ingredients: [
+                    {
+                        id: '03ff41b7-9faf-47a6-ac3a-efcbb20a2e1a',
+                        amount: 225,
+                        unit: 'g',
+                        ingredient: {
+                            id: '6961db05-7a8a-40d8-ad9b-0873dc23e271',
+                            name: 'Test'
+                        }
+                    }
+                ]
+            });
         });
     });
 });
