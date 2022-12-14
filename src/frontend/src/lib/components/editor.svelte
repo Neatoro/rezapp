@@ -25,6 +25,21 @@
     let images = [];
     let selectedIngredients = [];
 
+    let ingredientMetadata = {};
+
+    $: {
+        for (const ingredientId of selectedIngredients.map(
+            (ingredient) => ingredient.id
+        )) {
+            if (!ingredientMetadata[ingredientId]) {
+                ingredientMetadata[ingredientId] = {
+                    amount: 0,
+                    unit: ''
+                };
+            }
+        }
+    }
+
     let ingredientsModalOpen = false;
 
     export let ingredients;
@@ -51,7 +66,11 @@
             description,
             steps,
             images,
-            ingredients: selectedIngredients.map((ingredient) => ingredient.id)
+            ingredients: Object.keys(ingredientMetadata).map((id) => ({
+                ingredient: id,
+                amount: Number(ingredientMetadata[id].amount),
+                unit: ingredientMetadata[id].unit
+            }))
         });
     }
 
@@ -180,12 +199,11 @@
                 on:newIngredient={newIngredient}
             />
 
-            <Table striped={true}>
+            <Table>
                 <TableHead>
+                    <TableHeadCell>Menge</TableHeadCell>
+                    <TableHeadCell>Einheit</TableHeadCell>
                     <TableHeadCell>Zutat</TableHeadCell>
-                    <TableHeadCell>
-                        <span class="sr-only"> Bearbeiten </span>
-                    </TableHeadCell>
                     <TableHeadCell>
                         <span class="sr-only"> Löschen </span>
                     </TableHeadCell>
@@ -193,15 +211,24 @@
                 <TableBody class="divide-y">
                     {#each selectedIngredients as ingredient}
                         <TableBodyRow>
-                            <TableBodyCell>{ingredient.name}</TableBodyCell>
                             <TableBodyCell>
-                                <a
-                                    href="#"
-                                    class="font-medium text-blue-600 hover:underline dark:text-blue-500"
-                                >
-                                    Bearbeiten
-                                </a>
+                                <Input
+                                    type="number"
+                                    placeholder="1000"
+                                    bind:value={ingredientMetadata[
+                                        ingredient.id
+                                    ].amount}
+                                />
                             </TableBodyCell>
+                            <TableBodyCell>
+                                <Input
+                                    placeholder="g"
+                                    bind:value={ingredientMetadata[
+                                        ingredient.id
+                                    ].unit}
+                                />
+                            </TableBodyCell>
+                            <TableBodyCell>{ingredient.name}</TableBodyCell>
                             <TableBodyCell>
                                 <button
                                     on:click={() =>

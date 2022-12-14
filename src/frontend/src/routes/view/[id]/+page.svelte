@@ -52,12 +52,19 @@
 
         <Table>
             <TableHead>
+                <TableHeadCell>Menge</TableHeadCell>
                 <TableHeadCell>Zutat</TableHeadCell>
             </TableHead>
             <TableBody class="divide-y">
-                {#each data.recipe.ingredients as ingredient}
+                {#each data.recipe.ingredients as recipeIngredient}
                     <TableBodyRow>
-                        <TableBodyCell>{ingredient.name}</TableBodyCell>
+                        <TableBodyCell
+                            >{#if recipeIngredient.amount > 0}{recipeIngredient.amount}
+                            {/if}{recipeIngredient.unit}</TableBodyCell
+                        >
+                        <TableBodyCell
+                            >{recipeIngredient.ingredient.name}</TableBodyCell
+                        >
                     </TableBodyRow>
                 {/each}
             </TableBody>

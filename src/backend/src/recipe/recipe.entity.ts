@@ -26,9 +26,11 @@ export class Recipe {
     @OneToMany(() => RecipeStep, (step) => step.recipe)
     steps: RecipeStep[];
 
-    @ManyToMany(() => Ingredient, (ingredient) => ingredient.recipes)
-    @JoinTable()
-    ingredients: Ingredient[];
+    @OneToMany(
+        () => RecipeIngredient,
+        (recipeIngredient) => recipeIngredient.recipe
+    )
+    ingredients: RecipeIngredient[];
 }
 
 @Entity()
@@ -44,4 +46,26 @@ export class RecipeStep {
 
     @ManyToOne(() => Recipe, (recipe) => recipe.steps, { onDelete: 'CASCADE' })
     recipe: Recipe;
+}
+
+@Entity()
+export class RecipeIngredient {
+    @PrimaryGeneratedColumn('uuid')
+    id: string;
+
+    @Column()
+    amount: number;
+
+    @Column()
+    unit: string;
+
+    @ManyToOne(() => Recipe, (recipe) => recipe.ingredients, {
+        onDelete: 'CASCADE'
+    })
+    recipe: Recipe;
+
+    @ManyToOne(() => Ingredient, (ingredient) => ingredient.recipes, {
+        onDelete: 'CASCADE'
+    })
+    ingredient: Ingredient;
 }

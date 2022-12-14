@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Recipe, RecipeStep } from './recipe.entity';
+import { Recipe, RecipeIngredient, RecipeStep } from './recipe.entity';
 import { CreateRecipeRequestDto } from './recipe.interface';
 import { writeFile, readFile, access, rm } from 'fs/promises';
 import { resolve } from 'path';
@@ -12,7 +12,9 @@ export class RecipeService {
         @InjectRepository(Recipe)
         private readonly recipeRepository: Repository<Recipe>,
         @InjectRepository(RecipeStep)
-        private readonly stepRepository: Repository<Recipe>
+        private readonly stepRepository: Repository<RecipeStep>,
+        @InjectRepository(RecipeIngredient)
+        private readonly recipeIngredientRepository: Repository<RecipeIngredient>
     ) {}
 
     async list(): Promise<Recipe[]> {
@@ -24,10 +26,7 @@ export class RecipeService {
             where: {
                 id
             },
-            relations: {
-                steps: true,
-                ingredients: true
-            }
+            relations: ['steps', 'ingredients', 'ingredients.ingredient']
         });
 
         return {
@@ -38,19 +37,32 @@ export class RecipeService {
         };
     }
 
+    private async createRecipeIngredient({ ingredient, amount, unit }) {
+        return await this.recipeIngredientRepository.save({
+            ingredient: { id: ingredient },
+            amount,
+            unit
+        });
+    }
+
     async create(dto: CreateRecipeRequestDto): Promise<Recipe> {
         const steps = await Promise.all(
             dto.steps.map((step, index) =>
                 this.stepRepository.save({ description: step, order: index })
             )
         );
+
+        const recipeIngredients = await Promise.all(
+            dto.ingredients.map((recipeIngredient) =>
+                this.createRecipeIngredient(recipeIngredient)
+            )
+        );
+
         return await this.recipeRepository.save({
             name: dto.name,
             description: dto.description,
             steps: steps,
-            ingredients: dto.ingredients.map((ingredient) => ({
-                id: ingredient
-            }))
+            ingredients: recipeIngredients
         });
     }
 

@@ -16,7 +16,15 @@ export class CreateRecipeRequestDto {
     @IsOptional()
     steps: string[];
 
-    @IsString({ each: true })
     @IsOptional()
-    ingredients: string[];
+    ingredients: RecipeIngredient[];
+}
+
+class RecipeIngredient {
+    @IsNotEmpty()
+    ingredient: string;
+
+    amount: number;
+
+    unit: string;
 }
