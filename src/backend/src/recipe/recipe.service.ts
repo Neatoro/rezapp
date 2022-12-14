@@ -31,9 +31,7 @@ export class RecipeService {
 
         return {
             ...recipe,
-            steps: recipe.steps.sort(
-                (stepA, stepB) => stepA.order - stepB.order
-            )
+            steps: recipe.steps.sort((stepA, stepB) => stepA.rank - stepB.rank)
         };
     }
 
@@ -48,7 +46,7 @@ export class RecipeService {
     async create(dto: CreateRecipeRequestDto): Promise<Recipe> {
         const steps = await Promise.all(
             dto.steps.map((step, index) =>
-                this.stepRepository.save({ description: step, order: index })
+                this.stepRepository.save({ description: step, rank: index })
             )
         );
 

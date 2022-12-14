@@ -42,7 +42,7 @@ export class RecipeStep {
     description: string;
 
     @Column('int')
-    order: number;
+    rank: number;
 
     @ManyToOne(() => Recipe, (recipe) => recipe.steps, { onDelete: 'CASCADE' })
     recipe: Recipe;
