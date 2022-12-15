@@ -3,7 +3,8 @@ const path = require('path');
 
 class ProfileHelper {
     constructor() {
-        this.db = new sqlite.Database(
+        const dbPath =
+            process.env.DATABASE_PATH ||
             path.resolve(
                 process.cwd(),
                 '..',
@@ -11,8 +12,8 @@ class ProfileHelper {
                 'src',
                 'backend',
                 'recipes.db'
-            )
-        );
+            );
+        this.db = new sqlite.Database(dbPath);
     }
 
     _exec(query) {

@@ -1,3 +1,4 @@
+const executeRequest = require('./helpers/request-helper');
 const ProfileHelper = require('./helpers/profile-helper');
 
 describe('Recipe', () => {
@@ -18,7 +19,7 @@ describe('Recipe', () => {
 
     describe('list', () => {
         it('should return an empty list when no recipes exists', async () => {
-            const response = await fetch('http://localhost:8080/recipe');
+            const response = await executeRequest('/recipe');
             const data = await response.json();
 
             expect(response.status).toBe(200);
@@ -28,7 +29,7 @@ describe('Recipe', () => {
         it('should return existing recipes', async () => {
             await profileHelper.apply('simple-recipe');
 
-            const response = await fetch('http://localhost:8080/recipe');
+            const response = await executeRequest('/recipe');
             const data = await response.json();
 
             expect(response.status).toBe(200);
@@ -48,9 +49,7 @@ describe('Recipe', () => {
 
     describe('get', () => {
         it('should 404 if recipe does not exists', async () => {
-            const response = await fetch(
-                'http://localhost:8080/recipe/foo-bar'
-            );
+            const response = await executeRequest('/recipe/foo-bar');
 
             expect(response.status).toBe(404);
         });
@@ -58,8 +57,8 @@ describe('Recipe', () => {
         it('should return correct recipe', async () => {
             await profileHelper.apply('test-recipe');
 
-            const response = await fetch(
-                'http://localhost:8080/recipe/7ae7b1d7-f081-4203-ae9d-2839201d942d'
+            const response = await executeRequest(
+                '/recipe/7ae7b1d7-f081-4203-ae9d-2839201d942d'
             );
             const data = await response.json();
 
@@ -93,7 +92,7 @@ describe('Recipe', () => {
 
     describe('create', () => {
         it('should fail if empty body is provided', async () => {
-            const response = await fetch('http://localhost:8080/recipe', {
+            const response = await executeRequest('/recipe', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'
@@ -116,7 +115,7 @@ describe('Recipe', () => {
         });
 
         it('should fail if name is not provided', async () => {
-            const response = await fetch('http://localhost:8080/recipe', {
+            const response = await executeRequest('/recipe', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'
@@ -136,7 +135,7 @@ describe('Recipe', () => {
         });
 
         it('should fail if name is not a string', async () => {
-            const response = await fetch('http://localhost:8080/recipe', {
+            const response = await executeRequest('/recipe', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'
@@ -157,7 +156,7 @@ describe('Recipe', () => {
         });
 
         it('should fail if name is not provided', async () => {
-            const response = await fetch('http://localhost:8080/recipe', {
+            const response = await executeRequest('/recipe', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'
@@ -180,7 +179,7 @@ describe('Recipe', () => {
         });
 
         it('should fail if name is not a string', async () => {
-            const response = await fetch('http://localhost:8080/recipe', {
+            const response = await executeRequest('/recipe', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'
@@ -201,7 +200,7 @@ describe('Recipe', () => {
         });
 
         it('should fail if steps are not strings', async () => {
-            const response = await fetch('http://localhost:8080/recipe', {
+            const response = await executeRequest('/recipe', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'
@@ -223,7 +222,7 @@ describe('Recipe', () => {
         });
 
         it('should fail if ingredient id is not provided', async () => {
-            const response = await fetch('http://localhost:8080/recipe', {
+            const response = await executeRequest('/recipe', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'
@@ -253,7 +252,7 @@ describe('Recipe', () => {
         });
 
         it('should fail if ingredient id is not a string', async () => {
-            const response = await fetch('http://localhost:8080/recipe', {
+            const response = await executeRequest('/recipe', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'
@@ -281,7 +280,7 @@ describe('Recipe', () => {
         });
 
         it('should fail if ingredient amount is not a number', async () => {
-            const response = await fetch('http://localhost:8080/recipe', {
+            const response = await executeRequest('/recipe', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'
@@ -311,7 +310,7 @@ describe('Recipe', () => {
         });
 
         it('should fail if ingredient unit is not a string', async () => {
-            const response = await fetch('http://localhost:8080/recipe', {
+            const response = await executeRequest('/recipe', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'
@@ -339,7 +338,7 @@ describe('Recipe', () => {
         });
 
         it('should create a recipe without ingredients and steps', async () => {
-            const response = await fetch('http://localhost:8080/recipe', {
+            const response = await executeRequest('/recipe', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'
@@ -366,7 +365,7 @@ describe('Recipe', () => {
         });
 
         it('should create a recipe without ingredients', async () => {
-            const response = await fetch('http://localhost:8080/recipe', {
+            const response = await executeRequest('/recipe', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'
@@ -401,7 +400,7 @@ describe('Recipe', () => {
         it('should create a recipe without steps', async () => {
             await profileHelper.apply('test-ingredient');
 
-            const response = await fetch('http://localhost:8080/recipe', {
+            const response = await executeRequest('/recipe', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'
@@ -445,7 +444,7 @@ describe('Recipe', () => {
         it('should create a recipe with ingredients and steps', async () => {
             await profileHelper.apply('test-ingredient');
 
-            const response = await fetch('http://localhost:8080/recipe', {
+            const response = await executeRequest('/recipe', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'
