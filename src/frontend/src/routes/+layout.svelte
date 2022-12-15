@@ -1,10 +1,7 @@
 <script>
     import {
         NavBrand,
-        Navbar,
-        NavHamburger,
-        NavUl,
-        NavLi
+        Navbar
     } from 'flowbite-svelte';
     import '../app.postcss';
 </script>
