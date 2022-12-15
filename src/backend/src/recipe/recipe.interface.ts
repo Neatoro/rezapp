@@ -7,9 +7,11 @@ export interface ListRecipesResponse {
 
 export class CreateRecipeRequestDto {
     @IsNotEmpty()
+    @IsString()
     name: string;
 
     @IsNotEmpty()
+    @IsString()
     description: string;
 
     @IsString({ each: true })

@@ -90,4 +90,29 @@ describe('Recipe', () => {
             });
         });
     });
+
+    describe('create', () => {
+        it('should fail if empty body is provided', async () => {
+            const response = await fetch('http://localhost:8080/recipe', {
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify({})
+            });
+            const data = await response.json();
+
+            expect(response.status).toBe(400);
+            expect(data).toEqual({
+                statusCode: 400,
+                message: [
+                    'name must be a string',
+                    'name should not be empty',
+                    'description must be a string',
+                    'description should not be empty'
+                ],
+                error: 'Bad Request'
+            });
+        });
+    });
 });
