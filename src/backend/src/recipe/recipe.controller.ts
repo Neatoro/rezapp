@@ -65,6 +65,8 @@ export class RecipeController {
     @Post()
     async create(@Body() dto: CreateRecipeRequestDto): Promise<Recipe> {
         dto.steps = dto.steps || [];
+        dto.ingredients = dto.ingredients || [];
+
         return this.recipeService.create(dto);
     }
 }
