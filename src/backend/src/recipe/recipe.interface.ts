@@ -43,7 +43,6 @@ class RecipeStep {
 }
 
 class RecipeIngredient {
-
     @IsOptional()
     @IsString()
     id: string;

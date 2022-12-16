@@ -15,8 +15,7 @@
                 name,
                 description,
                 ingredients,
-                steps: steps
-                    .filter((step) => step.description !== '')
+                steps: steps.filter((step) => step.description !== '')
             })
         });
 

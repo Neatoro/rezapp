@@ -70,6 +70,56 @@ export class RecipeService {
         });
     }
 
+    async update(id: string, dto: CreateRecipeRequestDto): Promise<Recipe> {
+        const dboRecipe = await this.recipeRepository.findOneBy({ id });
+        if (!dboRecipe) {
+            return undefined;
+        }
+
+        const steps = await Promise.all(
+            dto.steps.map(async (step, index) => {
+                if (step.id) {
+                    const dboStep = await this.stepRepository.findOneBy({
+                        id: step.id
+                    });
+                    dboStep.description = step.description;
+                    dboStep.rank = index;
+                    return await this.stepRepository.save(dboStep);
+                } else {
+                    return await this.stepRepository.save({
+                        ...step,
+                        rank: index
+                    });
+                }
+            })
+        );
+
+        const recipeIngredients = await Promise.all(
+            dto.ingredients.map(async (recipeIngredient) => {
+                if (recipeIngredient.id) {
+                    const dboRecipeIngredient =
+                        await this.recipeIngredientRepository.findOne({
+                            where: { id: recipeIngredient.id }
+                        });
+                    dboRecipeIngredient.amount = recipeIngredient.amount;
+                    dboRecipeIngredient.unit = recipeIngredient.unit;
+                    return this.recipeIngredientRepository.save(
+                        dboRecipeIngredient
+                    );
+                } else {
+                    return await this.createRecipeIngredient(recipeIngredient);
+                }
+            })
+        );
+
+        dboRecipe.name = dto.name;
+        dboRecipe.description = dto.description;
+        dboRecipe.steps = steps;
+        dboRecipe.ingredients = recipeIngredients;
+
+        return await this.recipeRepository.save(dboRecipe);
+    }
+
     async delete(id: string) {
         await this.recipeRepository.delete(id);
         try {

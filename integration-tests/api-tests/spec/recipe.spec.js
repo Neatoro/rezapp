@@ -208,7 +208,7 @@ describe('Recipe', () => {
                 body: JSON.stringify({
                     name: 'Test',
                     description: 'Test',
-                    steps: [{ description: 'foo'}, { name: 'bla' }]
+                    steps: [{ description: 'foo' }, { name: 'bla' }]
                 })
             });
             const data = await response.json();
@@ -216,7 +216,10 @@ describe('Recipe', () => {
             expect(response.status).toBe(400);
             expect(data).toEqual({
                 statusCode: 400,
-                message: ['steps.1.description must be a string', 'steps.1.description should not be empty'],
+                message: [
+                    'steps.1.description must be a string',
+                    'steps.1.description should not be empty'
+                ],
                 error: 'Bad Request'
             });
         });
@@ -488,6 +491,500 @@ describe('Recipe', () => {
                     })
                 ],
                 image: false
+            });
+        });
+    });
+
+    describe('update', () => {
+        beforeEach(async () => {
+            await profileHelper.apply('test-recipe');
+        });
+
+        it('should fail if empty body is provided', async () => {
+            const response = await executeRequest(
+                '/recipe/7ae7b1d7-f081-4203-ae9d-2839201d942d',
+                {
+                    method: 'PUT',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify({})
+                }
+            );
+            const data = await response.json();
+
+            expect(response.status).toBe(400);
+            expect(data).toEqual({
+                statusCode: 400,
+                message: [
+                    'name must be a string',
+                    'name should not be empty',
+                    'description must be a string',
+                    'description should not be empty'
+                ],
+                error: 'Bad Request'
+            });
+        });
+
+        it('should fail if name is not provided', async () => {
+            const response = await executeRequest(
+                '/recipe/7ae7b1d7-f081-4203-ae9d-2839201d942d',
+                {
+                    method: 'PUT',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        description: 'Test'
+                    })
+                }
+            );
+            const data = await response.json();
+
+            expect(response.status).toBe(400);
+            expect(data).toEqual({
+                statusCode: 400,
+                message: ['name must be a string', 'name should not be empty'],
+                error: 'Bad Request'
+            });
+        });
+
+        it('should fail if name is not a string', async () => {
+            const response = await executeRequest(
+                '/recipe/7ae7b1d7-f081-4203-ae9d-2839201d942d',
+                {
+                    method: 'PUT',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        name: true,
+                        description: 'Test'
+                    })
+                }
+            );
+            const data = await response.json();
+
+            expect(response.status).toBe(400);
+            expect(data).toEqual({
+                statusCode: 400,
+                message: ['name must be a string'],
+                error: 'Bad Request'
+            });
+        });
+
+        it('should fail if name is not provided', async () => {
+            const response = await executeRequest(
+                '/recipe/7ae7b1d7-f081-4203-ae9d-2839201d942d',
+                {
+                    method: 'PUT',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        name: 'Test'
+                    })
+                }
+            );
+            const data = await response.json();
+
+            expect(response.status).toBe(400);
+            expect(data).toEqual({
+                statusCode: 400,
+                message: [
+                    'description must be a string',
+                    'description should not be empty'
+                ],
+                error: 'Bad Request'
+            });
+        });
+
+        it('should fail if name is not a string', async () => {
+            const response = await executeRequest(
+                '/recipe/7ae7b1d7-f081-4203-ae9d-2839201d942d',
+                {
+                    method: 'PUT',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        name: 'Test',
+                        description: true
+                    })
+                }
+            );
+            const data = await response.json();
+
+            expect(response.status).toBe(400);
+            expect(data).toEqual({
+                statusCode: 400,
+                message: ['description must be a string'],
+                error: 'Bad Request'
+            });
+        });
+
+        it('should fail if steps do not have a description', async () => {
+            const response = await executeRequest(
+                '/recipe/7ae7b1d7-f081-4203-ae9d-2839201d942d',
+                {
+                    method: 'PUT',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        name: 'Test',
+                        description: 'Test',
+                        steps: [{ description: 'foo' }, { name: 'bla' }]
+                    })
+                }
+            );
+            const data = await response.json();
+
+            expect(response.status).toBe(400);
+            expect(data).toEqual({
+                statusCode: 400,
+                message: [
+                    'steps.1.description must be a string',
+                    'steps.1.description should not be empty'
+                ],
+                error: 'Bad Request'
+            });
+        });
+
+        it('should fail if ingredient id is not provided', async () => {
+            const response = await executeRequest(
+                '/recipe/7ae7b1d7-f081-4203-ae9d-2839201d942d',
+                {
+                    method: 'PUT',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        name: 'Test',
+                        description: 'Test',
+                        ingredients: [
+                            {
+                                amount: 3,
+                                unit: 'g'
+                            }
+                        ]
+                    })
+                }
+            );
+            const data = await response.json();
+
+            expect(response.status).toBe(400);
+            expect(data).toEqual({
+                statusCode: 400,
+                message: [
+                    'ingredients.0.ingredient must be a string',
+                    'ingredients.0.ingredient should not be empty'
+                ],
+                error: 'Bad Request'
+            });
+        });
+
+        it('should fail if ingredient id is not a string', async () => {
+            const response = await executeRequest(
+                '/recipe/7ae7b1d7-f081-4203-ae9d-2839201d942d',
+                {
+                    method: 'PUT',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        name: 'Test',
+                        description: 'Test',
+                        ingredients: [
+                            {
+                                ingredient: true,
+                                amount: 3,
+                                unit: 'g'
+                            }
+                        ]
+                    })
+                }
+            );
+            const data = await response.json();
+
+            expect(response.status).toBe(400);
+            expect(data).toEqual({
+                statusCode: 400,
+                message: ['ingredients.0.ingredient must be a string'],
+                error: 'Bad Request'
+            });
+        });
+
+        it('should fail if ingredient amount is not a number', async () => {
+            const response = await executeRequest(
+                '/recipe/7ae7b1d7-f081-4203-ae9d-2839201d942d',
+                {
+                    method: 'PUT',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        name: 'Test',
+                        description: 'Test',
+                        ingredients: [
+                            {
+                                ingredient: 'Test',
+                                amount: '3',
+                                unit: 'g'
+                            }
+                        ]
+                    })
+                }
+            );
+            const data = await response.json();
+
+            expect(response.status).toBe(400);
+            expect(data).toEqual({
+                statusCode: 400,
+                message: [
+                    'ingredients.0.amount must be a number conforming to the specified constraints'
+                ],
+                error: 'Bad Request'
+            });
+        });
+
+        it('should fail if ingredient unit is not a string', async () => {
+            const response = await executeRequest(
+                '/recipe/7ae7b1d7-f081-4203-ae9d-2839201d942d',
+                {
+                    method: 'PUT',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        name: 'Test',
+                        description: 'Test',
+                        ingredients: [
+                            {
+                                ingredient: 'Test',
+                                amount: 3,
+                                unit: true
+                            }
+                        ]
+                    })
+                }
+            );
+            const data = await response.json();
+
+            expect(response.status).toBe(400);
+            expect(data).toEqual({
+                statusCode: 400,
+                message: ['ingredients.0.unit must be a string'],
+                error: 'Bad Request'
+            });
+        });
+
+        it('should update without steps and ingredients', async () => {
+            const response = await executeRequest(
+                '/recipe/7ae7b1d7-f081-4203-ae9d-2839201d942d',
+                {
+                    method: 'PUT',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        name: 'Foo',
+                        description: 'Bar'
+                    })
+                }
+            );
+            const data = await response.json();
+
+            expect(response.status).toBe(200);
+            expect(data).toEqual({
+                id: '7ae7b1d7-f081-4203-ae9d-2839201d942d',
+                name: 'Foo',
+                description: 'Bar',
+                image: false,
+                steps: [],
+                ingredients: []
+            });
+        });
+
+        it('should update with an existing step', async () => {
+            const response = await executeRequest(
+                '/recipe/7ae7b1d7-f081-4203-ae9d-2839201d942d',
+                {
+                    method: 'PUT',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        name: 'Foo',
+                        description: 'Bar',
+                        steps: [
+                            {
+                                id: '8dae1913-517f-4d5e-9c23-14cb1a5b3cb3',
+                                description: 'Foo'
+                            }
+                        ]
+                    })
+                }
+            );
+            const data = await response.json();
+
+            expect(response.status).toBe(200);
+            expect(data).toEqual({
+                id: '7ae7b1d7-f081-4203-ae9d-2839201d942d',
+                name: 'Foo',
+                description: 'Bar',
+                image: false,
+                steps: [
+                    {
+                        id: '8dae1913-517f-4d5e-9c23-14cb1a5b3cb3',
+                        description: 'Foo',
+                        rank: 0
+                    }
+                ],
+                ingredients: []
+            });
+        });
+
+        it('should update with an new step', async () => {
+            const response = await executeRequest(
+                '/recipe/7ae7b1d7-f081-4203-ae9d-2839201d942d',
+                {
+                    method: 'PUT',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        name: 'Foo',
+                        description: 'Bar',
+                        steps: [
+                            {
+                                id: '8dae1913-517f-4d5e-9c23-14cb1a5b3cb3',
+                                description: 'Test'
+                            },
+                            {
+                                description: 'Foo'
+                            }
+                        ]
+                    })
+                }
+            );
+            const data = await response.json();
+
+            expect(response.status).toBe(200);
+            expect(data).toEqual({
+                id: '7ae7b1d7-f081-4203-ae9d-2839201d942d',
+                name: 'Foo',
+                description: 'Bar',
+                image: false,
+                steps: [
+                    {
+                        id: '8dae1913-517f-4d5e-9c23-14cb1a5b3cb3',
+                        description: 'Test',
+                        rank: 0
+                    },
+                    jasmine.objectContaining({
+                        description: 'Foo',
+                        rank: 1
+                    })
+                ],
+                ingredients: []
+            });
+        });
+
+        it('should update with an existing ingredient', async () => {
+            const response = await executeRequest(
+                '/recipe/7ae7b1d7-f081-4203-ae9d-2839201d942d',
+                {
+                    method: 'PUT',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        name: 'Foo',
+                        description: 'Bar',
+                        ingredients: [
+                            {
+                                id: '03ff41b7-9faf-47a6-ac3a-efcbb20a2e1a',
+                                ingredient:
+                                    '6961db05-7a8a-40d8-ad9b-0873dc23e271',
+                                amount: 2,
+                                unit: 'kg'
+                            }
+                        ]
+                    })
+                }
+            );
+            const data = await response.json();
+
+            expect(response.status).toBe(200);
+            expect(data).toEqual({
+                id: '7ae7b1d7-f081-4203-ae9d-2839201d942d',
+                name: 'Foo',
+                description: 'Bar',
+                image: false,
+                steps: [],
+                ingredients: [
+                    {
+                        id: '03ff41b7-9faf-47a6-ac3a-efcbb20a2e1a',
+                        amount: 2,
+                        unit: 'kg'
+                    }
+                ]
+            });
+        });
+
+        it('should update with an existing ingredient', async () => {
+            const response = await executeRequest(
+                '/recipe/7ae7b1d7-f081-4203-ae9d-2839201d942d',
+                {
+                    method: 'PUT',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        name: 'Foo',
+                        description: 'Bar',
+                        ingredients: [
+                            {
+                                id: '03ff41b7-9faf-47a6-ac3a-efcbb20a2e1a',
+                                ingredient:
+                                    '6961db05-7a8a-40d8-ad9b-0873dc23e271',
+                                amount: 2,
+                                unit: 'kg'
+                            },
+                            {
+                                ingredient:
+                                    '2e08f4d1-8c9c-479b-86f6-fb10d442543b',
+                                amount: 100,
+                                unit: 'g'
+                            }
+                        ]
+                    })
+                }
+            );
+            const data = await response.json();
+
+            expect(response.status).toBe(200);
+            expect(data).toEqual({
+                id: '7ae7b1d7-f081-4203-ae9d-2839201d942d',
+                name: 'Foo',
+                description: 'Bar',
+                image: false,
+                steps: [],
+                ingredients: [
+                    {
+                        id: '03ff41b7-9faf-47a6-ac3a-efcbb20a2e1a',
+                        amount: 2,
+                        unit: 'kg'
+                    },
+                    jasmine.objectContaining({
+                        ingredient: {
+                            id: '2e08f4d1-8c9c-479b-86f6-fb10d442543b'
+                        },
+                        amount: 100,
+                        unit: 'g'
+                    })
+                ]
             });
         });
     });

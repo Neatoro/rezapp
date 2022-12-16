@@ -69,4 +69,15 @@ export class RecipeController {
 
         return this.recipeService.create(dto);
     }
+
+    @Put(':id')
+    async update(
+        @Param('id') id: string,
+        @Body() dto: CreateRecipeRequestDto
+    ): Promise<Recipe> {
+        dto.steps = dto.steps || [];
+        dto.ingredients = dto.ingredients || [];
+
+        return this.recipeService.update(id, dto);
+    }
 }
