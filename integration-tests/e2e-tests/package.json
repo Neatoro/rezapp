@@ -1,5 +1,5 @@
 {
-    "name": "api-tests",
+    "name": "e2e-tests",
     "version": "1.0.0",
     "main": "jasmine.js",
     "scripts": {
@@ -7,6 +7,7 @@
     },
     "devDependencies": {
         "jasmine": "^4.5.0",
-        "jasmine-console-reporter": "^3.1.0"
+        "jasmine-console-reporter": "^3.1.0",
+        "puppeteer": "^19.4.1"
     }
 }
