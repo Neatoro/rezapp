@@ -1,5 +1,5 @@
 const executeRequest = require('./helpers/request-helper');
-const ProfileHelper = require('./helpers/profile-helper');
+const ProfileHelper = require('../../shared/profile-helper');
 
 describe('Recipe', () => {
     let profileHelper;

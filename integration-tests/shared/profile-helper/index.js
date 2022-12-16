@@ -6,7 +6,8 @@ class ProfileHelper {
         const dbPath =
             process.env.DATABASE_PATH ||
             path.resolve(
-                process.cwd(),
+                __dirname,
+                '..',
                 '..',
                 '..',
                 'src',
