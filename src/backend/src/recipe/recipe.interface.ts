@@ -21,9 +21,10 @@ export class CreateRecipeRequestDto {
     @IsString()
     description: string;
 
-    @IsString({ each: true })
+    @ValidateNested({ each: true })
+    @Type(() => RecipeStep)
     @IsOptional()
-    steps: string[];
+    steps: RecipeStep[];
 
     @IsOptional()
     @ValidateNested({ each: true })
@@ -31,7 +32,22 @@ export class CreateRecipeRequestDto {
     ingredients: RecipeIngredient[];
 }
 
+class RecipeStep {
+    @IsOptional()
+    @IsString()
+    id: string;
+
+    @IsNotEmpty()
+    @IsString()
+    description: string;
+}
+
 class RecipeIngredient {
+
+    @IsOptional()
+    @IsString()
+    id: string;
+
     @IsNotEmpty()
     @IsString()
     ingredient: string;

@@ -199,7 +199,7 @@ describe('Recipe', () => {
             });
         });
 
-        it('should fail if steps are not strings', async () => {
+        it('should fail if steps do not have a description', async () => {
             const response = await executeRequest('/recipe', {
                 method: 'POST',
                 headers: {
@@ -208,7 +208,7 @@ describe('Recipe', () => {
                 body: JSON.stringify({
                     name: 'Test',
                     description: 'Test',
-                    steps: ['Test', true]
+                    steps: [{ description: 'foo'}, { name: 'bla' }]
                 })
             });
             const data = await response.json();
@@ -216,7 +216,7 @@ describe('Recipe', () => {
             expect(response.status).toBe(400);
             expect(data).toEqual({
                 statusCode: 400,
-                message: ['each value in steps must be a string'],
+                message: ['steps.1.description must be a string', 'steps.1.description should not be empty'],
                 error: 'Bad Request'
             });
         });
@@ -373,7 +373,7 @@ describe('Recipe', () => {
                 body: JSON.stringify({
                     name: 'Test',
                     description: 'Test',
-                    steps: ['Foo bar']
+                    steps: [{ description: 'Foo bar' }]
                 })
             });
             const data = await response.json();
@@ -452,7 +452,7 @@ describe('Recipe', () => {
                 body: JSON.stringify({
                     name: 'Test',
                     description: 'Test',
-                    steps: ['Foo bar'],
+                    steps: [{ description: 'Foo bar' }],
                     ingredients: [
                         {
                             ingredient: '6961db05-7a8a-40d8-ad9b-0873dc23e271',

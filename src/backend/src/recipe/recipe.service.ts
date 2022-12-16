@@ -52,7 +52,7 @@ export class RecipeService {
     async create(dto: CreateRecipeRequestDto): Promise<Recipe> {
         const steps = await Promise.all(
             dto.steps.map((step, index) =>
-                this.stepRepository.save({ description: step, rank: index })
+                this.stepRepository.save({ ...step, rank: index })
             )
         );
 

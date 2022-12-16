@@ -17,7 +17,6 @@
                 ingredients,
                 steps: steps
                     .filter((step) => step.description !== '')
-                    .map((step) => step.description)
             })
         });
 
