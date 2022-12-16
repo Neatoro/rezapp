@@ -24,6 +24,5 @@ const reporter = new JasmineConsoleReporter({
 });
 jasmine.env.clearReporters();
 jasmine.addReporter(reporter);
-jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
 
 jasmine.execute();

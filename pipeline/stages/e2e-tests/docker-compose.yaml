@@ -1,0 +1,39 @@
+version: '3.9'
+
+services:
+    rezapp-backend:
+        image: rezapp-backend
+        networks:
+            - rezapp
+        volumes:
+            - database:/database
+            - images:/app/images
+            - ../../ormconfig.json:/app/ormconfig.json
+
+    rezapp-frontend:
+        image: rezapp-frontend
+        networks:
+            - rezapp
+        environment:
+            BACKEND_URL: http://rezapp-proxy:8000
+
+    rezapp-proxy:
+        image: kong/kong-gateway:3.1.1.1
+        networks:
+            - rezapp
+        volumes:
+            - ../../../src/proxy:/kong/declarative
+        environment:
+            KONG_DATABASE: 'off'
+            KONG_DECLARATIVE_CONFIG: /kong/declarative/kong.yaml
+        ports:
+            - 8000:8000
+
+networks:
+    rezapp:
+        name: rezapp
+
+volumes:
+    database:
+        name: rezapp-database
+    images:
