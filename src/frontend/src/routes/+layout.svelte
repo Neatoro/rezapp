@@ -1,8 +1,5 @@
 <script>
-    import {
-        NavBrand,
-        Navbar
-    } from 'flowbite-svelte';
+    import { NavBrand, Navbar } from 'flowbite-svelte';
     import '../app.postcss';
 </script>
 

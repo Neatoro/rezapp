@@ -1,3 +1,4 @@
+const executeRequest = require('./helpers/request-helper');
 const ProfileHelper = require('./helpers/profile-helper');
 
 describe('Ingredient', () => {
@@ -16,7 +17,7 @@ describe('Ingredient', () => {
 
     describe('list', () => {
         it('should return an empty list when no recipes exists', async () => {
-            const response = await fetch('http://localhost:8080/ingredient');
+            const response = await executeRequest('/ingredient');
             const data = await response.json();
 
             expect(response.status).toBe(200);
@@ -26,7 +27,7 @@ describe('Ingredient', () => {
         it('should return all ingredients', async () => {
             await profileHelper.apply('test-ingredient');
 
-            const response = await fetch('http://localhost:8080/ingredient');
+            const response = await executeRequest('/ingredient');
             const data = await response.json();
 
             expect(response.status).toBe(200);
@@ -47,7 +48,7 @@ describe('Ingredient', () => {
 
     describe('create', () => {
         it('should create a new ingredient', async () => {
-            const response = await fetch('http://localhost:8080/ingredient', {
+            const response = await executeRequest('/ingredient', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'
@@ -69,7 +70,7 @@ describe('Ingredient', () => {
         });
 
         it('should fail if no name is provided', async () => {
-            const response = await fetch('http://localhost:8080/ingredient', {
+            const response = await executeRequest('/ingredient', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'
@@ -88,7 +89,7 @@ describe('Ingredient', () => {
         });
 
         it('should fail if no name is not a string', async () => {
-            const response = await fetch('http://localhost:8080/ingredient', {
+            const response = await executeRequest('/ingredient', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'
