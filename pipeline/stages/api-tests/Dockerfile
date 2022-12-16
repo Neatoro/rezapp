@@ -1,8 +1,13 @@
 FROM node:18-alpine
 
-WORKDIR /tests
+WORKDIR /tests/shared
 
-COPY integration-tests/api-tests /tests
+COPY integration-tests/shared /tests/shared
+RUN npm ci
+
+WORKDIR /tests/api-tests
+
+COPY integration-tests/api-tests /tests/api-tests
 RUN npm ci
 
 ENV DATABASE_PATH=/database/recipes.db

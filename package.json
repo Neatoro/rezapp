@@ -2,7 +2,8 @@
     "name": "rezapp",
     "version": "1.0.0",
     "scripts": {
-        "prettify": "prettier --write ."
+        "prettify": "prettier --write .",
+        "apply-default": "node scripts/applyProfile.js"
     },
     "devDependencies": {
         "prettier": "^2.8.1",
