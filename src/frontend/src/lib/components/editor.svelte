@@ -19,13 +19,14 @@
 
     const dispatch = createEventDispatcher();
 
-    let name = '';
-    let description = '';
-    let steps = [{ description: '' }];
+    export let name = '';
+    export let description = '';
+    export let steps = [{ description: '' }];
     let images = [];
-    let selectedIngredients = [];
+    export let selectedIngredients = [];
+    export let title = '';
 
-    let ingredientMetadata = {};
+    export let ingredientMetadata = {};
 
     $: {
         for (const ingredientId of selectedIngredients.map(
@@ -100,7 +101,7 @@
     <h1
         class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
     >
-        Neues Rezept anlegen
+        {title}
     </h1>
     <Tabs style="underline">
         <TabItem open>

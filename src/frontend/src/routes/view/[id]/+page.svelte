@@ -89,6 +89,14 @@
         <svg class="icon icon-bin"><use xlink:href="/icons.svg#icon-bin" /></svg
         >
     </SpeedDialButton>
+    <SpeedDialButton
+        on:click={() => goto(`/update/${data.recipe.id}`)}
+        name="Bearbeiten"
+    >
+        <svg class="icon icon-pencil"
+            ><use xlink:href="/icons.svg#icon-pencil" /></svg
+        >
+    </SpeedDialButton>
 </SpeedDial>
 
 <Modal title="Löschen" bind:open={deleteModal} autoclose>
