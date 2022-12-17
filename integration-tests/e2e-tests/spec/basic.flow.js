@@ -8,6 +8,8 @@ describe('Basic flow', () => {
     let overviewPage;
 
     beforeAll(() => {
+        jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
+
         profileHelper = new ProfileHelper();
         browser = new PuppeteerHelper();
         overviewPage = new OverviewPage(browser);
