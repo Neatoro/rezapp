@@ -1,7 +1,6 @@
 const puppeteer = require('puppeteer');
 
 module.exports = class PuppeteerHelper {
-
     async setupPage() {
         const browser = await puppeteer.launch();
         this.page = await browser.newPage();
@@ -23,5 +22,4 @@ module.exports = class PuppeteerHelper {
     async close() {
         await this.page.close();
     }
-
 };
