@@ -3,7 +3,6 @@ const PuppeteerHelper = require('./helper/puppeteer-helper');
 const OverviewPage = require('./pages/OverviewPage');
 
 describe('Basic flow', () => {
-
     let profileHelper;
     let browser;
     let overviewPage;
@@ -28,5 +27,4 @@ describe('Basic flow', () => {
         const headerText = await overviewPage.getHeaderText();
         expect(headerText).toBe('Rezapp');
     });
-
 });

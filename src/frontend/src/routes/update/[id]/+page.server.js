@@ -1,11 +1,13 @@
+import { env } from '$env/dynamic/private';
+
 async function loadRecipe(id, fetch) {
-    const response = await fetch(`/api/recipe/${id}`);
+    const response = await fetch(`${env.BACKEND_URL}/api/recipe/${id}`);
 
     return await response.json();
 }
 
 async function loadIngredients(fetch) {
-    const response = await fetch('/api/ingredient');
+    const response = await fetch(`${env.BACKEND_URL}/api/ingredient`);
     const data = await response.json();
 
     return data.ingredients;

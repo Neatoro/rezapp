@@ -1,5 +1,4 @@
 module.exports = class OverviewPage {
-
     constructor(browser) {
         this.browser = browser;
     }
@@ -11,5 +10,4 @@ module.exports = class OverviewPage {
     async getHeaderText() {
         return await this.browser.getInnerText('nav span');
     }
-
 };
