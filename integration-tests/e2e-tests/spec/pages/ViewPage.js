@@ -37,4 +37,17 @@ module.exports = class ViewPage {
             return steps;
         });
     }
+
+    async triggerAction(action) {
+        await this.browser.waitForSelector('button[name="Open actions menu"]');
+        await this.browser.click('button[name="Open actions menu"]');
+
+        await this.browser.waitForSelector('div[role="tooltip"]');
+        await this.browser.clickButton(action);
+    }
+
+    async approveDelete() {
+        await this.browser.waitForSelector('#modal');
+        await this.browser.clickButton('Löschen');
+    }
 };

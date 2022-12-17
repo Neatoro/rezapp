@@ -11,6 +11,12 @@ module.exports = class OverviewPage {
         return await this.browser.getInnerText('nav span');
     }
 
+    async getRecipeCount() {
+        return await this.browser.evaluate(() => {
+            return document.querySelectorAll('div:has(> h5)').length;
+        });
+    }
+
     async waitForRecipes() {
         await this.browser.waitForSelector('div:has(> h5)');
     }

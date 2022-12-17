@@ -100,4 +100,20 @@ describe('Basic flow', () => {
         const steps = await viewPage.getSteps();
         expect(steps).toEqual(['Foo Bar Step']);
     });
+
+    it('should delete a recipe', async () => {
+        await profileHelper.apply('test-recipe');
+
+        await overviewPage.open();
+        await overviewPage.waitForRecipes();
+        await overviewPage.viewRecipe({
+            title: 'Test'
+        });
+
+        await viewPage.triggerAction('Löschen');
+        await viewPage.approveDelete();
+
+        const recipeCount = await overviewPage.getRecipeCount();
+        expect(recipeCount).toBe(0);
+    });
 });
