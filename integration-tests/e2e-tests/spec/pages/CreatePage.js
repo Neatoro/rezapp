@@ -13,7 +13,9 @@ module.exports = class CreatePage {
 
     async changeTab(tab) {
         await this.browser.evaluate((tab) => {
-            [...document.querySelectorAll('button[role="tab"]')].filter((button) => button.innerText === tab)[0].click();
+            [...document.querySelectorAll('button[role="tab"]')]
+                .filter((button) => button.innerText === tab)[0]
+                .click();
         }, tab);
     }
 
@@ -22,12 +24,14 @@ module.exports = class CreatePage {
     }
 
     async enterIngredient(name, amount, unit) {
-        await this.browser.clickButton('Hinzufügen')
+        await this.browser.clickButton('Hinzufügen');
 
         await this.browser.waitForSelector('#modal');
 
         await this.browser.evaluate((name) => {
-            const ingredient = [...document.querySelectorAll('#modal tbody tr')].filter((row) => {
+            const ingredient = [
+                ...document.querySelectorAll('#modal tbody tr')
+            ].filter((row) => {
                 const cells = row.querySelectorAll('td');
                 const ingredientName = cells[1].innerText;
                 return ingredientName === name;
@@ -44,10 +48,10 @@ module.exports = class CreatePage {
 
     async save() {
         await this.browser.evaluate(() => {
-            const saveButton = [...document.querySelectorAll('button')].filter((button) => button.innerText === 'Speichern')[0];
+            const saveButton = [...document.querySelectorAll('button')].filter(
+                (button) => button.innerText === 'Speichern'
+            )[0];
             saveButton.click();
         });
     }
 };
-
-

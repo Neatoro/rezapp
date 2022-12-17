@@ -171,12 +171,12 @@
 
             {#each steps as step, i}
                 <div>
-                    <Label for={"step-description-" + i} class="mb-2"
+                    <Label for={'step-description-' + i} class="mb-2"
                         >{i + 1}. Arbeitsschritt</Label
                     >
                     <Textarea
                         bind:value={step.description}
-                        id={"step-description-" + i}
+                        id={'step-description-' + i}
                         placeholder="Schrittbeschreibung"
                         rows="4"
                         name="description"
@@ -215,7 +215,7 @@
                             <TableBodyCell>
                                 <Input
                                     type="number"
-                                    id={"amount-" + ingredient.name}
+                                    id={'amount-' + ingredient.name}
                                     placeholder="1000"
                                     bind:value={ingredientMetadata[
                                         ingredient.id
@@ -225,7 +225,7 @@
                             <TableBodyCell>
                                 <Input
                                     placeholder="g"
-                                    id={"unit-" + ingredient.name}
+                                    id={'unit-' + ingredient.name}
                                     bind:value={ingredientMetadata[
                                         ingredient.id
                                     ].unit}

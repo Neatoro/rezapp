@@ -36,7 +36,9 @@ module.exports = class PuppeteerHelper {
 
     async clickButton(text) {
         await this.page.evaluate((text) => {
-            const button = [...document.querySelectorAll('button')].filter((button) => button.innerText === text)[0];
+            const button = [...document.querySelectorAll('button')].filter(
+                (button) => button.innerText === text
+            )[0];
             button.click();
         }, text);
     }

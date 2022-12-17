@@ -17,7 +17,9 @@ module.exports = class OverviewPage {
 
     async viewRecipe({ title }) {
         await this.browser.evaluate((title) => {
-            const recipe = [...document.querySelectorAll('div:has(> h5)')].filter((recipe) => {
+            const recipe = [
+                ...document.querySelectorAll('div:has(> h5)')
+            ].filter((recipe) => {
                 const titleElement = recipe.querySelector('h5');
                 return titleElement.innerText === title;
             })[0];

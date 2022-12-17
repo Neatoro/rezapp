@@ -32,6 +32,11 @@ describe('Basic flow', () => {
         await browser.close();
     });
 
+    afterAll(async () => {
+        await profileHelper.cleanSetup();
+        await profileHelper.close();
+    });
+
     it('should have Rezapp in header', async () => {
         await overviewPage.open();
         const headerText = await overviewPage.getHeaderText();
