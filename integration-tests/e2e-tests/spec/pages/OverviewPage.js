@@ -10,4 +10,8 @@ module.exports = class OverviewPage {
     async getHeaderText() {
         return await this.browser.getInnerText('nav span');
     }
+
+    async viewRecipe({ id }) {
+        await this.browser.click(`a[href="/view/${id}"]`);
+    }
 };

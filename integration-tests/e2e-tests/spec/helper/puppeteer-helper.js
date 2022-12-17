@@ -15,11 +15,22 @@ module.exports = class PuppeteerHelper {
     }
 
     async getInnerText(selector) {
+        await this.page.waitForSelector(selector);
+
         const result = await this.page.evaluate((selector) => {
             return document.querySelector(selector).innerText;
         }, selector);
 
         return result;
+    }
+
+    async evaluate(evaluateFunction) {
+        const result = await this.page.evaluate(evaluateFunction);
+        return result;
+    }
+
+    async click(selector) {
+        await this.page.click(selector);
     }
 
     async close() {
