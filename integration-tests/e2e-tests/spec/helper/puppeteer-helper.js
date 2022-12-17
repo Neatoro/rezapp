@@ -24,13 +24,30 @@ module.exports = class PuppeteerHelper {
         return result;
     }
 
-    async evaluate(evaluateFunction) {
-        const result = await this.page.evaluate(evaluateFunction);
+    async evaluate(evaluateFunction, ...params) {
+        const result = await this.page.evaluate(evaluateFunction, ...params);
         return result;
     }
 
     async click(selector) {
+        await this.page.waitForSelector(selector, { visible: true });
         await this.page.click(selector);
+    }
+
+    async clickButton(text) {
+        await this.page.evaluate((text) => {
+            const button = [...document.querySelectorAll('button')].filter((button) => button.innerText === text)[0];
+            button.click();
+        }, text);
+    }
+
+    async type(selector, text) {
+        await this.page.waitForSelector(selector, { visible: true });
+        await this.page.type(selector, text, { delay: 100 });
+    }
+
+    async waitForSelector(selector) {
+        await this.page.waitForSelector(selector);
     }
 
     async close() {

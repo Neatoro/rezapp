@@ -108,11 +108,11 @@
             <span slot="title">Allgemein</span>
 
             <div class="mb-6">
-                <Label for="name" class="mb-2">Rezept-Name</Label>
+                <Label for="recipe-name" class="mb-2">Rezept-Name</Label>
                 <Input
                     bind:value={name}
                     type="text"
-                    id="name"
+                    id="recipe-name"
                     placeholder="Ofengemüse mit Jackfruit und Zitronen-Kapern-Sauce"
                     required
                 />
@@ -171,12 +171,12 @@
 
             {#each steps as step, i}
                 <div>
-                    <Label for="description" class="mb-2"
+                    <Label for={"step-description-" + i} class="mb-2"
                         >{i + 1}. Arbeitsschritt</Label
                     >
                     <Textarea
                         bind:value={step.description}
-                        id="description"
+                        id={"step-description-" + i}
                         placeholder="Schrittbeschreibung"
                         rows="4"
                         name="description"
@@ -215,6 +215,7 @@
                             <TableBodyCell>
                                 <Input
                                     type="number"
+                                    id={"amount-" + ingredient.name}
                                     placeholder="1000"
                                     bind:value={ingredientMetadata[
                                         ingredient.id
@@ -224,6 +225,7 @@
                             <TableBodyCell>
                                 <Input
                                     placeholder="g"
+                                    id={"unit-" + ingredient.name}
                                     bind:value={ingredientMetadata[
                                         ingredient.id
                                     ].unit}
