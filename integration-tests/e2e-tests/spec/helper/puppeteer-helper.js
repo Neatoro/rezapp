@@ -38,6 +38,8 @@ module.exports = class PuppeteerHelper {
     }
 
     async clickButton(text) {
+        await this.page.waitForXPath(`//button[contains(., '${text}')]`);
+
         await this.page.evaluate((text) => {
             const button = [...document.querySelectorAll('button')].filter(
                 (button) => button.innerText === text
@@ -59,8 +61,8 @@ module.exports = class PuppeteerHelper {
         await input.press('Backspace');
     }
 
-    async waitForSelector(selector) {
-        await this.page.waitForSelector(selector);
+    async waitForSelector(selector, options) {
+        await this.page.waitForSelector(selector, options);
     }
 
     async waitForNavigation() {

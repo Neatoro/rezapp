@@ -12,21 +12,49 @@ module.exports = class CreatePage {
     }
 
     async changeTab(tab) {
-        await this.browser.evaluate((tab) => {
-            [...document.querySelectorAll('button[role="tab"]')]
-                .filter((button) => button.innerText === tab)[0]
-                .click();
-        }, tab);
+        await this.browser.clickButton(tab);
     }
 
     async enterStep(index, description) {
         await this.browser.type(`#step-description-${index}`, description);
     }
 
-    async enterIngredient(name, amount, unit) {
+    async openIngredientModal() {
+        await this.browser.waitForSelector('table');
         await this.browser.clickButton('Hinzufügen');
 
-        await this.browser.waitForSelector('#modal');
+        await this.browser.waitForSelector('#modalAddIngredient');
+    }
+
+    async openCreateIngredientModal() {
+        await this.browser.clickButton('Neue Zutat erstellen');
+
+        await this.browser.waitForSelector('#modalCreateIngredient');
+    }
+
+    async createIngredient(name) {
+        await this.browser.type('#modalCreateIngredient #name', name);
+        await this.browser.clickButton('Erstellen');
+        await this.browser.waitForSelector('#modalCreateIngredient', { hidden: true })
+    }
+
+    async hasIngredient(name) {
+        await this.browser.page.waitForFunction('document.querySelector("#modalAddIngredient tbody").innerText.trim() !== ""')
+
+        return await this.browser.evaluate((name) => {
+            const ingredient = [
+                ...document.querySelectorAll('#modal tbody tr')
+            ].filter((row) => {
+                const cells = row.querySelectorAll('td');
+                const ingredientName = cells[1].innerText;
+                return ingredientName === name;
+            });
+            return ingredient.length === 1;
+        }, name);
+    }
+
+    async enterIngredient(name, amount, unit) {
+        await this.openIngredientModal();
 
         await this.browser.evaluate((name) => {
             const ingredient = [
