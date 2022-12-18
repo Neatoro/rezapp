@@ -3,7 +3,7 @@ const PuppeteerHelper = require('./helper/puppeteer-helper');
 const CreatePage = require('./pages/CreatePage');
 const OverviewPage = require('./pages/OverviewPage');
 
-describe('Ingredient flow', () => {
+describe('Error flow', () => {
     let profileHelper;
     let browser;
 
@@ -36,19 +36,16 @@ describe('Ingredient flow', () => {
         await browser.tearDown();
     });
 
-    it('should create a new ingredient', async () => {
+    it('should display an error toast if recipe could not be saved', async () => {
         await overviewPage.open();
         await overviewPage.newRecipe();
 
-        await browser.waitForNavigation();
+        await createPage.save();
+        const hasError = await createPage.hasErrorMessage(
+            'Das Rezept konnte nicht gespeichert werden. Bitte versuche es später erneut.'
+        );
+        expect(hasError).toBe(true);
 
-        await createPage.changeTab('Zutaten');
-        await createPage.openIngredientModal();
-        await createPage.openCreateIngredientModal();
-        await createPage.createIngredient('Test');
-
-        const hasIngredient = await createPage.hasIngredient('Test');
-
-        expect(hasIngredient).toBe(true);
+        await browser.waitForSelector('div[role="alert"]', { hidden: true });
     });
 });

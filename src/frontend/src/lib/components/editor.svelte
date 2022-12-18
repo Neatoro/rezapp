@@ -62,7 +62,6 @@
     );
 
     async function saveRecipe() {
-        console.log(ingredientMetadata);
         dispatch('save', {
             name,
             description,
