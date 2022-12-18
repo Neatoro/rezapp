@@ -1,11 +1,28 @@
 <script>
+    import { _ } from 'svelte-i18n';
     import { goto } from '$app/navigation';
     import Editor from '$lib/components/editor.svelte';
+    import { Toast } from 'flowbite-svelte';
+    import { fly } from 'svelte/transition';
 
     export let data;
 
-    async function saveRecipe({ detail }) {
-        const { name, description, steps, images, ingredients } = detail;
+    let errors = [];
+
+    async function save({ detail }) {
+        try {
+            const recipe = await saveRecipe(detail);
+            await saveImage({ id: recipe.id, images: detail.images });
+            goto(`/view/${data.recipe.id}`);
+        } catch (e) {
+            errors = [...errors, e.message];
+            setTimeout(() => {
+                errors = errors.filter((message) => message !== e.message);
+            }, 4000);
+        }
+    }
+
+    async function saveRecipe({ name, description, steps, ingredients }) {
         const response = await fetch(`/api/recipe/${data.recipe.id}`, {
             method: 'PUT',
             headers: {
@@ -19,19 +36,28 @@
             })
         });
 
+        if (response.status !== 200) {
+            throw new Error('recipe.save_failed');
+        }
+
+        return await response.json();
+    }
+
+    async function saveImage({ id, images }) {
         if (images.length > 0) {
-            const recipe = await response.json();
             const image = images[0];
             const formData = new FormData();
             formData.append('file', image);
 
-            await fetch(`/api/recipe/${recipe.id}/image`, {
+            const response = await fetch(`/api/recipe/${id}/image`, {
                 method: 'PUT',
                 body: formData
             });
-        }
 
-        goto(`/view/${data.recipe.id}`);
+            if (response.status !== 200) {
+                throw new Error('image.upload_failed');
+            }
+        }
     }
 
     function newIngredient(event) {
@@ -59,8 +85,25 @@
     }
 </script>
 
+{#each errors as error}
+    <Toast
+        transition={fly}
+        params={{ x: 200 }}
+        color="red"
+        class="mb-2"
+        position="top-right"
+    >
+        <svelte:fragment slot="icon">
+            <svg class="icon icon-cross"
+                ><use xlink:href="/icons.svg#icon-cross" /></svg
+            >
+        </svelte:fragment>
+        {$_(error)}
+    </Toast>
+{/each}
+
 <Editor
-    on:save={saveRecipe}
+    on:save={save}
     title="Rezept ändern"
     ingredients={data.ingredients}
     name={data.recipe.name}
