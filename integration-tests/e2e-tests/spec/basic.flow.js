@@ -89,6 +89,8 @@ describe('Basic flow', () => {
         await createPage.save();
 
         await overviewPage.waitForRecipes();
+
+        await overviewPage.hasMessage('Rezept wurde erfolgreich angelegt!');
         await overviewPage.viewRecipe({
             title: 'Foo Bar Name'
         });
@@ -145,6 +147,7 @@ describe('Basic flow', () => {
         await updatePage.save();
 
         await browser.waitForNavigation();
+        await overviewPage.hasMessage('Rezept wurde erfolgreich geändert!');
 
         const titleText = await viewPage.getTitle();
         expect(titleText).toBe('Foo Bar Name');
