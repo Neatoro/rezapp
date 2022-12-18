@@ -105,4 +105,9 @@ module.exports = class CreatePage {
 
         return text === message;
     }
+
+    async getInputErrorText(selector) {
+        await this.browser.waitForSelector(selector);
+        return await this.browser.getInnerText(selector);
+    }
 };

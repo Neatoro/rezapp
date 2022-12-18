@@ -36,16 +36,17 @@ describe('Error flow', () => {
         await browser.tearDown();
     });
 
-    it('should display an error toast if recipe could not be saved', async () => {
+    it('should display an error message if recipe has no name and description', async () => {
         await overviewPage.open();
         await overviewPage.newRecipe();
 
         await createPage.save();
-        const hasError = await createPage.hasErrorMessage(
-            'Das Rezept konnte nicht gespeichert werden. Bitte versuche es später erneut.'
+        const nameError = await createPage.getInputErrorText('#nameDesc');
+        const descriptionError = await createPage.getInputErrorText(
+            '#descriptionDesc'
         );
-        expect(hasError).toBe(true);
 
-        await browser.waitForSelector('div[role="alert"]', { hidden: true });
+        expect(nameError).toEqual('Dieses Feld ist erforderlich!');
+        expect(descriptionError).toEqual('Dieses Feld ist erforderlich!');
     });
 });
