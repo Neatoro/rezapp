@@ -35,6 +35,6 @@ module.exports = class OverviewPage {
     }
 
     async newRecipe() {
-        await this.browser.click('a[href="/create"]');
+        await this.browser.clickButton('Neues Rezept', 'a');
     }
 };

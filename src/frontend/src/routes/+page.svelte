@@ -8,7 +8,7 @@
     <Button href="/create"
         ><svg class="icon icon-plus"
             ><use xlink:href="icons.svg#icon-plus" /></svg
-        ></Button
+        ><span class="sr-only">Neues Rezept</span></Button
     >
 </Toolbar>
 

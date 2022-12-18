@@ -37,15 +37,15 @@ module.exports = class PuppeteerHelper {
         await this.page.click(selector);
     }
 
-    async clickButton(text) {
-        await this.page.waitForXPath(`//button[contains(., '${text}')]`);
+    async clickButton(text, element = 'button') {
+        await this.page.waitForXPath(`//${element}[contains(., '${text}')]`);
 
-        await this.page.evaluate((text) => {
-            const button = [...document.querySelectorAll('button')].filter(
+        await this.page.evaluate((text, element) => {
+            const button = [...document.querySelectorAll(element)].filter(
                 (button) => button.innerText === text
             )[0];
             button.click();
-        }, text);
+        }, text, element);
     }
 
     async type(selector, text) {
