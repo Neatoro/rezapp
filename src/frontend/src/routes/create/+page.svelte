@@ -3,7 +3,7 @@
     import { goto } from '$app/navigation';
     import Editor from '$lib/components/editor.svelte';
     import { Toast } from 'flowbite-svelte';
-    import { fly } from 'svelte/transition';
+    import { toastMessage } from '$lib/store';
 
     export let data;
 
@@ -13,6 +13,11 @@
         try {
             const recipe = await saveRecipe(detail);
             await saveImage({ id: recipe.id, images: detail.images });
+            toastMessage({
+                text: 'Rezept wurde erfolgreich angelegt!',
+                icon: 'checkmark',
+                color: 'green'
+            });
             goto('/');
         } catch (e) {
             errors = [...errors, e.message];
@@ -66,13 +71,7 @@
 </script>
 
 {#each errors as error}
-    <Toast
-        transition={fly}
-        params={{ x: 200 }}
-        color="red"
-        class="mb-2"
-        position="top-right"
-    >
+    <Toast color="red" class="mb-2" position="top-right">
         <svelte:fragment slot="icon">
             <svg class="icon icon-cross"
                 ><use xlink:href="/icons.svg#icon-cross" /></svg

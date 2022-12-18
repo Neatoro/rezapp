@@ -37,4 +37,13 @@ module.exports = class OverviewPage {
     async newRecipe() {
         await this.browser.clickButton('Neues Rezept', 'a');
     }
+
+    async hasMessage(message) {
+        await this.browser.waitForSelector('div[role="alert"]');
+        const text = await this.browser.getInnerText(
+            'div[role="alert"] div.text-sm'
+        );
+
+        return text === message;
+    }
 };
