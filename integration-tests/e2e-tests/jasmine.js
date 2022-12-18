@@ -25,4 +25,9 @@ const reporter = new JasmineConsoleReporter({
 jasmine.env.clearReporters();
 jasmine.addReporter(reporter);
 
-jasmine.execute();
+(async () => {
+    console.log('Doing warmup request');
+    await fetch(process.env.FRONTEND_BASE_URL || 'http://localhost:5173');
+    console.log('Starting tests');
+    jasmine.execute();
+})();

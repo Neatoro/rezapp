@@ -35,11 +35,15 @@ module.exports = class CreatePage {
     async createIngredient(name) {
         await this.browser.type('#modalCreateIngredient #name', name);
         await this.browser.clickButton('Erstellen');
-        await this.browser.waitForSelector('#modalCreateIngredient', { hidden: true })
+        await this.browser.waitForSelector('#modalCreateIngredient', {
+            hidden: true
+        });
     }
 
     async hasIngredient(name) {
-        await this.browser.page.waitForFunction('document.querySelector("#modalAddIngredient tbody").innerText.trim() !== ""')
+        await this.browser.page.waitForFunction(
+            'document.querySelector("#modalAddIngredient tbody").innerText.trim() !== ""'
+        );
 
         return await this.browser.evaluate((name) => {
             const ingredient = [
@@ -90,11 +94,20 @@ module.exports = class CreatePage {
     }
 
     async save() {
-        await this.browser.evaluate(() => {
-            const saveButton = [...document.querySelectorAll('button')].filter(
-                (button) => button.innerText === 'Speichern'
-            )[0];
-            saveButton.click();
-        });
+        await this.browser.clickButton('Speichern');
+    }
+
+    async hasErrorMessage(message) {
+        await this.browser.waitForSelector('div[role="alert"]');
+        const text = await this.browser.getInnerText(
+            'div[role="alert"] div.text-sm'
+        );
+
+        return text === message;
+    }
+
+    async getInputErrorText(selector) {
+        await this.browser.waitForSelector(selector);
+        return await this.browser.getInnerText(selector);
     }
 };

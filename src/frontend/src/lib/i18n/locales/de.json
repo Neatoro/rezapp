@@ -1,0 +1,8 @@
+{
+    "recipe": {
+        "save_failed": "Das Rezept konnte nicht gespeichert werden. Bitte versuche es später erneut."
+    },
+    "image": {
+        "upload_failed": "Das angegebene Bild konnte nicht hochgeladen werden."
+    }
+}

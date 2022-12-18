@@ -22,7 +22,12 @@
     }
 </script>
 
-<Modal id="modalCreateIngredient" bind:open title="Neue Zutat erstellen" autoclose>
+<Modal
+    id="modalCreateIngredient"
+    bind:open
+    title="Neue Zutat erstellen"
+    autoclose
+>
     <form>
         <div class="mb-6">
             <Label for="name" class="mb-2">Name</Label>

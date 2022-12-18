@@ -28,6 +28,21 @@
 
     export let ingredientMetadata = {};
 
+    let tabStatus = {
+        general: true,
+        steps: false,
+        ingredients: false
+    };
+
+    const validationResults = {
+        name: {
+            valid: true
+        },
+        description: {
+            valid: true
+        }
+    };
+
     $: {
         for (const ingredientId of selectedIngredients.map(
             (ingredient) => ingredient.id
@@ -61,19 +76,35 @@
         (ingredient) => !selectedIngredients.includes(ingredient)
     );
 
+    function validate() {
+        validationResults.name.valid = name !== '';
+        validationResults.description.valid = description !== '';
+
+        return (
+            validationResults.name.valid && validationResults.description.valid
+        );
+    }
+
     async function saveRecipe() {
-        console.log(ingredientMetadata);
-        dispatch('save', {
-            name,
-            description,
-            steps,
-            images,
-            ingredients: Object.keys(ingredientMetadata).map((id) => ({
-                ingredient: id,
-                amount: Number(ingredientMetadata[id].amount),
-                unit: ingredientMetadata[id].unit
-            }))
-        });
+        if (validate()) {
+            dispatch('save', {
+                name,
+                description,
+                steps,
+                images,
+                ingredients: Object.keys(ingredientMetadata).map((id) => ({
+                    ingredient: id,
+                    amount: Number(ingredientMetadata[id].amount),
+                    unit: ingredientMetadata[id].unit
+                }))
+            });
+        } else {
+            tabStatus = {
+                general: true,
+                steps: false,
+                ingredients: false
+            };
+        }
     }
 
     function addStep() {
@@ -115,29 +146,51 @@
         {title}
     </h1>
     <Tabs style="underline">
-        <TabItem open>
+        <TabItem bind:open={tabStatus.general}>
             <span slot="title">Allgemein</span>
 
             <div class="mb-6">
-                <Label for="recipe-name" class="mb-2">Rezept-Name</Label>
+                <Label
+                    for="recipe-name"
+                    class="mb-2"
+                    color={validationResults.name.valid ? 'gray' : 'red'}
+                    >Rezept-Name</Label
+                >
+                {#if !validationResults.name.valid}
+                    <p id="nameDesc" class="text-red-500 text-sm mb-2">
+                        Dieses Feld ist erforderlich!
+                    </p>
+                {/if}
                 <Input
                     bind:value={name}
                     type="text"
                     id="recipe-name"
                     placeholder="Ofengemüse mit Jackfruit und Zitronen-Kapern-Sauce"
                     required
+                    aria-describedby="nameDesc"
                 />
             </div>
 
-            <div>
-                <Label for="description" class="mb-2">Rezept-Beschreibung</Label
+            <div class="mb-4">
+                <Label
+                    for="description"
+                    class="mb-2"
+                    color={validationResults.description.valid ? 'gray' : 'red'}
+                    >Rezept-Beschreibung</Label
                 >
+                {#if !validationResults.description.valid}
+                    <p id="descriptionDesc" class="text-red-500 text-sm mb-2">
+                        Dieses Feld ist erforderlich!
+                    </p>
+                {/if}
                 <Textarea
                     bind:value={description}
+                    color={validationResults.description.valid ? 'base' : 'red'}
                     id="description"
                     placeholder="Kurze Beschreibung des Rezeptes"
                     rows="4"
                     name="description"
+                    aria-describedby="descriptionDesc"
                 />
             </div>
 
@@ -177,7 +230,7 @@
             </div>
         </TabItem>
 
-        <TabItem>
+        <TabItem bind:open={tabStatus.steps}>
             <span slot="title">Arbeitsschritte</span>
 
             {#each steps as step, i}
@@ -198,7 +251,7 @@
             <Button on:click={addStep}>Schritt hinzufügen</Button>
         </TabItem>
 
-        <TabItem>
+        <TabItem bind:open={tabStatus.ingredients}>
             <span slot="title">Zutaten</span>
             <Button on:click={() => (ingredientsModalOpen = true)}
                 >Hinzufügen</Button

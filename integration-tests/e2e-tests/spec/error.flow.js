@@ -3,7 +3,7 @@ const PuppeteerHelper = require('./helper/puppeteer-helper');
 const CreatePage = require('./pages/CreatePage');
 const OverviewPage = require('./pages/OverviewPage');
 
-describe('Ingredient flow', () => {
+describe('Error flow', () => {
     let profileHelper;
     let browser;
 
@@ -36,19 +36,17 @@ describe('Ingredient flow', () => {
         await browser.tearDown();
     });
 
-    it('should create a new ingredient', async () => {
+    it('should display an error message if recipe has no name and description', async () => {
         await overviewPage.open();
         await overviewPage.newRecipe();
 
-        await browser.waitForNavigation();
+        await createPage.save();
+        const nameError = await createPage.getInputErrorText('#nameDesc');
+        const descriptionError = await createPage.getInputErrorText(
+            '#descriptionDesc'
+        );
 
-        await createPage.changeTab('Zutaten');
-        await createPage.openIngredientModal();
-        await createPage.openCreateIngredientModal();
-        await createPage.createIngredient('Test');
-
-        const hasIngredient = await createPage.hasIngredient('Test');
-
-        expect(hasIngredient).toBe(true);
+        expect(nameError).toEqual('Dieses Feld ist erforderlich!');
+        expect(descriptionError).toEqual('Dieses Feld ist erforderlich!');
     });
 });
