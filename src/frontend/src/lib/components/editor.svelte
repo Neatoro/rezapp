@@ -62,6 +62,7 @@
     );
 
     async function saveRecipe() {
+        console.log(ingredientMetadata);
         dispatch('save', {
             name,
             description,
@@ -90,6 +91,16 @@
         selectedIngredients = selectedIngredients.filter(
             (ingredient) => ingredient.id !== id
         );
+
+        ingredientMetadata = Object.keys(ingredientMetadata)
+            .filter((key) => key !== id)
+            .reduce(
+                (acc, current) => ({
+                    ...acc,
+                    [current]: ingredientMetadata[current]
+                }),
+                {}
+            );
     }
 
     function newIngredient(event) {
@@ -215,7 +226,8 @@
                             <TableBodyCell>
                                 <Input
                                     type="number"
-                                    id={'amount-' + ingredient.name}
+                                    id={'amount-' + ingredient.id}
+                                    data-name={'amount-' + ingredient.name}
                                     placeholder="1000"
                                     bind:value={ingredientMetadata[
                                         ingredient.id
@@ -225,7 +237,8 @@
                             <TableBodyCell>
                                 <Input
                                     placeholder="g"
-                                    id={'unit-' + ingredient.name}
+                                    id={'unit-' + ingredient.id}
+                                    data-name={'unit-' + ingredient.name}
                                     bind:value={ingredientMetadata[
                                         ingredient.id
                                     ].unit}

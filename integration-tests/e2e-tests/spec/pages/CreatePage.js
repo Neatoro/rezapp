@@ -42,8 +42,23 @@ module.exports = class CreatePage {
         await this.browser.waitForSelector('input[type="checkbox"]:checked');
         await this.browser.clickButton('Auswählen');
 
-        await this.browser.type('#amount-' + name, amount);
-        await this.browser.type('#unit-' + name, unit);
+        await this.browser.type(`input[data-name="amount-${name}"]`, amount);
+        await this.browser.type(`input[data-name="unit-${name}"]`, unit);
+    }
+
+    async removeIngredient(name) {
+        await this.browser.waitForSelector('tbody tr');
+
+        await this.browser.evaluate((name) => {
+            const ingredient = [
+                ...document.querySelectorAll('tbody tr')
+            ].filter((row) => {
+                const cells = row.querySelectorAll('td');
+                const ingredientName = cells[2].innerText;
+                return ingredientName === name;
+            })[0];
+            ingredient.querySelector('button').click();
+        }, name);
     }
 
     async save() {
