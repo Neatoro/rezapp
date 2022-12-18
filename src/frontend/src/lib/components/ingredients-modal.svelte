@@ -82,7 +82,7 @@
     }
 </script>
 
-<Modal title="Zutaten hinzufügen" bind:open>
+<Modal id="modalAddIngredient" title="Zutaten hinzufügen" bind:open>
     <Button on:click={() => (newIngredientModalOpen = true)}
         >Neue Zutat erstellen</Button
     >

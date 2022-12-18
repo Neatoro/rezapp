@@ -1,11 +1,14 @@
 const puppeteer = require('puppeteer');
 
 module.exports = class PuppeteerHelper {
-    async setupPage() {
-        const browser = await puppeteer.launch({
+    async setupBrowser() {
+        this.browser = await puppeteer.launch({
             args: ['--no-sandbox']
         });
-        this.page = await browser.newPage();
+    }
+
+    async setupPage() {
+        this.page = await this.browser.newPage();
     }
 
     async goto(path) {
@@ -15,6 +18,8 @@ module.exports = class PuppeteerHelper {
     }
 
     async getInnerText(selector) {
+        await this.page.waitForSelector(selector);
+
         const result = await this.page.evaluate((selector) => {
             return document.querySelector(selector).innerText;
         }, selector);
@@ -22,7 +27,53 @@ module.exports = class PuppeteerHelper {
         return result;
     }
 
+    async evaluate(evaluateFunction, ...params) {
+        const result = await this.page.evaluate(evaluateFunction, ...params);
+        return result;
+    }
+
+    async click(selector) {
+        await this.page.waitForSelector(selector, { visible: true });
+        await this.page.click(selector);
+    }
+
+    async clickButton(text) {
+        await this.page.waitForXPath(`//button[contains(., '${text}')]`);
+
+        await this.page.evaluate((text) => {
+            const button = [...document.querySelectorAll('button')].filter(
+                (button) => button.innerText === text
+            )[0];
+            button.click();
+        }, text);
+    }
+
+    async type(selector, text) {
+        await this.page.waitForSelector(selector, { visible: true });
+        await this.page.type(selector, text, { delay: 100 });
+    }
+
+    async clearInput(selector) {
+        await this.page.waitForSelector(selector, { visible: true });
+
+        const input = await this.page.$(selector);
+        await input.click({ clickCount: 3 });
+        await input.press('Backspace');
+    }
+
+    async waitForSelector(selector, options) {
+        await this.page.waitForSelector(selector, options);
+    }
+
+    async waitForNavigation() {
+        await this.page.waitForNavigation();
+    }
+
     async close() {
         await this.page.close();
+    }
+
+    async tearDown() {
+        await this.browser.close();
     }
 };
