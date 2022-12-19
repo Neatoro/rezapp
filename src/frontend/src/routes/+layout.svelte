@@ -1,5 +1,5 @@
 <script>
-    import { NavBrand, Navbar, Toast } from 'flowbite-svelte';
+    import { NavBrand, Navbar, Toast, NavUl, NavLi } from 'flowbite-svelte';
     import '../app.postcss';
     import { goto } from '$app/navigation';
     import { page } from '$app/stores';
@@ -49,6 +49,9 @@
                 Rezapp
             </span>
         </NavBrand>
+        <NavUl>
+            <NavLi href="/auth/logout">Logout</NavLi>
+        </NavUl>
     </Navbar>
     <main class="p-4">
         <slot />
