@@ -3,7 +3,6 @@ const proxyHelper = require('./helpers/proxy-helper');
 const ProfileHelper = require('../../shared/profile-helper');
 
 describe('User Isolation', () => {
-
     let profileHelper;
 
     beforeAll(() => {
@@ -27,7 +26,6 @@ describe('User Isolation', () => {
     });
 
     describe('list', () => {
-
         it('should not return other users recipes', async () => {
             await profileHelper.apply('simple-recipe');
 
@@ -51,15 +49,15 @@ describe('User Isolation', () => {
                 ingredients: []
             });
         });
-
     });
 
     describe('get', () => {
-
         it('should not return other users recipes', async () => {
             await profileHelper.apply('simple-recipe');
 
-            const response = await executeRequest('/recipe/7ae7b1d7-f081-4203-ae9d-2839201d942d');
+            const response = await executeRequest(
+                '/recipe/7ae7b1d7-f081-4203-ae9d-2839201d942d'
+            );
             const data = await response.json();
 
             expect(response.status).toBe(404);
@@ -68,11 +66,9 @@ describe('User Isolation', () => {
                 message: 'Not Found'
             });
         });
-
     });
 
     describe('delete', () => {
-
         it('should not delete other users recipe', async () => {
             await profileHelper.apply('test-recipe');
             const response = await executeRequest(
@@ -89,11 +85,9 @@ describe('User Isolation', () => {
                 message: 'Not Found'
             });
         });
-
     });
 
     describe('update', () => {
-
         it('should not update other users recipe', async () => {
             await profileHelper.apply('test-recipe');
 
@@ -118,7 +112,5 @@ describe('User Isolation', () => {
                 message: 'Not Found'
             });
         });
-
     });
-
 });

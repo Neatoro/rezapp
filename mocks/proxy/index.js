@@ -26,7 +26,8 @@ app.get('/auth/profile', (request, response) => {
 });
 
 app.put('/mock/auth-state', (request, response) => {
-    authState = Object.keys(request.body).length === 0 ? defaultState : request.body;
+    authState =
+        Object.keys(request.body).length === 0 ? defaultState : request.body;
     response.status(201).json(authState);
 });
 

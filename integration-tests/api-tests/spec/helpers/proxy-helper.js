@@ -1,5 +1,4 @@
 module.exports = {
-
     changeAuthState(state = {}) {
         const baseUrl = process.env.PROXY_MOCK_URL || 'http://localhost:3111';
         return fetch(`${baseUrl}/mock/auth-state`, {
@@ -10,5 +9,4 @@ module.exports = {
             body: JSON.stringify(state)
         });
     }
-
 };
