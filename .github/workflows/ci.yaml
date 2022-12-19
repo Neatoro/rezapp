@@ -65,10 +65,19 @@ jobs:
                   file: pipeline/stages/api-tests/Dockerfile
                   outputs: type=docker,dest=/tmp/api-tests.tar
 
+            - name: Build mock proxy image
+              uses: docker/build-push-action@v3
+              with:
+                  context: .
+                  tags: mock-proxy:latest
+                  file: mocks/proxy/Dockerfile
+                  outputs: type=docker,dest=/tmp/proxy-mock.tar
+
             - name: Prepare docker
               run: |
                   docker load --input /tmp/backend.tar
                   docker load --input /tmp/api-tests.tar
+                  docker load --input /tmp/proxy-mock.tar
                   docker volume create --name rezapp-database
                   docker network create api-tests
 
