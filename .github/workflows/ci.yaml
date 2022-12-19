@@ -68,9 +68,8 @@ jobs:
             - name: Build mock proxy image
               uses: docker/build-push-action@v3
               with:
-                  context: .
+                  context: mocks/proxy
                   tags: mock-proxy:latest
-                  file: mocks/proxy/Dockerfile
                   outputs: type=docker,dest=/tmp/proxy-mock.tar
 
             - name: Prepare docker
@@ -80,10 +79,8 @@ jobs:
                   docker load --input /tmp/proxy-mock.tar
 
             - name: Start landscape
-              uses: isbang/compose-action@v1.4.1
-              with:
-                compose-file: ./pipeline/stages/api-tests/docker-compose.yaml
-                up-flags: "-d"
+              run: |
+                  docker-compose -f pipeline/stages/api-tests/docker-compose.yaml up -d
 
             - name: Wait for server to start
               uses: ifaxity/wait-on-action@v1
