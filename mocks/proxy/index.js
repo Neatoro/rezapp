@@ -12,7 +12,7 @@ app.use(
 
 app.get('/auth/profile', (request, response) => {
     response.json({
-        isAuthenticated: false
+        isAuthenticated: true
     });
 });
 
