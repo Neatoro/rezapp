@@ -5,6 +5,8 @@ services:
         image: rezapp-backend
         networks:
             - rezapp
+        environment:
+            AUTH_PROVIDER_BASE_URL: http://mock-proxy:3111/auth
         volumes:
             - database:/database
             - images:/app/images
@@ -28,6 +30,11 @@ services:
             KONG_DECLARATIVE_CONFIG: /kong/declarative/kong.yaml
         ports:
             - 8000:8000
+
+    mock-proxy:
+        image: mock-proxy
+        networks:
+            - rezapp
 
 networks:
     rezapp:
