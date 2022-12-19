@@ -72,9 +72,9 @@ jobs:
                   docker volume create --name rezapp-database
                   docker network create api-tests
 
-            - name: Start backend container
+            - name: Start landscape
               run: |
-                  docker run -d -p 8080:8080 --network api-tests --name rezapp-backend -v ${GITHUB_WORKSPACE}/pipeline/ormconfig.json:/app/ormconfig.json -v rezapp-database:/database rezapp-backend
+                  docker-compose -f pipeline/stages/api-tests/docker-compose.yaml up -d
 
             - name: Wait for server to start
               uses: ifaxity/wait-on-action@v1
@@ -83,12 +83,7 @@ jobs:
 
             - name: Run API tests
               run: |
-                  docker run --rm --network api-tests --name api-tests -v rezapp-database:/database api-tests
-
-            - if: always()
-              name: Logs
-              run: |
-                  docker logs rezapp-backend
+                  docker run --rm --network rezapp --name api-tests -v rezapp-database:/database api-tests
 
     e2e-tests:
         runs-on: ubuntu-latest
