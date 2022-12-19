@@ -4,65 +4,80 @@
             "id": "7ae7b1d7-f081-4203-ae9d-2839201d942d",
             "name": "Ofengemüse mit Jackfruit und Zitronen-Kapern-Sauce",
             "description": "Ein schnelles Gericht, perfekt im Herbst und Winter.",
-            "image": false
+            "image": false,
+            "user": "0123456789"
         }
     ],
     "ingredient": [
         {
             "id": "6961db05-7a8a-40d8-ad9b-0873dc23e271",
-            "name": "Jackfruit"
+            "name": "Jackfruit",
+            "user": "0123456789"
         },
         {
             "id": "2e08f4d1-8c9c-479b-86f6-fb10d442543b",
-            "name": "Sojasauce"
+            "name": "Sojasauce",
+            "user": "0123456789"
         },
         {
             "id": "f4b82197-196a-4a06-8ec2-5ce2e34dac63",
-            "name": "Paprikapulver"
+            "name": "Paprikapulver",
+            "user": "0123456789"
         },
         {
             "id": "ef781d66-1ba6-4ed5-9ce7-9f1ef9eaf504",
-            "name": "Tomatenmark"
+            "name": "Tomatenmark",
+            "user": "0123456789"
         },
         {
             "id": "a9003178-413d-4b17-a729-f2a8e5038863",
-            "name": "Kartoffel"
+            "name": "Kartoffel",
+            "user": "0123456789"
         },
         {
             "id": "663dee2b-0835-4ca0-9d40-63d0cd274dd5",
-            "name": "Zwiebel"
+            "name": "Zwiebel",
+            "user": "0123456789"
         },
         {
             "id": "981ca0b6-a694-474b-948e-2d07ff0b1526",
-            "name": "Knoblauch"
+            "name": "Knoblauch",
+            "user": "0123456789"
         },
         {
             "id": "cb0e3ecb-77ec-4d76-90d3-1886bfcc756a",
-            "name": "Thymianzweig"
+            "name": "Thymianzweig",
+            "user": "0123456789"
         },
         {
             "id": "874c14a1-1363-4a1f-98c8-15219daff441",
-            "name": "Süßkartoffel"
+            "name": "Süßkartoffel",
+            "user": "0123456789"
         },
         {
             "id": "f8fd18e2-79de-46d1-ac70-c296d9524af7",
-            "name": "Hokkaidokürbis"
+            "name": "Hokkaidokürbis",
+            "user": "0123456789"
         },
         {
             "id": "0178e59b-9015-4750-96fe-af95133a9bf6",
-            "name": "Cherrytomate"
+            "name": "Cherrytomate",
+            "user": "0123456789"
         },
         {
             "id": "137910cd-008d-41a5-9735-732bd3562711",
-            "name": "Olivenöl"
+            "name": "Olivenöl",
+            "user": "0123456789"
         },
         {
             "id": "5378a803-73e7-4a75-b527-d96adc18a7ba",
-            "name": "Salz und Pfeffer"
+            "name": "Salz und Pfeffer",
+            "user": "0123456789"
         },
         {
             "id": "dc9d08c9-b8dc-4dd2-aa5f-4b8c1c59e2b6",
-            "name": "Rosmarin"
+            "name": "Rosmarin",
+            "user": "0123456789"
         }
     ],
     "recipe_ingredient": [

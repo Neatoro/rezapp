@@ -40,7 +40,8 @@ describe('Recipe', () => {
                         name: 'Ofengemüse mit Jackfruit und Zitronen-Kapern-Sauce',
                         description:
                             'Ein schnelles Gericht, perfekt im Herbst und Winter.',
-                        image: false
+                        image: false,
+                        user: '0123456789'
                     }
                 ]
             });
@@ -68,6 +69,7 @@ describe('Recipe', () => {
                 name: 'Test',
                 description: 'Test',
                 image: false,
+                user: '0123456789',
                 steps: [
                     {
                         id: '8dae1913-517f-4d5e-9c23-14cb1a5b3cb3',
@@ -82,7 +84,8 @@ describe('Recipe', () => {
                         unit: 'g',
                         ingredient: {
                             id: '6961db05-7a8a-40d8-ad9b-0873dc23e271',
-                            name: 'Test'
+                            name: 'Test',
+                            user: '0123456789'
                         }
                     }
                 ]
@@ -363,7 +366,8 @@ describe('Recipe', () => {
                 description: 'Test',
                 steps: [],
                 ingredients: [],
-                image: false
+                image: false,
+                user: '0123456789'
             });
         });
 
@@ -396,7 +400,8 @@ describe('Recipe', () => {
                     })
                 ],
                 ingredients: [],
-                image: false
+                image: false,
+                user: '0123456789'
             });
         });
 
@@ -440,7 +445,8 @@ describe('Recipe', () => {
                         unit: 'g'
                     })
                 ],
-                image: false
+                image: false,
+                user: '0123456789'
             });
         });
 
@@ -490,7 +496,8 @@ describe('Recipe', () => {
                         unit: 'g'
                     })
                 ],
-                image: false
+                image: false,
+                user: '0123456789'
             });
         });
     });
@@ -802,7 +809,8 @@ describe('Recipe', () => {
                 description: 'Bar',
                 image: false,
                 steps: [],
-                ingredients: []
+                ingredients: [],
+                user: '0123456789'
             });
         });
 
@@ -841,7 +849,8 @@ describe('Recipe', () => {
                         rank: 0
                     }
                 ],
-                ingredients: []
+                ingredients: [],
+                user: '0123456789'
             });
         });
 
@@ -887,7 +896,8 @@ describe('Recipe', () => {
                         rank: 1
                     })
                 ],
-                ingredients: []
+                ingredients: [],
+                user: '0123456789'
             });
         });
 
@@ -923,6 +933,7 @@ describe('Recipe', () => {
                 description: 'Bar',
                 image: false,
                 steps: [],
+                user: '0123456789',
                 ingredients: [
                     {
                         id: '03ff41b7-9faf-47a6-ac3a-efcbb20a2e1a',
@@ -984,7 +995,8 @@ describe('Recipe', () => {
                         amount: 100,
                         unit: 'g'
                     })
-                ]
+                ],
+                user: '0123456789'
             });
         });
     });

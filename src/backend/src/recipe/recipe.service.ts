@@ -17,8 +17,10 @@ export class RecipeService {
         private readonly recipeIngredientRepository: Repository<RecipeIngredient>
     ) {}
 
-    async list(): Promise<Recipe[]> {
-        return await this.recipeRepository.find();
+    async list(user: string): Promise<Recipe[]> {
+        return await this.recipeRepository.find({
+            where: { user }
+        });
     }
 
     async get(id: string): Promise<Recipe> {
@@ -49,7 +51,7 @@ export class RecipeService {
         });
     }
 
-    async create(dto: CreateRecipeRequestDto): Promise<Recipe> {
+    async create(dto: CreateRecipeRequestDto, user: string): Promise<Recipe> {
         const steps = await Promise.all(
             dto.steps.map((step, index) =>
                 this.stepRepository.save({ ...step, rank: index })
@@ -66,7 +68,8 @@ export class RecipeService {
             name: dto.name,
             description: dto.description,
             steps: steps,
-            ingredients: recipeIngredients
+            ingredients: recipeIngredients,
+            user
         });
     }
 

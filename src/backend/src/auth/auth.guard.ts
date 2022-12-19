@@ -1,4 +1,10 @@
-import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
+import {
+    CanActivate,
+    ExecutionContext,
+    ForbiddenException,
+    Injectable,
+    UnauthorizedException
+} from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import axios from 'axios';
 
@@ -7,7 +13,7 @@ export class AuthGuard implements CanActivate {
     constructor(private readonly configService: ConfigService) {}
 
     async canActivate(context: ExecutionContext): Promise<boolean> {
-        const request: Request = context.switchToHttp().getRequest();
+        const request = context.switchToHttp().getRequest();
 
         const authProviderClient = axios.create({
             baseURL: this.configService.get('AUTH_PROVIDER_BASE_URL'),
@@ -19,6 +25,11 @@ export class AuthGuard implements CanActivate {
 
         const authProviderResponse = await authProviderClient.get('/profile');
 
-        return authProviderResponse.data.isAuthenticated;
+        if (authProviderResponse.data.isAuthenticated) {
+            request.user = authProviderResponse.data.user.sub;
+            return true;
+        }
+
+        throw new UnauthorizedException();
     }
 }

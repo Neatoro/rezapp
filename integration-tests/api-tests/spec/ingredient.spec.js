@@ -35,11 +35,13 @@ describe('Ingredient', () => {
                 ingredients: [
                     {
                         id: '6961db05-7a8a-40d8-ad9b-0873dc23e271',
-                        name: 'Jackfruit'
+                        name: 'Jackfruit',
+                        user: '0123456789'
                     },
                     {
                         id: '2e08f4d1-8c9c-479b-86f6-fb10d442543b',
-                        name: 'Sojasauce'
+                        name: 'Sojasauce',
+                        user: '0123456789'
                     }
                 ]
             });
@@ -65,7 +67,8 @@ describe('Ingredient', () => {
                 /^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$/i
             );
             expect(exceptId).toEqual({
-                name: 'Test'
+                name: 'Test',
+                user: '0123456789'
             });
         });
 

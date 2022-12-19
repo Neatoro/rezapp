@@ -12,7 +12,10 @@ app.use(
 
 app.get('/auth/profile', (request, response) => {
     response.json({
-        isAuthenticated: true
+        isAuthenticated: true,
+        user: {
+            sub: '0123456789'
+        }
     });
 });
 

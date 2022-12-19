@@ -11,13 +11,16 @@ export class IngredientService {
         private readonly ingredientRepository: Repository<Ingredient>
     ) {}
 
-    async list() {
-        return this.ingredientRepository.find();
+    async list(user: string) {
+        return this.ingredientRepository.find({
+            where: { user }
+        });
     }
 
-    async create(dto: CreateIngredientRequest) {
+    async create(dto: CreateIngredientRequest, user: string) {
         return await this.ingredientRepository.save({
-            name: dto.name
+            name: dto.name,
+            user
         });
     }
 }

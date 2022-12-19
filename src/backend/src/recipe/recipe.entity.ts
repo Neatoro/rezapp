@@ -1,8 +1,6 @@
 import {
     Column,
     Entity,
-    JoinTable,
-    ManyToMany,
     ManyToOne,
     OneToMany,
     PrimaryGeneratedColumn
@@ -31,6 +29,9 @@ export class Recipe {
         (recipeIngredient) => recipeIngredient.recipe
     )
     ingredients: RecipeIngredient[];
+
+    @Column()
+    user: string;
 }
 
 @Entity()

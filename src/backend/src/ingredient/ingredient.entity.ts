@@ -14,4 +14,7 @@ export class Ingredient {
         (recipeIngredient) => recipeIngredient.id
     )
     recipes: RecipeIngredient[];
+
+    @Column()
+    user: string;
 }
