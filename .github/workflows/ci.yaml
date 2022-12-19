@@ -94,6 +94,11 @@ jobs:
               run: |
                   docker run --rm --network rezapp --name api-tests -v rezapp-database:/database api-tests
 
+            - name: Logs landscape
+              if: always()
+              run: |
+                  docker-compose -f pipeline/stages/api-tests/docker-compose.yaml logs
+
     e2e-tests:
         runs-on: ubuntu-latest
         needs: build
