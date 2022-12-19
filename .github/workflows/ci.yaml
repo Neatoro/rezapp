@@ -82,7 +82,7 @@ jobs:
             - name: Start landscape
               uses: isbang/compose-action@v1.4.1
               with:
-                compose-file: ./pipeline/stages/api-tests/docker-compose.yml
+                compose-file: ./pipeline/stages/api-tests/docker-compose.yaml
                 up-flags: "-d"
 
             - name: Wait for server to start
