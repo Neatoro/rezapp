@@ -16,7 +16,7 @@ services:
 
     rezapp-proxy:
         image: mock-proxy
-        build: mocks/proxy
+        build: ../../../mocks/proxy
         networks:
             - rezapp
 
