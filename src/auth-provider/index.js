@@ -24,6 +24,10 @@ const app = express();
 app.use(helmet());
 app.use('/auth', auth(config));
 
+app.get('/auth', (request, response) => {
+    response.redirect('/');
+});
+
 app.get('/auth/profile', async (request, response) => {
     if (request.oidc.isAuthenticated()) {
         response.json({
