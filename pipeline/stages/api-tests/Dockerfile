@@ -12,5 +12,6 @@ RUN npm ci
 
 ENV DATABASE_PATH=/database/recipes.db
 ENV BACKEND_BASE_URL=http://rezapp-backend:8080
+ENV PROXY_MOCK_URL=http://rezapp-proxy:3111
 
 CMD [ "npm", "start" ]
