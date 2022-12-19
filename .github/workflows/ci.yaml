@@ -80,8 +80,10 @@ jobs:
                   docker load --input /tmp/proxy-mock.tar
 
             - name: Start landscape
-              run: |
-                  docker-compose -f pipeline/stages/api-tests/docker-compose.yaml up -d
+              uses: isbang/compose-action@v1.4.1
+              with:
+                compose-file: ./pipeline/stages/api-tests/docker-compose.yml
+                up-flags: "-d"
 
             - name: Wait for server to start
               uses: ifaxity/wait-on-action@v1
