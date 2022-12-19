@@ -27,6 +27,12 @@ services:
         ports:
             - 8000:8000
 
+    rezapp-auth-provider:
+        build: src/auth-provider
+        image: rezapp-auth-provider
+        env_file:
+            - .env
+
 volumes:
     database:
     images:

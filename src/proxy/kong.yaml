@@ -12,6 +12,16 @@ services:
                 - /api
             strip_path: true
 
+    - host: rezapp-auth-provider
+      name: auth-provider
+      port: 3222
+      protocol: http
+      routes:
+          - name: auth-provider-route
+            paths:
+                - /auth
+            strip_path: false
+
     - host: rezapp-frontend
       name: frontend
       port: 3000
