@@ -1,0 +1,29 @@
+version: '3.9'
+
+services:
+    rezapp-backend:
+        image: rezapp-backend
+        networks:
+            - rezapp
+        environment:
+            AUTH_PROVIDER_BASE_URL: http://rezapp-proxy:3111/auth
+        volumes:
+            - database:/database
+            - images:/app/images
+            - ../../ormconfig.json:/app/ormconfig.json
+        ports:
+            - 8080:8080
+
+    rezapp-proxy:
+        image: mock-proxy
+        networks:
+            - rezapp
+
+networks:
+    rezapp:
+        name: rezapp
+
+volumes:
+    database:
+        name: rezapp-database
+    images:

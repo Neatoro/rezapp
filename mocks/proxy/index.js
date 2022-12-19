@@ -10,6 +10,12 @@ app.use(
     })
 );
 
+app.get('/auth/profile', (request, response) => {
+    response.json({
+        isAuthenticated: true
+    });
+});
+
 app.listen(3111, () => {
     console.log('Proxy started on port 3111');
 });

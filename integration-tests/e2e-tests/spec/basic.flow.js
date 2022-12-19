@@ -128,6 +128,7 @@ describe('Basic flow', () => {
         await profileHelper.apply('test-recipe');
 
         await overviewPage.open();
+        await overviewPage.waitForRecipes();
         await overviewPage.viewRecipe({
             title: 'Test'
         });

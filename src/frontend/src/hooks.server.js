@@ -7,3 +7,9 @@ export const handle = async ({ event, resolve }) => {
     }
     return resolve(event);
 };
+
+export async function handleFetch({ event, request, fetch }) {
+    request.headers.set('cookie', event.request.headers.get('cookie'));
+
+    return fetch(request);
+}

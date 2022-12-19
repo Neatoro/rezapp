@@ -14,6 +14,7 @@ services:
         image: rezapp-frontend
         environment:
             BACKEND_URL: http://rezapp-proxy:8000
+            AUTH_PROVIDER_URL: http://rezapp-proxy:8000/auth
         ports:
             - 3000:3000
 
@@ -26,6 +27,12 @@ services:
             KONG_DECLARATIVE_CONFIG: /kong/declarative/kong.yaml
         ports:
             - 8000:8000
+
+    rezapp-auth-provider:
+        build: src/auth-provider
+        image: rezapp-auth-provider
+        env_file:
+            - .env
 
 volumes:
     database:
