@@ -269,3 +269,14 @@ jobs:
               host: ${{ secrets.DEPLOY_HOST }}
               username: ${{ secrets.DEPLOY_USER }}
               privateKey: ${{ secrets.DEPLOY_KEY }}
+
+          - name: Start Application
+            uses: appleboy/ssh-action@v0.1.6
+            with:
+              host: ${{ secrets.DEPLOY_HOST }}
+              username: ${{ secrets.DEPLOY_USER }}
+              key: ${{ secrets.DEPLOY_KEY }}
+              script_stop: true
+              script: |
+                cd ${{ secrets.DEPLOY_PATH }}
+                docker-compose up -d
