@@ -279,4 +279,4 @@ jobs:
               script_stop: true
               script: |
                 cd ${{ secrets.DEPLOY_PATH }}
-                docker-compose up -d
+                TMPDIR=~/tmp docker-compose up -d
