@@ -245,4 +245,11 @@ jobs:
             docker tag rezapp-auth-provider:latest ${{ steps.repo.outputs.lowercase }}/rezapp-auth-provider:latest
             docker tag rezapp-auth-provider:latest ${{ steps.repo.outputs.lowercase }}/rezapp-auth-provider:${{ github.sha }}
 
-            docker images ls
+            docker images ls -a
+
+
+        - name: Push Images
+          run: |
+            docker push ${{ steps.repo.outputs.lowercase }}/rezapp-backend
+            docker push ${{ steps.repo.outputs.lowercase }}/rezapp-frontend
+            docker push ${{ steps.repo.outputs.lowercase }}/rezapp-auth-provider
