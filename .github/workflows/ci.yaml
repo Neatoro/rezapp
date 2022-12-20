@@ -250,6 +250,6 @@ jobs:
 
         - name: Push Images
           run: |
-            docker push ${{ steps.repo.outputs.lowercase }}/rezapp-backend
-            docker push ${{ steps.repo.outputs.lowercase }}/rezapp-frontend
-            docker push ${{ steps.repo.outputs.lowercase }}/rezapp-auth-provider
+            docker push -a ${{ steps.repo.outputs.lowercase }}/rezapp-backend
+            docker push -a ${{ steps.repo.outputs.lowercase }}/rezapp-frontend
+            docker push -a ${{ steps.repo.outputs.lowercase }}/rezapp-auth-provider
