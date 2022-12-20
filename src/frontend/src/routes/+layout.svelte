@@ -49,9 +49,11 @@
                 Rezapp
             </span>
         </NavBrand>
+        {#if data.isAuthenticated }
         <NavUl>
             <NavLi href="/auth/logout">Logout</NavLi>
         </NavUl>
+        {/if}
     </Navbar>
     <main class="p-4">
         <slot />
