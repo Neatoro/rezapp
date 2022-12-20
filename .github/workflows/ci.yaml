@@ -29,6 +29,13 @@ jobs:
                   tags: rezapp-frontend:latest
                   outputs: type=docker,dest=/tmp/frontend.tar
 
+            - name: Build and export auth provider
+              uses: docker/build-push-action@v3
+              with:
+                  context: src/auth-provider
+                  tags: rezapp-auth-provider:latest
+                  outputs: type=docker,dest=/tmp/auth-provider.tar
+
             - name: Build and export mock proxy image
               uses: docker/build-push-action@v3
               with:
@@ -47,6 +54,12 @@ jobs:
               with:
                   name: frontend
                   path: /tmp/frontend.tar
+
+            - name: Upload auth-provider artifact
+              uses: actions/upload-artifact@v3
+              with:
+                  name: auth-provider
+                  path: /tmp/auth-provider.tar
 
             - name: Upload mock proxy artifact
               uses: actions/upload-artifact@v3
@@ -169,3 +182,59 @@ jobs:
               if: always()
               run: |
                   docker-compose -f pipeline/stages/e2e-tests/docker-compose.yaml logs
+
+    release:
+      if: github.ref_name == 'dev-release-images'
+      runs-on: ubuntu-latest
+      needs: [e2e-tests, api-tests]
+
+      steps:
+        - name: Checkout Repository
+          uses: actions/checkout@v3
+
+        - name: Setup Docker Buildx
+          uses: docker/setup-buildx-action@v2
+
+        - name: Download backend artifact
+          uses: actions/download-artifact@v3
+          with:
+              name: backend
+              path: /tmp
+
+        - name: Download frontend artifact
+          uses: actions/download-artifact@v3
+          with:
+              name: frontend
+              path: /tmp
+
+        - name: Download auth-provider artifact
+          uses: actions/download-artifact@v3
+          with:
+              name: auth-provider
+              path: /tmp
+
+        - name: Prepare docker
+          run: |
+              docker load --input /tmp/backend.tar
+              docker load --input /tmp/frontend.tar
+              docker load --input /tmp/auth-provider.tar
+
+        - name: Log in to the Container registry
+          uses: docker/login-action@v2
+          with:
+            registry: ghcr.io
+            username: ${{ github.actor }}
+            password: ${{ secrets.GITHUB_TOKEN }}
+
+        - name: Tag Images
+          run: |
+            docker tag rezapp-backend:latest ghcr.io/${{ github.repository }}/rezapp-backend:latest
+            docker tag rezapp-backend:latest ghcr.io/${{ github.repository }}/rezapp-backend:${{ github.sha }}
+
+            docker tag rezapp-frontend:latest ghcr.io/${{ github.repository }}/rezapp-frontend:latest
+            docker tag rezapp-frontend:latest ghcr.io/${{ github.repository }}/rezapp-frontend:${{ github.sha }}
+
+            docker tag rezapp-auth-provider:latest ghcr.io/${{ github.repository }}/rezapp-auth-provider:latest
+            docker tag rezapp-auth-provider:latest ghcr.io/${{ github.repository }}/rezapp-auth-provider:${{ github.sha }}
+
+            docker images ls
