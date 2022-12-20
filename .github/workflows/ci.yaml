@@ -226,15 +226,21 @@ jobs:
             username: ${{ github.actor }}
             password: ${{ secrets.GITHUB_TOKEN }}
 
+        - id: repo
+          name: Prepare Packages Repository Name
+          uses: ASzc/change-string-case-action@v5
+          with:
+            string: ghcr.io/${{ github.repository }}
+
         - name: Tag Images
           run: |
-            docker tag rezapp-backend:latest ghcr.io/${{ github.repository }}/rezapp-backend:latest
-            docker tag rezapp-backend:latest ghcr.io/${{ github.repository }}/rezapp-backend:${{ github.sha }}
+            docker tag rezapp-backend:latest ${{ steps.repo.outputs.lowercase }}}/rezapp-backend:latest
+            docker tag rezapp-backend:latest ${{ steps.repo.outputs.lowercase }}}/rezapp-backend:${{ github.sha }}
 
-            docker tag rezapp-frontend:latest ghcr.io/${{ github.repository }}/rezapp-frontend:latest
-            docker tag rezapp-frontend:latest ghcr.io/${{ github.repository }}/rezapp-frontend:${{ github.sha }}
+            docker tag rezapp-frontend:latest ${{ steps.repo.outputs.lowercase }}}/rezapp-frontend:latest
+            docker tag rezapp-frontend:latest ${{ steps.repo.outputs.lowercase }}}/rezapp-frontend:${{ github.sha }}
 
-            docker tag rezapp-auth-provider:latest ghcr.io/${{ github.repository }}/rezapp-auth-provider:latest
-            docker tag rezapp-auth-provider:latest ghcr.io/${{ github.repository }}/rezapp-auth-provider:${{ github.sha }}
+            docker tag rezapp-auth-provider:latest ${{ steps.repo.outputs.lowercase }}}/rezapp-auth-provider:latest
+            docker tag rezapp-auth-provider:latest ${{ steps.repo.outputs.lowercase }}}/rezapp-auth-provider:${{ github.sha }}
 
             docker images ls
