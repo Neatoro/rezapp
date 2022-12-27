@@ -264,7 +264,7 @@
                 on:newIngredient={newIngredient}
             />
 
-            <Table>
+            <Table class="mt-4">
                 <TableHead>
                     <TableHeadCell>Menge</TableHeadCell>
                     <TableHeadCell>Einheit</TableHeadCell>
