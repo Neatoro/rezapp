@@ -17,6 +17,16 @@ module.exports = class OverviewPage {
         });
     }
 
+    async isDarkMode() {
+        return await this.browser.evaluate(() => {
+            return document.documentElement.classList.contains('dark');
+        });
+    }
+
+    async toggleDarkMode() {
+        await this.browser.click('#darkModeToggle');
+    }
+
     async waitForRecipes() {
         await this.browser.waitForSelector('div:has(> h5)');
     }

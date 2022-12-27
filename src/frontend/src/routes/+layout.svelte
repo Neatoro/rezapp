@@ -1,13 +1,37 @@
 <script>
-    import { NavBrand, Navbar, Toast, NavUl, NavLi } from 'flowbite-svelte';
+    import {
+        NavBrand,
+        Navbar,
+        Toast,
+        NavUl,
+        NavLi,
+        Toggle
+    } from 'flowbite-svelte';
     import '../app.postcss';
     import { goto } from '$app/navigation';
     import { page } from '$app/stores';
     import { messages } from '$lib/store';
     import { onMount } from 'svelte';
     import { beforeNavigate } from '$app/navigation';
+    import { browser } from '$app/environment';
+    import { writable } from 'svelte/store';
 
     export let data;
+
+    let initialDarkModeValue = true;
+    if (browser) {
+        const currentDarkModeSetting =
+            localStorage.getItem('darkMode') || 'true';
+        initialDarkModeValue = currentDarkModeSetting === 'true';
+    }
+
+    let darkMode = writable(initialDarkModeValue);
+    darkMode.subscribe((value) => {
+        if (browser) {
+            document.documentElement.classList.toggle('dark', value);
+            localStorage.setItem('darkMode', value);
+        }
+    });
 
     $: shouldShowContent = data.isAuthenticated || $page.route.id === '/login';
 
@@ -51,6 +75,15 @@
         </NavBrand>
         {#if data.isAuthenticated}
             <NavUl>
+                <NavLi>
+                    <Toggle id="darkModeToggle" bind:checked={$darkMode}>
+                        {#if $darkMode}
+                            Dunkel
+                        {:else}
+                            Hell
+                        {/if}
+                    </Toggle>
+                </NavLi>
                 <NavLi href="/auth/logout">Logout</NavLi>
             </NavUl>
         {/if}
