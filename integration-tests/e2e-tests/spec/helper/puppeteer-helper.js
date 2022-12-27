@@ -69,8 +69,8 @@ module.exports = class PuppeteerHelper {
         await this.page.waitForSelector(selector, options);
     }
 
-    async waitForNavigation() {
-        await this.page.waitForNavigation();
+    async waitForNavigation(options) {
+        await this.page.waitForNavigation(options);
     }
 
     async close() {

@@ -48,6 +48,27 @@ describe('Basic flow', () => {
         expect(headerText).toBe('Rezapp');
     });
 
+    it('should toggle dark mode', async () => {
+        await overviewPage.open();
+        await browser.evaluate(() => {
+            localStorage.clear();
+            window.location.reload();
+        });
+
+        await browser.waitForSelector('.dark');
+
+        const beforeFirstToggle = await overviewPage.isDarkMode();
+        expect(beforeFirstToggle).toBe(true);
+
+        await overviewPage.toggleDarkMode();
+        const afterFirstToggle = await overviewPage.isDarkMode();
+        expect(afterFirstToggle).toBe(false);
+
+        await overviewPage.toggleDarkMode();
+        const afterSecondToggle = await overviewPage.isDarkMode();
+        expect(afterSecondToggle).toBe(true);
+    });
+
     it('should display the correct recipe', async () => {
         await profileHelper.apply('test-recipe');
 
