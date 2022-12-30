@@ -34,7 +34,7 @@ export class RecipeController {
         @Query('search') search: string
     ): Promise<ListRecipesResponse> {
         return {
-            recipes: await this.recipeService.list(user, search)
+            recipes: await this.recipeService.list(user, search || '')
         };
     }
 

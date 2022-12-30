@@ -46,6 +46,26 @@ describe('Recipe', () => {
                 ]
             });
         });
+
+        it('should only return the searched recipes', async () => {
+            await profileHelper.apply('test-recipes');
+
+            const response = await executeRequest('/recipe?search=Test');
+            const data = await response.json();
+
+            expect(response.status).toBe(200);
+            expect(data).toEqual({
+                recipes: [
+                    {
+                        id: '7ae7b1d7-f081-4203-ae9d-2839201d942d',
+                        name: 'Test',
+                        description: 'Test',
+                        image: false,
+                        user: '0123456789'
+                    }
+                ]
+            });
+        });
     });
 
     describe('get', () => {
