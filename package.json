@@ -4,7 +4,9 @@
     "scripts": {
         "prettify": "prettier --write .",
         "apply-default": "node scripts/applyProfile.js",
-        "deep-install": "run-p install:backend install:frontend install:auth-provider install:integration-tests",
+        "generate:config": "jsonnet -m . -S config.jsonnet",
+        "deep-install": "run-p install:root install:backend install:frontend install:auth-provider install:integration-tests",
+        "install:root": "npm ci",
         "install:backend": "npm ci --prefix src/backend",
         "install:frontend": "npm ci --prefix src/frontend",
         "install:auth-provider": "npm ci --prefix src/auth-provider",
