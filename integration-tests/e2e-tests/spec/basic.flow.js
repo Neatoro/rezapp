@@ -145,6 +145,21 @@ describe('Basic flow', () => {
         expect(recipeCount).toBe(0);
     });
 
+    it('should search through recipes', async () => {
+        await profileHelper.apply('test-recipes');
+
+        await overviewPage.open();
+        await overviewPage.waitForRecipes();
+        let recipeCount = await overviewPage.getRecipeCount();
+        expect(recipeCount).toBe(2);
+
+        await overviewPage.searchRecipes('Test');
+        await browser.waitForNavigation();
+
+        recipeCount = await overviewPage.getRecipeCount();
+        expect(recipeCount).toBe(1);
+    });
+
     it('should edit a recipe', async () => {
         await profileHelper.apply('test-recipe');
 

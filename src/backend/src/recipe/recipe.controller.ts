@@ -11,7 +11,8 @@ import {
     Response,
     Delete,
     NotFoundException,
-    UseGuards
+    UseGuards,
+    Query
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { RecipeOwnerGuard } from '../auth/recipe.guard';
@@ -28,9 +29,12 @@ export class RecipeController {
     constructor(private readonly recipeService: RecipeService) {}
 
     @Get()
-    async list(@User() user: string): Promise<ListRecipesResponse> {
+    async list(
+        @User() user: string,
+        @Query('search') search: string
+    ): Promise<ListRecipesResponse> {
         return {
-            recipes: await this.recipeService.list(user)
+            recipes: await this.recipeService.list(user, search || '')
         };
     }
 

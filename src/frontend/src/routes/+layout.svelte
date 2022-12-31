@@ -5,7 +5,8 @@
         Toast,
         NavUl,
         NavLi,
-        Toggle
+        Toggle,
+        Search
     } from 'flowbite-svelte';
     import '../app.postcss';
     import { goto } from '$app/navigation';
@@ -17,6 +18,8 @@
     import { writable } from 'svelte/store';
 
     export let data;
+
+    let searchQuery = '';
 
     let initialDarkModeValue = true;
     if (browser) {
@@ -51,6 +54,11 @@
             goto('/login');
         }
     }
+
+    function submitSearch(event) {
+        event.preventDefault();
+        goto(`/?search=${encodeURIComponent(searchQuery)}`);
+    }
 </script>
 
 {#if shouldShowContent}
@@ -73,6 +81,14 @@
                 Rezapp
             </span>
         </NavBrand>
+        <form class="w-1/3" on:submit={submitSearch}>
+            <Search
+                id="recipeSearch"
+                placeholder="Rezept suchen"
+                size="md"
+                bind:value={searchQuery}
+            />
+        </form>
         {#if data.isAuthenticated}
             <NavUl>
                 <NavLi>

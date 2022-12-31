@@ -56,4 +56,12 @@ module.exports = class OverviewPage {
 
         return text === message;
     }
+
+    async searchRecipes(term) {
+        await this.browser.type('#recipeSearch', term);
+        await this.browser.evaluate(() => {
+            const form = document.querySelector('#recipeSearch').form;
+            form.requestSubmit();
+        });
+    }
 };
