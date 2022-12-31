@@ -38,10 +38,11 @@ class ProfileHelper {
 
     async apply(profileName) {
         const profile = require(`./profiles/${profileName}.json`);
-        const tables = Object.keys(profile);
+        const database = profile.database;
+        const tables = Object.keys(database);
 
         for (const table of tables) {
-            const entries = profile[table];
+            const entries = database[table];
             for (const entry of entries) {
                 const fields = Object.keys(entry).join(', ');
                 const values = Object.values(entry)
