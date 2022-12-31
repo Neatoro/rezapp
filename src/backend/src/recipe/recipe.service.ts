@@ -70,6 +70,7 @@ export class RecipeService {
         return await this.recipeRepository.save({
             name: dto.name,
             description: dto.description,
+            portions: dto.portions,
             steps: steps,
             ingredients: recipeIngredients,
             user

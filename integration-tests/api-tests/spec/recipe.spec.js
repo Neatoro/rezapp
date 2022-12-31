@@ -41,7 +41,8 @@ describe('Recipe', () => {
                         description:
                             'Ein schnelles Gericht, perfekt im Herbst und Winter.',
                         image: false,
-                        user: '0123456789'
+                        user: '0123456789',
+                        portions: 2
                     }
                 ]
             });
@@ -61,7 +62,8 @@ describe('Recipe', () => {
                         name: 'Test',
                         description: 'Test',
                         image: false,
-                        user: '0123456789'
+                        user: '0123456789',
+                        portions: 0
                     }
                 ]
             });
@@ -90,6 +92,7 @@ describe('Recipe', () => {
                 description: 'Test',
                 image: false,
                 user: '0123456789',
+                portions: 0,
                 steps: [
                     {
                         id: '8dae1913-517f-4d5e-9c23-14cb1a5b3cb3',
@@ -387,7 +390,8 @@ describe('Recipe', () => {
                 steps: [],
                 ingredients: [],
                 image: false,
-                user: '0123456789'
+                user: '0123456789',
+                portions: 0
             });
         });
 
@@ -421,7 +425,8 @@ describe('Recipe', () => {
                 ],
                 ingredients: [],
                 image: false,
-                user: '0123456789'
+                user: '0123456789',
+                portions: 0
             });
         });
 
@@ -466,7 +471,8 @@ describe('Recipe', () => {
                     })
                 ],
                 image: false,
-                user: '0123456789'
+                user: '0123456789',
+                portions: 0
             });
         });
 
@@ -517,7 +523,8 @@ describe('Recipe', () => {
                     })
                 ],
                 image: false,
-                user: '0123456789'
+                user: '0123456789',
+                portions: 0
             });
         });
     });
@@ -830,7 +837,8 @@ describe('Recipe', () => {
                 image: false,
                 steps: [],
                 ingredients: [],
-                user: '0123456789'
+                user: '0123456789',
+                portions: 0
             });
         });
 
@@ -870,7 +878,8 @@ describe('Recipe', () => {
                     }
                 ],
                 ingredients: [],
-                user: '0123456789'
+                user: '0123456789',
+                portions: 0,
             });
         });
 
@@ -917,7 +926,8 @@ describe('Recipe', () => {
                     })
                 ],
                 ingredients: [],
-                user: '0123456789'
+                user: '0123456789',
+                portions: 0
             });
         });
 
@@ -954,6 +964,7 @@ describe('Recipe', () => {
                 image: false,
                 steps: [],
                 user: '0123456789',
+                portions: 0,
                 ingredients: [
                     {
                         id: '03ff41b7-9faf-47a6-ac3a-efcbb20a2e1a',
@@ -1016,7 +1027,8 @@ describe('Recipe', () => {
                         unit: 'g'
                     })
                 ],
-                user: '0123456789'
+                user: '0123456789',
+                portions: 0
             });
         });
     });

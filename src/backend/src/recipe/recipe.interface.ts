@@ -21,6 +21,10 @@ export class CreateRecipeRequestDto {
     @IsString()
     description: string;
 
+    @IsOptional()
+    @IsNumber()
+    portions: number;
+
     @ValidateNested({ each: true })
     @Type(() => RecipeStep)
     @IsOptional()
