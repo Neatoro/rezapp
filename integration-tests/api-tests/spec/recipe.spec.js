@@ -366,6 +366,28 @@ describe('Recipe', () => {
             });
         });
 
+        it('should fail if portions is not a number', async () => {
+            const response = await executeRequest('/recipe', {
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify({
+                    name: 'Test',
+                    description: 'Test',
+                    portions: 'foo'
+                })
+            });
+            const data = await response.json();
+
+            expect(response.status).toBe(400);
+            expect(data).toEqual({
+                statusCode: 400,
+                message: ['portions must be a number conforming to the specified constraints'],
+                error: 'Bad Request'
+            });
+        });
+
         it('should create a recipe without ingredients and steps', async () => {
             const response = await executeRequest('/recipe', {
                 method: 'POST',
@@ -809,6 +831,28 @@ describe('Recipe', () => {
             expect(data).toEqual({
                 statusCode: 400,
                 message: ['ingredients.0.unit must be a string'],
+                error: 'Bad Request'
+            });
+        });
+
+        it('should fail if portions is not a number', async () => {
+            const response = await executeRequest('/recipe', {
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify({
+                    name: 'Test',
+                    description: 'Test',
+                    portions: 'foo'
+                })
+            });
+            const data = await response.json();
+
+            expect(response.status).toBe(400);
+            expect(data).toEqual({
+                statusCode: 400,
+                message: ['portions must be a number conforming to the specified constraints'],
                 error: 'Bad Request'
             });
         });
