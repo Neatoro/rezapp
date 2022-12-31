@@ -45,3 +45,4 @@ volumes:
     database:
         name: rezapp-database
     images:
+        name: rezapp-images

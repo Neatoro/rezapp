@@ -115,7 +115,7 @@ jobs:
 
             - name: Run API tests
               run: |
-                  docker run --rm --network rezapp --name api-tests -v rezapp-database:/database api-tests
+                  docker run --rm --network rezapp --name api-tests -v rezapp-database:/database -v rezapp-images:/images api-tests
 
             - name: Logs landscape
               if: always()
@@ -177,7 +177,7 @@ jobs:
 
             - name: Run E2E tests
               run: |
-                  docker run --rm --network rezapp --name e2e-tests -v rezapp-database:/database e2e-tests
+                  docker run --rm --network rezapp --name e2e-tests -v rezapp-database:/database -v rezapp-images:/images e2e-tests
 
             - name: Logs landscape
               if: always()

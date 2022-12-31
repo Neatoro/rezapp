@@ -19,7 +19,7 @@ WORKDIR /tests/e2e-tests
 COPY integration-tests/e2e-tests /tests/e2e-tests
 RUN npm ci
 
-ENV IMAGES_PATH=/app/images
+ENV IMAGES_PATH=/images
 ENV DATABASE_PATH=/database/recipes.db
 ENV FRONTEND_BASE_URL=http://rezapp-proxy:8000
 
