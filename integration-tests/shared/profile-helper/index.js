@@ -1,5 +1,6 @@
 const sqlite = require('sqlite3').verbose();
 const path = require('path');
+const fs = require('fs/promises');
 
 class ProfileHelper {
     constructor() {
@@ -34,6 +35,21 @@ class ProfileHelper {
         await this._exec('DELETE FROM recipe;');
         await this._exec('DELETE FROM recipe_ingredient;');
         await this._exec('DELETE FROM recipe_step;');
+
+        const imagesPath = path.resolve(
+            __dirname,
+            '..',
+            '..',
+            '..',
+            'src',
+            'backend',
+            'images'
+        );
+
+        const files = await fs.readdir(imagesPath);
+        for (const file of files) {
+            await fs.rm(path.resolve(imagesPath, file));
+        }
     }
 
     async apply(profileName) {
@@ -52,6 +68,31 @@ class ProfileHelper {
                 const query = `INSERT INTO ${table} (${fields}) VALUES (${values});`;
                 await this._exec(query);
             }
+        }
+
+        const images = profile.images;
+        const targets = Object.keys(images);
+
+        for (const target of targets) {
+            const targetPath = path.resolve(
+                __dirname,
+                '..',
+                '..',
+                '..',
+                'src',
+                'backend',
+                'images',
+                target
+            );
+            await fs.copyFile(
+                path.resolve(
+                    __dirname,
+                    'profiles',
+                    'images',
+                    images[target].name
+                ),
+                targetPath
+            );
         }
     }
 

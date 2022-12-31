@@ -5,7 +5,7 @@
                 "id": "7ae7b1d7-f081-4203-ae9d-2839201d942d",
                 "name": "Ofengemüse mit Jackfruit und Zitronen-Kapern-Sauce",
                 "description": "Ein schnelles Gericht, perfekt im Herbst und Winter.",
-                "image": false,
+                "image": true,
                 "user": "0123456789",
                 "portions": 2
             }
@@ -232,5 +232,10 @@
                 "recipeId": "7ae7b1d7-f081-4203-ae9d-2839201d942d"
             }
         ]
+    },
+    "images": {
+        "7ae7b1d7-f081-4203-ae9d-2839201d942d": {
+            "name": "example-image.jpg"
+        }
     }
 }
