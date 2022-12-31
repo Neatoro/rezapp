@@ -71,28 +71,30 @@ class ProfileHelper {
         }
 
         const images = profile.images;
-        const targets = Object.keys(images);
+        if (images) {
+            const targets = Object.keys(images);
 
-        for (const target of targets) {
-            const targetPath = path.resolve(
-                __dirname,
-                '..',
-                '..',
-                '..',
-                'src',
-                'backend',
-                'images',
-                target
-            );
-            await fs.copyFile(
-                path.resolve(
+            for (const target of targets) {
+                const targetPath = path.resolve(
                     __dirname,
-                    'profiles',
+                    '..',
+                    '..',
+                    '..',
+                    'src',
+                    'backend',
                     'images',
-                    images[target].name
-                ),
-                targetPath
-            );
+                    target
+                );
+                await fs.copyFile(
+                    path.resolve(
+                        __dirname,
+                        'profiles',
+                        'images',
+                        images[target].name
+                    ),
+                    targetPath
+                );
+            }
         }
     }
 
