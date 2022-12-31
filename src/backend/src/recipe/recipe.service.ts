@@ -123,6 +123,7 @@ export class RecipeService {
         dboRecipe.description = dto.description;
         dboRecipe.steps = steps;
         dboRecipe.ingredients = recipeIngredients;
+        dboRecipe.portions = dto.portions;
 
         return await this.recipeRepository.save(dboRecipe);
     }

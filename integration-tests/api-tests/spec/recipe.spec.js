@@ -886,7 +886,7 @@ describe('Recipe', () => {
                 steps: [],
                 ingredients: [],
                 user: '0123456789',
-                portions: 1
+                portions: 0
             });
         });
 
@@ -927,7 +927,7 @@ describe('Recipe', () => {
                 ],
                 ingredients: [],
                 user: '0123456789',
-                portions: 1
+                portions: 0
             });
         });
 
@@ -975,7 +975,7 @@ describe('Recipe', () => {
                 ],
                 ingredients: [],
                 user: '0123456789',
-                portions: 1
+                portions: 0
             });
         });
 
@@ -1012,7 +1012,7 @@ describe('Recipe', () => {
                 image: false,
                 steps: [],
                 user: '0123456789',
-                portions: 1,
+                portions: 0,
                 ingredients: [
                     {
                         id: '03ff41b7-9faf-47a6-ac3a-efcbb20a2e1a',
@@ -1076,7 +1076,7 @@ describe('Recipe', () => {
                     })
                 ],
                 user: '0123456789',
-                portions: 1
+                portions: 0
             });
         });
     });
