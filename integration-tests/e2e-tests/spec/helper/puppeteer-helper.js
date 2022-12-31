@@ -3,8 +3,7 @@ const puppeteer = require('puppeteer');
 module.exports = class PuppeteerHelper {
     async setupBrowser() {
         this.browser = await puppeteer.launch({
-            args: ['--no-sandbox'],
-            headless: false
+            args: ['--no-sandbox']
         });
     }
 
