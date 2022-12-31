@@ -103,6 +103,7 @@ describe('Basic flow', () => {
 
         await createPage.enterName('Foo Bar Name');
         await createPage.enterDescription('Foo Bar Description');
+        await createPage.enterPortions('3');
 
         await createPage.changeTab('Arbeitsschritte');
         await createPage.enterStep(0, 'Foo Bar Step');
@@ -124,6 +125,9 @@ describe('Basic flow', () => {
 
         const descriptionText = await viewPage.getDescription();
         expect(descriptionText).toBe('Foo Bar Description');
+
+        const portions = await viewPage.getPortions();
+        expect(portions).toBe(3);
 
         const ingredients = await viewPage.getIngredients();
         expect(ingredients).toEqual([{ name: 'Jackfruit', amount: '200 g' }]);
@@ -176,6 +180,7 @@ describe('Basic flow', () => {
 
         await updatePage.enterName('Foo Bar Name');
         await updatePage.enterDescription('Foo Bar Description');
+        await updatePage.enterPortions('42');
 
         await updatePage.changeTab('Arbeitsschritte');
         await updatePage.enterStep(0, 'Foo Bar Step');
@@ -194,6 +199,9 @@ describe('Basic flow', () => {
 
         const descriptionText = await viewPage.getDescription();
         expect(descriptionText).toBe('Foo Bar Description');
+
+        const portions = await viewPage.getPortions();
+        expect(portions).toBe(42);
 
         const ingredients = await viewPage.getIngredients();
         expect(ingredients).toEqual([{ name: 'Test 2', amount: '100 g' }]);

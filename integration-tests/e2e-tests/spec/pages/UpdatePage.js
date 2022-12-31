@@ -15,6 +15,11 @@ module.exports = class UpdatePage extends CreatePage {
         await super.enterDescription(description);
     }
 
+    async enterPortions(portions) {
+        await this.browser.clearInput('#recipe-portions');
+        await super.enterPortions(portions);
+    }
+
     async enterStep(index, description) {
         await this.browser.clearInput(`#step-description-${index}`);
         await super.enterStep(index, description);

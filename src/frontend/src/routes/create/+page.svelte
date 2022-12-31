@@ -27,7 +27,13 @@
         }
     }
 
-    async function saveRecipe({ name, description, steps, ingredients }) {
+    async function saveRecipe({
+        name,
+        description,
+        steps,
+        ingredients,
+        portions
+    }) {
         const response = await fetch('/api/recipe', {
             method: 'POST',
             headers: {
@@ -36,6 +42,7 @@
             body: JSON.stringify({
                 name,
                 description,
+                portions,
                 ingredients,
                 steps: steps.filter((step) => step.description !== '')
             })
