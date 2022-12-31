@@ -27,7 +27,13 @@
         }
     }
 
-    async function saveRecipe({ name, description, steps, ingredients }) {
+    async function saveRecipe({
+        name,
+        description,
+        steps,
+        ingredients,
+        portions
+    }) {
         const response = await fetch(`/api/recipe/${data.recipe.id}`, {
             method: 'PUT',
             headers: {
@@ -37,6 +43,7 @@
                 name,
                 description,
                 ingredients,
+                portions,
                 steps: steps.filter((step) => step.description !== '')
             })
         });
@@ -108,6 +115,7 @@
     name={data.recipe.name}
     description={data.recipe.description}
     steps={data.recipe.steps}
+    portions={data.recipe.portions}
     selectedIngredients={transformToSelectedIngredients()}
     ingredientMetadata={transformToIngredientMetadata()}
     on:newIngredient={newIngredient}

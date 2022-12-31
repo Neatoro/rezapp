@@ -30,6 +30,9 @@ export class Recipe {
     )
     ingredients: RecipeIngredient[];
 
+    @Column({ default: 0 })
+    portions: number;
+
     @Column()
     user: string;
 }

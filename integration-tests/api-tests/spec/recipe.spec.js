@@ -41,7 +41,8 @@ describe('Recipe', () => {
                         description:
                             'Ein schnelles Gericht, perfekt im Herbst und Winter.',
                         image: false,
-                        user: '0123456789'
+                        user: '0123456789',
+                        portions: 2
                     }
                 ]
             });
@@ -61,7 +62,8 @@ describe('Recipe', () => {
                         name: 'Test',
                         description: 'Test',
                         image: false,
-                        user: '0123456789'
+                        user: '0123456789',
+                        portions: 0
                     }
                 ]
             });
@@ -90,6 +92,7 @@ describe('Recipe', () => {
                 description: 'Test',
                 image: false,
                 user: '0123456789',
+                portions: 1,
                 steps: [
                     {
                         id: '8dae1913-517f-4d5e-9c23-14cb1a5b3cb3',
@@ -363,6 +366,30 @@ describe('Recipe', () => {
             });
         });
 
+        it('should fail if portions is not a number', async () => {
+            const response = await executeRequest('/recipe', {
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify({
+                    name: 'Test',
+                    description: 'Test',
+                    portions: 'foo'
+                })
+            });
+            const data = await response.json();
+
+            expect(response.status).toBe(400);
+            expect(data).toEqual({
+                statusCode: 400,
+                message: [
+                    'portions must be a number conforming to the specified constraints'
+                ],
+                error: 'Bad Request'
+            });
+        });
+
         it('should create a recipe without ingredients and steps', async () => {
             const response = await executeRequest('/recipe', {
                 method: 'POST',
@@ -387,7 +414,8 @@ describe('Recipe', () => {
                 steps: [],
                 ingredients: [],
                 image: false,
-                user: '0123456789'
+                user: '0123456789',
+                portions: 0
             });
         });
 
@@ -421,7 +449,8 @@ describe('Recipe', () => {
                 ],
                 ingredients: [],
                 image: false,
-                user: '0123456789'
+                user: '0123456789',
+                portions: 0
             });
         });
 
@@ -466,7 +495,8 @@ describe('Recipe', () => {
                     })
                 ],
                 image: false,
-                user: '0123456789'
+                user: '0123456789',
+                portions: 0
             });
         });
 
@@ -517,7 +547,8 @@ describe('Recipe', () => {
                     })
                 ],
                 image: false,
-                user: '0123456789'
+                user: '0123456789',
+                portions: 0
             });
         });
     });
@@ -806,6 +837,30 @@ describe('Recipe', () => {
             });
         });
 
+        it('should fail if portions is not a number', async () => {
+            const response = await executeRequest('/recipe', {
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify({
+                    name: 'Test',
+                    description: 'Test',
+                    portions: 'foo'
+                })
+            });
+            const data = await response.json();
+
+            expect(response.status).toBe(400);
+            expect(data).toEqual({
+                statusCode: 400,
+                message: [
+                    'portions must be a number conforming to the specified constraints'
+                ],
+                error: 'Bad Request'
+            });
+        });
+
         it('should update without steps and ingredients', async () => {
             const response = await executeRequest(
                 '/recipe/7ae7b1d7-f081-4203-ae9d-2839201d942d',
@@ -830,7 +885,8 @@ describe('Recipe', () => {
                 image: false,
                 steps: [],
                 ingredients: [],
-                user: '0123456789'
+                user: '0123456789',
+                portions: 0
             });
         });
 
@@ -870,7 +926,8 @@ describe('Recipe', () => {
                     }
                 ],
                 ingredients: [],
-                user: '0123456789'
+                user: '0123456789',
+                portions: 0
             });
         });
 
@@ -917,7 +974,8 @@ describe('Recipe', () => {
                     })
                 ],
                 ingredients: [],
-                user: '0123456789'
+                user: '0123456789',
+                portions: 0
             });
         });
 
@@ -954,6 +1012,7 @@ describe('Recipe', () => {
                 image: false,
                 steps: [],
                 user: '0123456789',
+                portions: 0,
                 ingredients: [
                     {
                         id: '03ff41b7-9faf-47a6-ac3a-efcbb20a2e1a',
@@ -1016,7 +1075,8 @@ describe('Recipe', () => {
                         unit: 'g'
                     })
                 ],
-                user: '0123456789'
+                user: '0123456789',
+                portions: 0
             });
         });
     });

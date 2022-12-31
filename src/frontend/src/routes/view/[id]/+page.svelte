@@ -42,6 +42,9 @@
     </h1>
 
     <P>{data.recipe.description}</P>
+    {#if data.recipe.portions !== 0}
+        <P class="mt-4">Portionen: {data.recipe.portions}</P>
+    {/if}
 
     <section class="mt-8">
         <h2

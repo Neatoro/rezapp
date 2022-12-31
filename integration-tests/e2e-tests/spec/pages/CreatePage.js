@@ -11,6 +11,10 @@ module.exports = class CreatePage {
         await this.browser.type('#description', description);
     }
 
+    async enterPortions(portions) {
+        await this.browser.type('#recipe-portions', portions);
+    }
+
     async changeTab(tab) {
         await this.browser.clickButton(tab);
     }

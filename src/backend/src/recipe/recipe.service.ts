@@ -70,6 +70,7 @@ export class RecipeService {
         return await this.recipeRepository.save({
             name: dto.name,
             description: dto.description,
+            portions: dto.portions,
             steps: steps,
             ingredients: recipeIngredients,
             user
@@ -122,6 +123,7 @@ export class RecipeService {
         dboRecipe.description = dto.description;
         dboRecipe.steps = steps;
         dboRecipe.ingredients = recipeIngredients;
+        dboRecipe.portions = dto.portions;
 
         return await this.recipeRepository.save(dboRecipe);
     }

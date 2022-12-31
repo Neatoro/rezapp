@@ -25,6 +25,7 @@
     let images = [];
     export let selectedIngredients = [];
     export let title = '';
+    export let portions = '';
 
     export let ingredientMetadata = {};
 
@@ -91,6 +92,7 @@
                 name,
                 description,
                 steps,
+                portions: Number(portions),
                 images,
                 ingredients: Object.keys(ingredientMetadata).map((id) => ({
                     ingredient: id,
@@ -149,7 +151,7 @@
         <TabItem bind:open={tabStatus.general}>
             <span slot="title">Allgemein</span>
 
-            <div class="mb-6">
+            <div class="mb-4">
                 <Label
                     for="recipe-name"
                     class="mb-2"
@@ -191,6 +193,17 @@
                     rows="4"
                     name="description"
                     aria-describedby="descriptionDesc"
+                />
+            </div>
+
+            <div class="mb-4">
+                <Label for="recipe-portions" class="mb-2">Portionen</Label>
+                <Input
+                    bind:value={portions}
+                    type="number"
+                    id="recipe-portions"
+                    placeholder="3"
+                    min={0}
                 />
             </div>
 

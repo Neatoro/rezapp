@@ -80,6 +80,7 @@ export class RecipeController {
     ): Promise<Recipe> {
         dto.steps = dto.steps || [];
         dto.ingredients = dto.ingredients || [];
+        dto.portions = dto.portions || 0;
 
         return this.recipeService.create(dto, user);
     }
@@ -92,6 +93,7 @@ export class RecipeController {
     ): Promise<Recipe> {
         dto.steps = dto.steps || [];
         dto.ingredients = dto.ingredients || [];
+        dto.portions = dto.portions || 0;
 
         return this.recipeService.update(id, dto);
     }

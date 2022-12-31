@@ -11,6 +11,11 @@ module.exports = class ViewPage {
         return await this.browser.getInnerText('main h1 + p');
     }
 
+    async getPortions() {
+        const text = await this.browser.getInnerText('main h1 + p + p');
+        return Number(text.split(' ')[1]);
+    }
+
     async getIngredients() {
         return await this.browser.evaluate(() => {
             const ingredientSection =
