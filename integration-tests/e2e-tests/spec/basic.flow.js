@@ -90,6 +90,9 @@ describe('Basic flow', () => {
 
         const steps = await viewPage.getSteps();
         expect(steps).toEqual(['Test']);
+
+        const portions = await viewPage.getPortions();
+        expect(portions).toBe(1);
     });
 
     it('should create a new recipe', async () => {

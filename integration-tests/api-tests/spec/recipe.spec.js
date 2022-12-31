@@ -92,7 +92,7 @@ describe('Recipe', () => {
                 description: 'Test',
                 image: false,
                 user: '0123456789',
-                portions: 0,
+                portions: 1,
                 steps: [
                     {
                         id: '8dae1913-517f-4d5e-9c23-14cb1a5b3cb3',
@@ -383,7 +383,9 @@ describe('Recipe', () => {
             expect(response.status).toBe(400);
             expect(data).toEqual({
                 statusCode: 400,
-                message: ['portions must be a number conforming to the specified constraints'],
+                message: [
+                    'portions must be a number conforming to the specified constraints'
+                ],
                 error: 'Bad Request'
             });
         });
@@ -852,7 +854,9 @@ describe('Recipe', () => {
             expect(response.status).toBe(400);
             expect(data).toEqual({
                 statusCode: 400,
-                message: ['portions must be a number conforming to the specified constraints'],
+                message: [
+                    'portions must be a number conforming to the specified constraints'
+                ],
                 error: 'Bad Request'
             });
         });
@@ -882,7 +886,7 @@ describe('Recipe', () => {
                 steps: [],
                 ingredients: [],
                 user: '0123456789',
-                portions: 0
+                portions: 1
             });
         });
 
@@ -923,7 +927,7 @@ describe('Recipe', () => {
                 ],
                 ingredients: [],
                 user: '0123456789',
-                portions: 0,
+                portions: 1
             });
         });
 
@@ -971,7 +975,7 @@ describe('Recipe', () => {
                 ],
                 ingredients: [],
                 user: '0123456789',
-                portions: 0
+                portions: 1
             });
         });
 
@@ -1008,7 +1012,7 @@ describe('Recipe', () => {
                 image: false,
                 steps: [],
                 user: '0123456789',
-                portions: 0,
+                portions: 1,
                 ingredients: [
                     {
                         id: '03ff41b7-9faf-47a6-ac3a-efcbb20a2e1a',
@@ -1072,7 +1076,7 @@ describe('Recipe', () => {
                     })
                 ],
                 user: '0123456789',
-                portions: 0
+                portions: 1
             });
         });
     });

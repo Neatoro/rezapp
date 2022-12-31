@@ -5,7 +5,8 @@
             "name": "Test",
             "description": "Test",
             "image": false,
-            "user": "0123456789"
+            "user": "0123456789",
+            "portions": 1
         }
     ],
     "ingredient": [
