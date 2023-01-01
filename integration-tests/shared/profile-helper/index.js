@@ -46,6 +46,7 @@ class ProfileHelper {
         await this._exec('DELETE FROM recipe;');
         await this._exec('DELETE FROM recipe_ingredient;');
         await this._exec('DELETE FROM recipe_step;');
+        await this._exec('DELETE FROM recipe_labels_label;');
         await this._exec('DELETE FROM label;');
 
         const files = await fs.readdir(this.imagesPath);

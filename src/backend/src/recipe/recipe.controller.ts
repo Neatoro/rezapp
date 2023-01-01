@@ -79,6 +79,7 @@ export class RecipeController {
         @User() user: string
     ): Promise<Recipe> {
         dto.steps = dto.steps || [];
+        dto.labels = dto.labels || [];
         dto.ingredients = dto.ingredients || [];
         dto.portions = dto.portions || 0;
 
@@ -92,6 +93,7 @@ export class RecipeController {
         @Body() dto: CreateRecipeRequestDto
     ): Promise<Recipe> {
         dto.steps = dto.steps || [];
+        dto.labels = dto.labels || [];
         dto.ingredients = dto.ingredients || [];
         dto.portions = dto.portions || 0;
 

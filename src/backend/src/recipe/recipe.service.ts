@@ -22,7 +22,8 @@ export class RecipeService {
             where: {
                 user,
                 name: Like(`%${search}%`)
-            }
+            },
+            relations: ['labels']
         });
     }
 
@@ -31,7 +32,12 @@ export class RecipeService {
             where: {
                 id
             },
-            relations: ['steps', 'ingredients', 'ingredients.ingredient']
+            relations: [
+                'steps',
+                'ingredients',
+                'ingredients.ingredient',
+                'labels'
+            ]
         });
 
         if (recipe) {
@@ -73,6 +79,7 @@ export class RecipeService {
             portions: dto.portions,
             steps: steps,
             ingredients: recipeIngredients,
+            labels: dto.labels,
             user
         });
     }
@@ -125,7 +132,10 @@ export class RecipeService {
         dboRecipe.ingredients = recipeIngredients;
         dboRecipe.portions = dto.portions;
 
-        return await this.recipeRepository.save(dboRecipe);
+        return await this.recipeRepository.save({
+            ...dboRecipe,
+            labels: dto.labels
+        });
     }
 
     async delete(id: string) {

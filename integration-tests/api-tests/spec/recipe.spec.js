@@ -42,7 +42,15 @@ describe('Recipe', () => {
                             'Ein schnelles Gericht, perfekt im Herbst und Winter.',
                         image: true,
                         user: '0123456789',
-                        portions: 2
+                        portions: 2,
+                        labels: [
+                            {
+                                id: 'b838f03f-c9ad-4051-9ddc-c090887efeb3',
+                                name: 'Vegan',
+                                color: 'green',
+                                user: '0123456789'
+                            }
+                        ]
                     }
                 ]
             });
@@ -63,7 +71,8 @@ describe('Recipe', () => {
                         description: 'Test',
                         image: false,
                         user: '0123456789',
-                        portions: 0
+                        portions: 0,
+                        labels: []
                     }
                 ]
             });
@@ -93,6 +102,14 @@ describe('Recipe', () => {
                 image: false,
                 user: '0123456789',
                 portions: 1,
+                labels: [
+                    {
+                        id: 'b838f03f-c9ad-4051-9ddc-c090887efeb3',
+                        name: 'Test',
+                        color: 'green',
+                        user: '0123456789'
+                    }
+                ],
                 steps: [
                     {
                         id: '8dae1913-517f-4d5e-9c23-14cb1a5b3cb3',
@@ -366,6 +383,67 @@ describe('Recipe', () => {
             });
         });
 
+        it('should fail if label id is not provied', async () => {
+            const response = await executeRequest('/recipe', {
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify({
+                    name: 'Test',
+                    description: 'Test',
+                    labels: [
+                        {
+                            id: 'some-id'
+                        },
+                        {
+                            name: 'bal'
+                        }
+                    ]
+                })
+            });
+            const data = await response.json();
+
+            expect(response.status).toBe(400);
+            expect(data).toEqual({
+                statusCode: 400,
+                message: [
+                    'labels.1.id must be a string',
+                    'labels.1.id should not be empty'
+                ],
+                error: 'Bad Request'
+            });
+        });
+
+        it('should fail if label id is not a string', async () => {
+            const response = await executeRequest('/recipe', {
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify({
+                    name: 'Test',
+                    description: 'Test',
+                    labels: [
+                        {
+                            id: 'some-id'
+                        },
+                        {
+                            id: true
+                        }
+                    ]
+                })
+            });
+            const data = await response.json();
+
+            expect(response.status).toBe(400);
+            expect(data).toEqual({
+                statusCode: 400,
+                message: ['labels.1.id must be a string'],
+                error: 'Bad Request'
+            });
+        });
+
         it('should fail if portions is not a number', async () => {
             const response = await executeRequest('/recipe', {
                 method: 'POST',
@@ -413,13 +491,14 @@ describe('Recipe', () => {
                 description: 'Test',
                 steps: [],
                 ingredients: [],
+                labels: [],
                 image: false,
                 user: '0123456789',
                 portions: 0
             });
         });
 
-        it('should create a recipe without ingredients', async () => {
+        it('should create a recipe with steps', async () => {
             const response = await executeRequest('/recipe', {
                 method: 'POST',
                 headers: {
@@ -448,13 +527,14 @@ describe('Recipe', () => {
                     })
                 ],
                 ingredients: [],
+                labels: [],
                 image: false,
                 user: '0123456789',
                 portions: 0
             });
         });
 
-        it('should create a recipe without steps', async () => {
+        it('should create a recipe with ingredients', async () => {
             await profileHelper.apply('test-ingredient');
 
             const response = await executeRequest('/recipe', {
@@ -485,6 +565,7 @@ describe('Recipe', () => {
                 name: 'Test',
                 description: 'Test',
                 steps: [],
+                labels: [],
                 ingredients: [
                     jasmine.objectContaining({
                         ingredient: {
@@ -500,8 +581,50 @@ describe('Recipe', () => {
             });
         });
 
-        it('should create a recipe with ingredients and steps', async () => {
+        it('should create a recipe with labels', async () => {
+            await profileHelper.apply('labels');
+
+            const response = await executeRequest('/recipe', {
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify({
+                    name: 'Test',
+                    description: 'Test',
+                    labels: [
+                        {
+                            id: 'b838f03f-c9ad-4051-9ddc-c090887efeb3'
+                        }
+                    ]
+                })
+            });
+            const data = await response.json();
+            const { id, ...exceptId } = data;
+
+            expect(response.status).toBe(201);
+            expect(id).toMatch(
+                /^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$/i
+            );
+            expect(exceptId).toEqual({
+                name: 'Test',
+                description: 'Test',
+                steps: [],
+                ingredients: [],
+                labels: [
+                    {
+                        id: 'b838f03f-c9ad-4051-9ddc-c090887efeb3'
+                    }
+                ],
+                image: false,
+                user: '0123456789',
+                portions: 0
+            });
+        });
+
+        it('should create a recipe with ingredients, labels and steps', async () => {
             await profileHelper.apply('test-ingredient');
+            await profileHelper.apply('labels');
 
             const response = await executeRequest('/recipe', {
                 method: 'POST',
@@ -517,6 +640,11 @@ describe('Recipe', () => {
                             ingredient: '6961db05-7a8a-40d8-ad9b-0873dc23e271',
                             amount: 200,
                             unit: 'g'
+                        }
+                    ],
+                    labels: [
+                        {
+                            id: 'b838f03f-c9ad-4051-9ddc-c090887efeb3'
                         }
                     ]
                 })
@@ -545,6 +673,11 @@ describe('Recipe', () => {
                         amount: 200,
                         unit: 'g'
                     })
+                ],
+                labels: [
+                    {
+                        id: 'b838f03f-c9ad-4051-9ddc-c090887efeb3'
+                    }
                 ],
                 image: false,
                 user: '0123456789',
@@ -838,17 +971,20 @@ describe('Recipe', () => {
         });
 
         it('should fail if portions is not a number', async () => {
-            const response = await executeRequest('/recipe', {
-                method: 'POST',
-                headers: {
-                    'content-type': 'application/json'
-                },
-                body: JSON.stringify({
-                    name: 'Test',
-                    description: 'Test',
-                    portions: 'foo'
-                })
-            });
+            const response = await executeRequest(
+                '/recipe/7ae7b1d7-f081-4203-ae9d-2839201d942d',
+                {
+                    method: 'PUT',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        name: 'Test',
+                        description: 'Test',
+                        portions: 'foo'
+                    })
+                }
+            );
             const data = await response.json();
 
             expect(response.status).toBe(400);
@@ -861,7 +997,74 @@ describe('Recipe', () => {
             });
         });
 
-        it('should update without steps and ingredients', async () => {
+        it('should fail if label id is not provied', async () => {
+            const response = await executeRequest(
+                '/recipe/7ae7b1d7-f081-4203-ae9d-2839201d942d',
+                {
+                    method: 'PUT',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        name: 'Test',
+                        description: 'Test',
+                        labels: [
+                            {
+                                id: 'some-id'
+                            },
+                            {
+                                name: 'bal'
+                            }
+                        ]
+                    })
+                }
+            );
+            const data = await response.json();
+
+            expect(response.status).toBe(400);
+            expect(data).toEqual({
+                statusCode: 400,
+                message: [
+                    'labels.1.id must be a string',
+                    'labels.1.id should not be empty'
+                ],
+                error: 'Bad Request'
+            });
+        });
+
+        it('should fail if label id is not a string', async () => {
+            const response = await executeRequest(
+                '/recipe/7ae7b1d7-f081-4203-ae9d-2839201d942d',
+                {
+                    method: 'PUT',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        name: 'Test',
+                        description: 'Test',
+                        labels: [
+                            {
+                                id: 'some-id'
+                            },
+                            {
+                                id: true
+                            }
+                        ]
+                    })
+                }
+            );
+            const data = await response.json();
+
+            expect(response.status).toBe(400);
+            expect(data).toEqual({
+                statusCode: 400,
+                message: ['labels.1.id must be a string'],
+                error: 'Bad Request'
+            });
+        });
+
+        it('should update without steps, labels and ingredients', async () => {
             const response = await executeRequest(
                 '/recipe/7ae7b1d7-f081-4203-ae9d-2839201d942d',
                 {
@@ -884,7 +1087,53 @@ describe('Recipe', () => {
                 description: 'Bar',
                 image: false,
                 steps: [],
+                labels: [],
                 ingredients: [],
+                user: '0123456789',
+                portions: 0
+            });
+        });
+
+        it('should update with an new label', async () => {
+            const response = await executeRequest(
+                '/recipe/7ae7b1d7-f081-4203-ae9d-2839201d942d',
+                {
+                    method: 'PUT',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        name: 'Foo',
+                        description: 'Bar',
+                        labels: [
+                            {
+                                id: 'b838f03f-c9ad-4051-9ddc-c090887efeb3'
+                            },
+                            {
+                                id: 'bc09a712-d1b9-4b1a-8477-61a76648d7c7'
+                            }
+                        ]
+                    })
+                }
+            );
+            const data = await response.json();
+
+            expect(response.status).toBe(200);
+            expect(data).toEqual({
+                id: '7ae7b1d7-f081-4203-ae9d-2839201d942d',
+                name: 'Foo',
+                description: 'Bar',
+                image: false,
+                steps: [],
+                ingredients: [],
+                labels: [
+                    {
+                        id: 'b838f03f-c9ad-4051-9ddc-c090887efeb3'
+                    },
+                    {
+                        id: 'bc09a712-d1b9-4b1a-8477-61a76648d7c7'
+                    }
+                ],
                 user: '0123456789',
                 portions: 0
             });
@@ -926,6 +1175,7 @@ describe('Recipe', () => {
                     }
                 ],
                 ingredients: [],
+                labels: [],
                 user: '0123456789',
                 portions: 0
             });
@@ -961,6 +1211,7 @@ describe('Recipe', () => {
                 id: '7ae7b1d7-f081-4203-ae9d-2839201d942d',
                 name: 'Foo',
                 description: 'Bar',
+                labels: [],
                 image: false,
                 steps: [
                     {
@@ -1011,6 +1262,7 @@ describe('Recipe', () => {
                 description: 'Bar',
                 image: false,
                 steps: [],
+                labels: [],
                 user: '0123456789',
                 portions: 0,
                 ingredients: [
@@ -1023,7 +1275,7 @@ describe('Recipe', () => {
             });
         });
 
-        it('should update with an existing ingredient', async () => {
+        it('should update with an additional ingredient', async () => {
             const response = await executeRequest(
                 '/recipe/7ae7b1d7-f081-4203-ae9d-2839201d942d',
                 {
@@ -1061,6 +1313,7 @@ describe('Recipe', () => {
                 description: 'Bar',
                 image: false,
                 steps: [],
+                labels: [],
                 ingredients: [
                     {
                         id: '03ff41b7-9faf-47a6-ac3a-efcbb20a2e1a',

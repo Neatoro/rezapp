@@ -34,6 +34,17 @@ export class CreateRecipeRequestDto {
     @ValidateNested({ each: true })
     @Type(() => RecipeIngredient)
     ingredients: RecipeIngredient[];
+
+    @IsOptional()
+    @ValidateNested({ each: true })
+    @Type(() => RecipeLabel)
+    labels: RecipeLabel[];
+}
+
+class RecipeLabel {
+    @IsNotEmpty()
+    @IsString()
+    id: string;
 }
 
 class RecipeStep {
