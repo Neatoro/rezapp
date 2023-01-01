@@ -15,15 +15,17 @@ class ProfileHelper {
                 'backend',
                 'recipes.db'
             );
-        this.imagesPath = process.env.IMAGES_PATH || path.resolve(
-            __dirname,
-            '..',
-            '..',
-            '..',
-            'src',
-            'backend',
-            'images'
-        );
+        this.imagesPath =
+            process.env.IMAGES_PATH ||
+            path.resolve(
+                __dirname,
+                '..',
+                '..',
+                '..',
+                'src',
+                'backend',
+                'images'
+            );
         this.db = new sqlite.Database(dbPath);
     }
 
@@ -75,10 +77,7 @@ class ProfileHelper {
             const targets = Object.keys(images);
 
             for (const target of targets) {
-                const targetPath = path.resolve(
-                    this.imagesPath,
-                    target
-                );
+                const targetPath = path.resolve(this.imagesPath, target);
                 await fs.copyFile(
                     path.resolve(
                         __dirname,

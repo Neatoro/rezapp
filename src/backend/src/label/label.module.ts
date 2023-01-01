@@ -1,14 +1,12 @@
-import { Module } from "@nestjs/common";
-import { TypeOrmModule } from "@nestjs/typeorm";
-import { LabelController } from "./label.controller";
-import { Label } from "./label.entity";
-import { LabelService } from "./label.service";
+import { Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { LabelController } from './label.controller';
+import { Label } from './label.entity';
+import { LabelService } from './label.service';
 
 @Module({
-    imports: [
-        TypeOrmModule.forFeature([Label])
-    ],
+    imports: [TypeOrmModule.forFeature([Label])],
     controllers: [LabelController],
     providers: [LabelService]
 })
-export class LabelModule {};
+export class LabelModule {}

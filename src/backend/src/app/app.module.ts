@@ -19,7 +19,13 @@ import { RecipeModule } from '../recipe/recipe.module';
                 const providedConfig = await loadDatabaseConfiguration();
                 return {
                     ...providedConfig,
-                    entities: [Recipe, RecipeStep, RecipeIngredient, Ingredient, Label]
+                    entities: [
+                        Recipe,
+                        RecipeStep,
+                        RecipeIngredient,
+                        Ingredient,
+                        Label
+                    ]
                 };
             }
         }),
