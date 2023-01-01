@@ -192,6 +192,10 @@ describe('Basic flow', () => {
         await updatePage.changeTab('Arbeitsschritte');
         await updatePage.enterStep(0, 'Foo Bar Step');
 
+        await updatePage.changeTab('Kategorien');
+        await updatePage.addLabel('Foo Bar');
+        await updatePage.removeLabel('Test');
+
         await updatePage.changeTab('Zutaten');
         await updatePage.enterIngredient('Test 2', '100', 'g');
         await updatePage.removeIngredient('Test');
@@ -215,5 +219,8 @@ describe('Basic flow', () => {
 
         const steps = await viewPage.getSteps();
         expect(steps).toEqual(['Foo Bar Step']);
+
+        const labels = await viewPage.getLabels();
+        expect(labels).toEqual(['Foo Bar']);
     });
 });

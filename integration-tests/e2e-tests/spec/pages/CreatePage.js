@@ -21,12 +21,23 @@ module.exports = class CreatePage {
 
     async addLabel(text) {
         const id = await this.browser.evaluate((text) => {
-            const option = [...document.querySelectorAll('#labelSelect option')].find((option) => option.innerText === text);
+            const option = [
+                ...document.querySelectorAll('#labelSelect option')
+            ].find((option) => option.innerText === text);
             return option.value;
         }, text);
 
         await this.browser.select('#labelSelect', id);
         await this.browser.clickButton('Hinzufügen');
+    }
+
+    async removeLabel(text) {
+        await this.browser.evaluate((text) => {
+            const labelElement = [
+                ...document.querySelectorAll('.labels span')
+            ].find((label) => label.innerText === `${text}\nX`);
+            labelElement.querySelector('button').click();
+        }, text);
     }
 
     async enterStep(index, description) {
