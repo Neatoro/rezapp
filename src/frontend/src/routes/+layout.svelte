@@ -81,28 +81,30 @@
                 Rezapp
             </span>
         </NavBrand>
-        <form class="w-1/3" on:submit={submitSearch}>
-            <Search
-                id="recipeSearch"
-                placeholder="Rezept suchen"
-                size="md"
-                bind:value={searchQuery}
-            />
-        </form>
         {#if data.isAuthenticated}
-            <NavUl>
-                <NavLi>
-                    <Toggle id="darkModeToggle" bind:checked={$darkMode}>
-                        {#if $darkMode}
-                            Dunkel
-                        {:else}
-                            Hell
-                        {/if}
-                    </Toggle>
-                </NavLi>
-                <NavLi href="/auth/logout">Logout</NavLi>
-            </NavUl>
+            <form class="w-1/3" on:submit={submitSearch}>
+                <Search
+                    id="recipeSearch"
+                    placeholder="Rezept suchen"
+                    size="md"
+                    bind:value={searchQuery}
+                />
+            </form>
         {/if}
+        <NavUl>
+            <NavLi>
+                <Toggle id="darkModeToggle" bind:checked={$darkMode}>
+                    {#if $darkMode}
+                        Dunkel
+                    {:else}
+                        Hell
+                    {/if}
+                </Toggle>
+            </NavLi>
+            {#if data.isAuthenticated}
+                <NavLi href="/auth/logout">Logout</NavLi>
+            {/if}
+        </NavUl>
     </Navbar>
     <main class="p-4">
         <slot />
