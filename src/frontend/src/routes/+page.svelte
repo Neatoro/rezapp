@@ -26,7 +26,7 @@
             {#if recipe.labels.length > 0}
                 <div class="labels mt-2">
                     {#each recipe.labels as label}
-                        <Badge color={badgeColor(label.color)}
+                        <Badge class="mr-2" color={badgeColor(label.color)}
                             >{label.name}</Badge
                         >
                     {/each}
