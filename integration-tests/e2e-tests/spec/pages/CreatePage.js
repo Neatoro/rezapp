@@ -44,6 +44,12 @@ module.exports = class CreatePage {
         await this.browser.type(`#step-description-${index}`, description);
     }
 
+    async openCreateLabelModal() {
+        await this.browser.clickButton('Neue Kategorie erstellen');
+
+        await this.browser.waitForSelector('#modalCreateLabel');
+    }
+
     async openIngredientModal() {
         await this.browser.waitForSelector('table');
         await this.browser.clickButton('Hinzufügen');
@@ -63,6 +69,23 @@ module.exports = class CreatePage {
         await this.browser.waitForSelector('#modalCreateIngredient', {
             hidden: true
         });
+    }
+
+    async createLabel(name, color) {
+        await this.browser.type('#modalCreateLabel #name', name);
+        await this.browser.select('#modalCreateLabel #color', color);
+        await this.browser.clickButton('Erstellen');
+        await this.browser.waitForSelector('#modalCreateIngredient', {
+            hidden: true
+        });
+    }
+
+    async hasLabel(name) {
+        return await this.browser.evaluate((name) => {
+            return [...document.querySelectorAll('#labelSelect option')]
+                .map((option) => option.innerText)
+                .includes(name);
+        }, name);
     }
 
     async hasIngredient(name) {

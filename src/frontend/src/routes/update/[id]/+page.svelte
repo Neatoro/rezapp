@@ -78,6 +78,10 @@
         data.ingredients = [...data.ingredients, event.detail];
     }
 
+    function newLabel(event) {
+        data.labels = [...data.labels, event.detail];
+    }
+
     function transformToSelectedIngredients() {
         return data.recipe.ingredients.map(({ ingredient }) => ({
             id: ingredient.id,
@@ -123,4 +127,5 @@
     selectedLabels={data.recipe.labels}
     ingredientMetadata={transformToIngredientMetadata()}
     on:newIngredient={newIngredient}
+    on:newLabel={newLabel}
 />

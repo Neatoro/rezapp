@@ -65,4 +65,22 @@ describe('Labels flow', () => {
         const labels = await viewPage.getLabels({ title: 'Test' });
         expect(labels).toEqual(['Test']);
     });
+
+    it('should create a new label', async () => {
+        await overviewPage.open();
+        await overviewPage.newRecipe();
+
+        await browser.waitForNavigation();
+
+        await createPage.changeTab('Kategorien');
+        await createPage.openCreateLabelModal();
+
+        await createPage.createLabel('Test', 'green');
+
+        await browser.page.waitForTimeout(100);
+
+        const hasLabel = await createPage.hasLabel('Test');
+
+        expect(hasLabel).toBe(true);
+    });
 });

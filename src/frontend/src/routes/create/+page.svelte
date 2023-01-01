@@ -77,6 +77,10 @@
     function newIngredient(event) {
         data.ingredients = [...data.ingredients, event.detail];
     }
+
+    function newLabel(event) {
+        data.labels = [...data.labels, event.detail];
+    }
 </script>
 
 {#each errors as error}
@@ -96,4 +100,5 @@
     labels={data.labels}
     title="Neues Rezept anlegen"
     on:newIngredient={newIngredient}
+    on:newLabel={newLabel}
 />

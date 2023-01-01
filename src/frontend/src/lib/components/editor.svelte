@@ -19,6 +19,7 @@
     import { createEventDispatcher } from 'svelte';
     import IngredientsModal from './ingredients-modal.svelte';
     import { badgeColor } from '$lib/badge-color';
+    import CreateLabelModal from './create-label-modal.svelte';
 
     const dispatch = createEventDispatcher();
 
@@ -65,6 +66,7 @@
     }
 
     let ingredientsModalOpen = false;
+    let createLabelModalOpen = false;
 
     export let ingredients;
     export let labels;
@@ -162,6 +164,10 @@
             ...selectedLabels,
             labels.find((label) => label.id === labelSelection)
         ];
+    }
+
+    function newLabel(event) {
+        dispatch('newLabel', event.detail);
     }
 
     function removeLabel(id) {
@@ -295,6 +301,10 @@
         <TabItem bind:open={tabStatus.labels}>
             <span slot="title">Kategorien</span>
 
+            <Button class="mb-4" on:click={() => (createLabelModalOpen = true)}
+                >Neue Kategorie erstellen</Button
+            >
+
             {#if selectedLabels.length > 0}
                 <div class="labels mb-4">
                     {#each selectedLabels as label}
@@ -392,3 +402,5 @@
         <Button href="/" outline color="red">Abbrechen</Button>
     </div>
 </form>
+
+<CreateLabelModal bind:open={createLabelModalOpen} on:created={newLabel} />
