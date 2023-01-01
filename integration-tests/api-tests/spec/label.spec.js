@@ -110,7 +110,7 @@ describe('Ingredient', () => {
                 error: 'Bad Request',
                 message: [
                     'color should not be empty',
-                    'color must be one of the following values: default, dark, red, green, yellow, indigo, purple, pink'
+                    'color must be one of the following values: default, blue, dark, red, green, yellow, indigo, purple, pink'
                 ]
             });
         });
@@ -133,7 +133,7 @@ describe('Ingredient', () => {
                 statusCode: 400,
                 error: 'Bad Request',
                 message: [
-                    'color must be one of the following values: default, dark, red, green, yellow, indigo, purple, pink'
+                    'color must be one of the following values: default, blue, dark, red, green, yellow, indigo, purple, pink'
                 ]
             });
         });
@@ -156,7 +156,7 @@ describe('Ingredient', () => {
                 statusCode: 400,
                 error: 'Bad Request',
                 message: [
-                    'color must be one of the following values: default, dark, red, green, yellow, indigo, purple, pink'
+                    'color must be one of the following values: default, blue, dark, red, green, yellow, indigo, purple, pink'
                 ]
             });
         });
