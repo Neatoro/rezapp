@@ -97,6 +97,7 @@ describe('Basic flow', () => {
 
     it('should create a new recipe', async () => {
         await profileHelper.apply('test-ingredient');
+        await profileHelper.apply('labels');
 
         await overviewPage.open();
         await overviewPage.newRecipe();
@@ -107,6 +108,9 @@ describe('Basic flow', () => {
 
         await createPage.changeTab('Arbeitsschritte');
         await createPage.enterStep(0, 'Foo Bar Step');
+
+        await createPage.changeTab('Kategorien');
+        await createPage.addLabel('Vegan');
 
         await createPage.changeTab('Zutaten');
         await createPage.enterIngredient('Jackfruit', '200', 'g');
@@ -134,6 +138,9 @@ describe('Basic flow', () => {
 
         const steps = await viewPage.getSteps();
         expect(steps).toEqual(['Foo Bar Step']);
+
+        const labels = await viewPage.getLabels();
+        expect(labels).toEqual(['Vegan']);
     });
 
     it('should delete a recipe', async () => {

@@ -314,6 +314,7 @@
                 <Label for="recipe-name" class="mb-2">Kategorie</Label>
                 <div class="flex gap-2">
                     <Select
+                        id="labelSelect"
                         bind:value={labelSelection}
                         placeholder="Kategorie auswählen"
                         items={selectableLabels}

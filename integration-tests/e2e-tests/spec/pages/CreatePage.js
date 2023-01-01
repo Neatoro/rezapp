@@ -19,6 +19,16 @@ module.exports = class CreatePage {
         await this.browser.clickButton(tab);
     }
 
+    async addLabel(text) {
+        const id = await this.browser.evaluate((text) => {
+            const option = [...document.querySelectorAll('#labelSelect option')].find((option) => option.innerText === text);
+            return option.value;
+        }, text);
+
+        await this.browser.select('#labelSelect', id);
+        await this.browser.clickButton('Hinzufügen');
+    }
+
     async enterStep(index, description) {
         await this.browser.type(`#step-description-${index}`, description);
     }
