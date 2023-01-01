@@ -4,7 +4,11 @@ const config = {
         './node_modules/flowbite-svelte/**/*.{html,js,svelte,ts}'
     ],
     theme: {
-        extend: {}
+        extend: {
+            colors: {
+                'light-transparent': 'rgba(0, 0, 0, .1)'
+            }
+        }
     },
     plugins: [require('flowbite/plugin')],
     darkMode: 'class'

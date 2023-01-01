@@ -24,6 +24,10 @@ describe('Authentication', () => {
         {
             path: '/ingredient',
             methods: ['GET', 'POST']
+        },
+        {
+            path: '/label',
+            methods: ['GET']
         }
     ];
 

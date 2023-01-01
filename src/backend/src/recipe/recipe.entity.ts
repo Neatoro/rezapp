@@ -1,11 +1,14 @@
 import {
     Column,
     Entity,
+    JoinTable,
+    ManyToMany,
     ManyToOne,
     OneToMany,
     PrimaryGeneratedColumn
 } from 'typeorm';
 import { Ingredient } from '../ingredient/ingredient.entity';
+import { Label } from '../label/label.entity';
 
 @Entity()
 export class Recipe {
@@ -35,6 +38,10 @@ export class Recipe {
 
     @Column()
     user: string;
+
+    @ManyToMany(() => Label, (label) => label.recipes)
+    @JoinTable()
+    labels: Label[];
 }
 
 @Entity()

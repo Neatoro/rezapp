@@ -27,6 +27,10 @@ module.exports = class PuppeteerHelper {
         return result;
     }
 
+    async select(selector, value) {
+        await this.page.select(selector, value);
+    }
+
     async evaluate(evaluateFunction, ...params) {
         const result = await this.page.evaluate(evaluateFunction, ...params);
         return result;

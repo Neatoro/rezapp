@@ -1,0 +1,18 @@
+{
+    "database": {
+        "label": [
+            {
+                "id": "b838f03f-c9ad-4051-9ddc-c090887efeb3",
+                "name": "Vegan",
+                "color": "green",
+                "user": "0123456789"
+            },
+            {
+                "id": "bc09a712-d1b9-4b1a-8477-61a76648d7c7",
+                "name": "Kuchen",
+                "color": "red",
+                "user": "0123456789"
+            }
+        ]
+    }
+}

@@ -64,4 +64,18 @@ module.exports = class OverviewPage {
             form.requestSubmit();
         });
     }
+
+    async getLabels({ title }) {
+        return await this.browser.evaluate((title) => {
+            const recipe = [
+                ...document.querySelectorAll('div:has(> h5)')
+            ].filter((recipe) => {
+                const titleElement = recipe.querySelector('h5');
+                return titleElement.innerText === title;
+            })[0];
+
+            const labelElements = recipe.querySelectorAll('.labels span');
+            return [...labelElements].map((element) => element.innerText);
+        }, title);
+    }
 };

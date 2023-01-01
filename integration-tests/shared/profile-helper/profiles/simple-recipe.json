@@ -1,5 +1,19 @@
 {
     "database": {
+        "label": [
+            {
+                "id": "b838f03f-c9ad-4051-9ddc-c090887efeb3",
+                "name": "Vegan",
+                "color": "green",
+                "user": "0123456789"
+            },
+            {
+                "id": "bc09a712-d1b9-4b1a-8477-61a76648d7c7",
+                "name": "Kuchen",
+                "color": "red",
+                "user": "0123456789"
+            }
+        ],
         "recipe": [
             {
                 "id": "7ae7b1d7-f081-4203-ae9d-2839201d942d",
@@ -230,6 +244,12 @@
                 "description": "Eine Prise Rosmarin über das Ofengemüse streuen und servieren.",
                 "rank": 7,
                 "recipeId": "7ae7b1d7-f081-4203-ae9d-2839201d942d"
+            }
+        ],
+        "recipe_labels_label": [
+            {
+                "recipeId": "7ae7b1d7-f081-4203-ae9d-2839201d942d",
+                "labelId": "b838f03f-c9ad-4051-9ddc-c090887efeb3"
             }
         ]
     },

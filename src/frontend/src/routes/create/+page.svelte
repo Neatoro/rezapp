@@ -32,6 +32,7 @@
         description,
         steps,
         ingredients,
+        labels,
         portions
     }) {
         const response = await fetch('/api/recipe', {
@@ -44,6 +45,7 @@
                 description,
                 portions,
                 ingredients,
+                labels,
                 steps: steps.filter((step) => step.description !== '')
             })
         });
@@ -75,6 +77,10 @@
     function newIngredient(event) {
         data.ingredients = [...data.ingredients, event.detail];
     }
+
+    function newLabel(event) {
+        data.labels = [...data.labels, event.detail];
+    }
 </script>
 
 {#each errors as error}
@@ -91,6 +97,8 @@
 <Editor
     on:save={save}
     ingredients={data.ingredients}
+    labels={data.labels}
     title="Neues Rezept anlegen"
     on:newIngredient={newIngredient}
+    on:newLabel={newLabel}
 />

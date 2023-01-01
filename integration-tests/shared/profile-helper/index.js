@@ -15,15 +15,17 @@ class ProfileHelper {
                 'backend',
                 'recipes.db'
             );
-        this.imagesPath = process.env.IMAGES_PATH || path.resolve(
-            __dirname,
-            '..',
-            '..',
-            '..',
-            'src',
-            'backend',
-            'images'
-        );
+        this.imagesPath =
+            process.env.IMAGES_PATH ||
+            path.resolve(
+                __dirname,
+                '..',
+                '..',
+                '..',
+                'src',
+                'backend',
+                'images'
+            );
         this.db = new sqlite.Database(dbPath);
     }
 
@@ -44,6 +46,8 @@ class ProfileHelper {
         await this._exec('DELETE FROM recipe;');
         await this._exec('DELETE FROM recipe_ingredient;');
         await this._exec('DELETE FROM recipe_step;');
+        await this._exec('DELETE FROM recipe_labels_label;');
+        await this._exec('DELETE FROM label;');
 
         const files = await fs.readdir(this.imagesPath);
         for (const file of files) {
@@ -74,10 +78,7 @@ class ProfileHelper {
             const targets = Object.keys(images);
 
             for (const target of targets) {
-                const targetPath = path.resolve(
-                    this.imagesPath,
-                    target
-                );
+                const targetPath = path.resolve(this.imagesPath, target);
                 await fs.copyFile(
                     path.resolve(
                         __dirname,

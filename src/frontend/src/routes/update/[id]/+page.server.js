@@ -13,9 +13,15 @@ async function loadIngredients(fetch) {
     return data.ingredients;
 }
 
+async function loadLabels({ fetch }) {
+    const response = await fetch(`${env.BACKEND_URL}/api/label`);
+    return (await response.json()).labels;
+}
+
 export async function load({ params, fetch }) {
     return {
         recipe: await loadRecipe(params.id, fetch),
-        ingredients: await loadIngredients(fetch)
+        ingredients: await loadIngredients(fetch),
+        labels: await loadLabels({ fetch })
     };
 }

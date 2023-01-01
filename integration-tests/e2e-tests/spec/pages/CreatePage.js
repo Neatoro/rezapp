@@ -19,8 +19,35 @@ module.exports = class CreatePage {
         await this.browser.clickButton(tab);
     }
 
+    async addLabel(text) {
+        const id = await this.browser.evaluate((text) => {
+            const option = [
+                ...document.querySelectorAll('#labelSelect option')
+            ].find((option) => option.innerText === text);
+            return option.value;
+        }, text);
+
+        await this.browser.select('#labelSelect', id);
+        await this.browser.clickButton('Hinzufügen');
+    }
+
+    async removeLabel(text) {
+        await this.browser.evaluate((text) => {
+            const labelElement = [
+                ...document.querySelectorAll('.labels span')
+            ].find((label) => label.innerText === `${text}\nX`);
+            labelElement.querySelector('button').click();
+        }, text);
+    }
+
     async enterStep(index, description) {
         await this.browser.type(`#step-description-${index}`, description);
+    }
+
+    async openCreateLabelModal() {
+        await this.browser.clickButton('Neue Kategorie erstellen');
+
+        await this.browser.waitForSelector('#modalCreateLabel');
     }
 
     async openIngredientModal() {
@@ -42,6 +69,23 @@ module.exports = class CreatePage {
         await this.browser.waitForSelector('#modalCreateIngredient', {
             hidden: true
         });
+    }
+
+    async createLabel(name, color) {
+        await this.browser.type('#modalCreateLabel #name', name);
+        await this.browser.select('#modalCreateLabel #color', color);
+        await this.browser.clickButton('Erstellen');
+        await this.browser.waitForSelector('#modalCreateIngredient', {
+            hidden: true
+        });
+    }
+
+    async hasLabel(name) {
+        return await this.browser.evaluate((name) => {
+            return [...document.querySelectorAll('#labelSelect option')]
+                .map((option) => option.innerText)
+                .includes(name);
+        }, name);
     }
 
     async hasIngredient(name) {
