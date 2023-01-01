@@ -32,6 +32,7 @@
         description,
         steps,
         ingredients,
+        labels,
         portions
     }) {
         const response = await fetch('/api/recipe', {
@@ -44,6 +45,7 @@
                 description,
                 portions,
                 ingredients,
+                labels,
                 steps: steps.filter((step) => step.description !== '')
             })
         });
@@ -91,6 +93,7 @@
 <Editor
     on:save={save}
     ingredients={data.ingredients}
+    labels={data.labels}
     title="Neues Rezept anlegen"
     on:newIngredient={newIngredient}
 />

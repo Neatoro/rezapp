@@ -32,6 +32,7 @@
         description,
         steps,
         ingredients,
+        labels,
         portions
     }) {
         const response = await fetch(`/api/recipe/${data.recipe.id}`, {
@@ -43,6 +44,7 @@
                 name,
                 description,
                 ingredients,
+                labels,
                 portions,
                 steps: steps.filter((step) => step.description !== '')
             })
@@ -112,11 +114,13 @@
     on:save={save}
     title="Rezept ändern"
     ingredients={data.ingredients}
+    labels={data.labels}
     name={data.recipe.name}
     description={data.recipe.description}
     steps={data.recipe.steps}
     portions={data.recipe.portions}
     selectedIngredients={transformToSelectedIngredients()}
+    selectedLabels={data.recipe.labels}
     ingredientMetadata={transformToIngredientMetadata()}
     on:newIngredient={newIngredient}
 />

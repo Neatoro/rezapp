@@ -7,6 +7,8 @@
         Tabs,
         TabItem,
         Dropzone,
+        Badge,
+        Select,
         Table,
         TableBody,
         TableBodyCell,
@@ -16,6 +18,7 @@
     } from 'flowbite-svelte';
     import { createEventDispatcher } from 'svelte';
     import IngredientsModal from './ingredients-modal.svelte';
+    import { badgeColor } from '$lib/badge-color';
 
     const dispatch = createEventDispatcher();
 
@@ -24,14 +27,18 @@
     export let steps = [{ description: '' }];
     let images = [];
     export let selectedIngredients = [];
+    export let selectedLabels = [];
     export let title = '';
     export let portions = '';
 
     export let ingredientMetadata = {};
 
+    let labelSelection = '';
+
     let tabStatus = {
         general: true,
         steps: false,
+        labels: false,
         ingredients: false
     };
 
@@ -60,6 +67,14 @@
     let ingredientsModalOpen = false;
 
     export let ingredients;
+    export let labels;
+
+    $: selectableLabels = labels
+        .filter(
+            (label) =>
+                !selectedLabels.map((label) => label.id).includes(label.id)
+        )
+        .map((label) => ({ name: label.name, value: label.id }));
 
     let preview_image;
 
@@ -93,6 +108,7 @@
                 description,
                 steps,
                 portions: Number(portions),
+                labels: selectedLabels,
                 images,
                 ingredients: Object.keys(ingredientMetadata).map((id) => ({
                     ingredient: id,
@@ -104,6 +120,7 @@
             tabStatus = {
                 general: true,
                 steps: false,
+                labels: false,
                 ingredients: false
             };
         }
@@ -138,6 +155,17 @@
 
     function newIngredient(event) {
         dispatch('newIngredient', event.detail);
+    }
+
+    function addLabel() {
+        selectedLabels = [
+            ...selectedLabels,
+            labels.find((label) => label.id === labelSelection)
+        ];
+    }
+
+    function removeLabel(id) {
+        selectedLabels = selectedLabels.filter((label) => label.id !== id);
     }
 </script>
 
@@ -262,6 +290,37 @@
             {/each}
 
             <Button on:click={addStep}>Schritt hinzufügen</Button>
+        </TabItem>
+
+        <TabItem bind:open={tabStatus.labels}>
+            <span slot="title">Kategorien</span>
+
+            {#if selectedLabels.length > 0}
+                <div class="labels mb-4">
+                    {#each selectedLabels as label}
+                        <Badge class="mr-2" color={badgeColor(label.color)}
+                            >{label.name}
+                            <button
+                                on:click={() => removeLabel(label.id)}
+                                class="ml-2 rounded p-2 hover:bg-light-transparent"
+                                >X</button
+                            >
+                        </Badge>
+                    {/each}
+                </div>
+            {/if}
+
+            <div class="mb-4">
+                <Label for="recipe-name" class="mb-2">Kategorie</Label>
+                <div class="flex gap-2">
+                    <Select
+                        bind:value={labelSelection}
+                        placeholder="Kategorie auswählen"
+                        items={selectableLabels}
+                    />
+                    <Button on:click={addLabel}>Hinzufügen</Button>
+                </div>
+            </div>
         </TabItem>
 
         <TabItem bind:open={tabStatus.ingredients}>
