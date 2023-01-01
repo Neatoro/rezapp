@@ -1,234 +1,241 @@
 {
-    "recipe": [
-        {
-            "id": "7ae7b1d7-f081-4203-ae9d-2839201d942d",
-            "name": "Ofengemüse mit Jackfruit und Zitronen-Kapern-Sauce",
-            "description": "Ein schnelles Gericht, perfekt im Herbst und Winter.",
-            "image": false,
-            "user": "0123456789",
-            "portions": 2
+    "database": {
+        "recipe": [
+            {
+                "id": "7ae7b1d7-f081-4203-ae9d-2839201d942d",
+                "name": "Ofengemüse mit Jackfruit und Zitronen-Kapern-Sauce",
+                "description": "Ein schnelles Gericht, perfekt im Herbst und Winter.",
+                "image": true,
+                "user": "0123456789",
+                "portions": 2
+            }
+        ],
+        "ingredient": [
+            {
+                "id": "6961db05-7a8a-40d8-ad9b-0873dc23e271",
+                "name": "Jackfruit",
+                "user": "0123456789"
+            },
+            {
+                "id": "2e08f4d1-8c9c-479b-86f6-fb10d442543b",
+                "name": "Sojasauce",
+                "user": "0123456789"
+            },
+            {
+                "id": "f4b82197-196a-4a06-8ec2-5ce2e34dac63",
+                "name": "Paprikapulver",
+                "user": "0123456789"
+            },
+            {
+                "id": "ef781d66-1ba6-4ed5-9ce7-9f1ef9eaf504",
+                "name": "Tomatenmark",
+                "user": "0123456789"
+            },
+            {
+                "id": "a9003178-413d-4b17-a729-f2a8e5038863",
+                "name": "Kartoffel",
+                "user": "0123456789"
+            },
+            {
+                "id": "663dee2b-0835-4ca0-9d40-63d0cd274dd5",
+                "name": "Zwiebel",
+                "user": "0123456789"
+            },
+            {
+                "id": "981ca0b6-a694-474b-948e-2d07ff0b1526",
+                "name": "Knoblauch",
+                "user": "0123456789"
+            },
+            {
+                "id": "cb0e3ecb-77ec-4d76-90d3-1886bfcc756a",
+                "name": "Thymianzweig",
+                "user": "0123456789"
+            },
+            {
+                "id": "874c14a1-1363-4a1f-98c8-15219daff441",
+                "name": "Süßkartoffel",
+                "user": "0123456789"
+            },
+            {
+                "id": "f8fd18e2-79de-46d1-ac70-c296d9524af7",
+                "name": "Hokkaidokürbis",
+                "user": "0123456789"
+            },
+            {
+                "id": "0178e59b-9015-4750-96fe-af95133a9bf6",
+                "name": "Cherrytomate",
+                "user": "0123456789"
+            },
+            {
+                "id": "137910cd-008d-41a5-9735-732bd3562711",
+                "name": "Olivenöl",
+                "user": "0123456789"
+            },
+            {
+                "id": "5378a803-73e7-4a75-b527-d96adc18a7ba",
+                "name": "Salz und Pfeffer",
+                "user": "0123456789"
+            },
+            {
+                "id": "dc9d08c9-b8dc-4dd2-aa5f-4b8c1c59e2b6",
+                "name": "Rosmarin",
+                "user": "0123456789"
+            }
+        ],
+        "recipe_ingredient": [
+            {
+                "id": "03ff41b7-9faf-47a6-ac3a-efcbb20a2e1a",
+                "ingredientId": "6961db05-7a8a-40d8-ad9b-0873dc23e271",
+                "recipeId": "7ae7b1d7-f081-4203-ae9d-2839201d942d",
+                "amount": 225,
+                "unit": "g"
+            },
+            {
+                "id": "aa5dcdb3-f730-423b-af55-cbd991db7e15",
+                "ingredientId": "2e08f4d1-8c9c-479b-86f6-fb10d442543b",
+                "recipeId": "7ae7b1d7-f081-4203-ae9d-2839201d942d",
+                "amount": 2,
+                "unit": "EL"
+            },
+            {
+                "id": "eeafff1d-11a7-408d-9234-b03ee2485db0",
+                "ingredientId": "f4b82197-196a-4a06-8ec2-5ce2e34dac63",
+                "recipeId": "7ae7b1d7-f081-4203-ae9d-2839201d942d",
+                "amount": 1,
+                "unit": "TL"
+            },
+            {
+                "id": "11fd9c63-c102-4061-bb73-dac1ae815a4f",
+                "ingredientId": "ef781d66-1ba6-4ed5-9ce7-9f1ef9eaf504",
+                "recipeId": "7ae7b1d7-f081-4203-ae9d-2839201d942d",
+                "amount": 2,
+                "unit": "EL"
+            },
+            {
+                "id": "76813d57-c1ec-4e54-89f7-22a3545d8405",
+                "ingredientId": "a9003178-413d-4b17-a729-f2a8e5038863",
+                "recipeId": "7ae7b1d7-f081-4203-ae9d-2839201d942d",
+                "amount": 6,
+                "unit": "große"
+            },
+            {
+                "id": "1b40b54a-6027-4e34-a4dd-ec23392fe2b7",
+                "ingredientId": "663dee2b-0835-4ca0-9d40-63d0cd274dd5",
+                "recipeId": "7ae7b1d7-f081-4203-ae9d-2839201d942d",
+                "amount": 2,
+                "unit": ""
+            },
+            {
+                "id": "7a23f9c0-4098-452a-bb00-fccd9edcfbde",
+                "ingredientId": "981ca0b6-a694-474b-948e-2d07ff0b1526",
+                "recipeId": "7ae7b1d7-f081-4203-ae9d-2839201d942d",
+                "amount": 0,
+                "unit": "n.B."
+            },
+            {
+                "id": "16e06b60-456f-4ade-9908-653aac490ab6",
+                "ingredientId": "cb0e3ecb-77ec-4d76-90d3-1886bfcc756a",
+                "recipeId": "7ae7b1d7-f081-4203-ae9d-2839201d942d",
+                "amount": 2,
+                "unit": ""
+            },
+            {
+                "id": "838a24ff-a6b0-4680-a0d3-5838a15e339b",
+                "ingredientId": "874c14a1-1363-4a1f-98c8-15219daff441",
+                "recipeId": "7ae7b1d7-f081-4203-ae9d-2839201d942d",
+                "amount": 1,
+                "unit": "große"
+            },
+            {
+                "id": "d56453a7-165b-4d80-a061-c156309c6d91",
+                "ingredientId": "f8fd18e2-79de-46d1-ac70-c296d9524af7",
+                "recipeId": "7ae7b1d7-f081-4203-ae9d-2839201d942d",
+                "amount": 1,
+                "unit": "kleiner"
+            },
+            {
+                "id": "2c3c6c11-db83-44be-b091-10016f0ffaa1",
+                "ingredientId": "0178e59b-9015-4750-96fe-af95133a9bf6",
+                "recipeId": "7ae7b1d7-f081-4203-ae9d-2839201d942d",
+                "amount": 0,
+                "unit": "einige"
+            },
+            {
+                "id": "ce46ae2c-b833-4b52-b807-a14a90c18932",
+                "ingredientId": "137910cd-008d-41a5-9735-732bd3562711",
+                "recipeId": "7ae7b1d7-f081-4203-ae9d-2839201d942d",
+                "amount": 0,
+                "unit": "n.B."
+            },
+            {
+                "id": "9b488314-bf9e-4c5d-805e-0ef3899d1be0",
+                "ingredientId": "5378a803-73e7-4a75-b527-d96adc18a7ba",
+                "recipeId": "7ae7b1d7-f081-4203-ae9d-2839201d942d",
+                "amount": 0,
+                "unit": "n.B."
+            },
+            {
+                "id": "7f5d1702-915d-429b-873b-d05d877ae9d4",
+                "ingredientId": "dc9d08c9-b8dc-4dd2-aa5f-4b8c1c59e2b6",
+                "recipeId": "7ae7b1d7-f081-4203-ae9d-2839201d942d",
+                "amount": 1,
+                "unit": "Prise"
+            }
+        ],
+        "recipe_step": [
+            {
+                "id": "8dae1913-517f-4d5e-9c23-14cb1a5b3cb3",
+                "description": "Die Jackfruitstückchen in einem Sieb gut ausdrücken und dabei mit der Hand zerkleinern. Anschließend mit Wasser abbrausen. Die Jackfruit in eine Schüssel geben. Sojasauce, Paprikapulver, 2 EL Olivenöl, Tomatenmark, Salz und Pfeffer dazugeben. Alles durchmischen und mindestens 15 Minuten ziehen lassen.",
+                "rank": 0,
+                "recipeId": "7ae7b1d7-f081-4203-ae9d-2839201d942d"
+            },
+            {
+                "id": "dd56bc5a-e117-419d-b21b-2df7c034dec0",
+                "description": "Den Backofen auf 190 °C Ober-/Unterhitze vorheizen.",
+                "rank": 1,
+                "recipeId": "7ae7b1d7-f081-4203-ae9d-2839201d942d"
+            },
+            {
+                "id": "3d39d2df-228b-4f30-9957-6769b157d809",
+                "description": "Die Kartoffeln gründlich waschen, würfeln und beiseitelegen. Anschließend die Zwiebeln schälen, halbieren und in sechs Spalten schneiden. Den Knoblauch in grobe Stücke hacken. Die Kartoffeln, Zwiebeln und Knoblauch mit Thymian, Salz, Pfeffer und Olivenöl in eine Schüssel geben und alles gut vermengen. Alles auf ein Backblech geben.",
+                "rank": 2,
+                "recipeId": "7ae7b1d7-f081-4203-ae9d-2839201d942d"
+            },
+            {
+                "id": "867f7970-b08b-4e42-9fc4-be411956b24f",
+                "description": "Im vorgeheizten Backofen ca. 10 Minuten auf der mittleren Einschubleiste backen.",
+                "rank": 3,
+                "recipeId": "7ae7b1d7-f081-4203-ae9d-2839201d942d"
+            },
+            {
+                "id": "68904916-d981-44ab-9560-058e376ffae5",
+                "description": "Währenddessen die Enden der Süßkartoffel abschneiden und diese mit Schale in mundgerechte Stücke schneiden. Den Hokkaidokürbis waschen, halbieren und die Kerne mit einem Löffel herausschaben. Den Kürbis ebenfalls würfeln oder in Spalten schneiden. Süßkartoffel und Kürbis auf das Backblech zu den Kartoffeln und Zwiebeln geben und noch mal gut vermischen. Weitere 30 Minuten im Backofen backen.",
+                "rank": 4,
+                "recipeId": "7ae7b1d7-f081-4203-ae9d-2839201d942d"
+            },
+            {
+                "id": "3fd0894e-cd24-4a5a-b92a-364d8c8d4f67",
+                "description": "Die Cherrytomaten waschen, halbieren und mit der marinierten Jackfruit zum goldbraunen Gemüse geben. Alles noch mal 10 Minuten backen.",
+                "rank": 5,
+                "recipeId": "7ae7b1d7-f081-4203-ae9d-2839201d942d"
+            },
+            {
+                "id": "0c626c90-03a7-407d-bab8-89fee5c7c6e6",
+                "description": "Für die Zitronen-Kapern-Sauce die Kapern aus dem Glas abgießen und in eine Schüssel geben. Zitronensaft, eine klein geschnittene Knoblauchzehe, Ahornsirup, Olivenöl, Salz und Pfeffer dazugeben. Alles vermischen und abschmecken. Sobald das Gemüse gar ist, aus dem Ofen nehmen und mit der Sauce übergießen.",
+                "rank": 6,
+                "recipeId": "7ae7b1d7-f081-4203-ae9d-2839201d942d"
+            },
+            {
+                "id": "dc182319-40a9-4f8b-bf6d-903417f31fc2",
+                "description": "Eine Prise Rosmarin über das Ofengemüse streuen und servieren.",
+                "rank": 7,
+                "recipeId": "7ae7b1d7-f081-4203-ae9d-2839201d942d"
+            }
+        ]
+    },
+    "images": {
+        "7ae7b1d7-f081-4203-ae9d-2839201d942d": {
+            "name": "example-image.jpg"
         }
-    ],
-    "ingredient": [
-        {
-            "id": "6961db05-7a8a-40d8-ad9b-0873dc23e271",
-            "name": "Jackfruit",
-            "user": "0123456789"
-        },
-        {
-            "id": "2e08f4d1-8c9c-479b-86f6-fb10d442543b",
-            "name": "Sojasauce",
-            "user": "0123456789"
-        },
-        {
-            "id": "f4b82197-196a-4a06-8ec2-5ce2e34dac63",
-            "name": "Paprikapulver",
-            "user": "0123456789"
-        },
-        {
-            "id": "ef781d66-1ba6-4ed5-9ce7-9f1ef9eaf504",
-            "name": "Tomatenmark",
-            "user": "0123456789"
-        },
-        {
-            "id": "a9003178-413d-4b17-a729-f2a8e5038863",
-            "name": "Kartoffel",
-            "user": "0123456789"
-        },
-        {
-            "id": "663dee2b-0835-4ca0-9d40-63d0cd274dd5",
-            "name": "Zwiebel",
-            "user": "0123456789"
-        },
-        {
-            "id": "981ca0b6-a694-474b-948e-2d07ff0b1526",
-            "name": "Knoblauch",
-            "user": "0123456789"
-        },
-        {
-            "id": "cb0e3ecb-77ec-4d76-90d3-1886bfcc756a",
-            "name": "Thymianzweig",
-            "user": "0123456789"
-        },
-        {
-            "id": "874c14a1-1363-4a1f-98c8-15219daff441",
-            "name": "Süßkartoffel",
-            "user": "0123456789"
-        },
-        {
-            "id": "f8fd18e2-79de-46d1-ac70-c296d9524af7",
-            "name": "Hokkaidokürbis",
-            "user": "0123456789"
-        },
-        {
-            "id": "0178e59b-9015-4750-96fe-af95133a9bf6",
-            "name": "Cherrytomate",
-            "user": "0123456789"
-        },
-        {
-            "id": "137910cd-008d-41a5-9735-732bd3562711",
-            "name": "Olivenöl",
-            "user": "0123456789"
-        },
-        {
-            "id": "5378a803-73e7-4a75-b527-d96adc18a7ba",
-            "name": "Salz und Pfeffer",
-            "user": "0123456789"
-        },
-        {
-            "id": "dc9d08c9-b8dc-4dd2-aa5f-4b8c1c59e2b6",
-            "name": "Rosmarin",
-            "user": "0123456789"
-        }
-    ],
-    "recipe_ingredient": [
-        {
-            "id": "03ff41b7-9faf-47a6-ac3a-efcbb20a2e1a",
-            "ingredientId": "6961db05-7a8a-40d8-ad9b-0873dc23e271",
-            "recipeId": "7ae7b1d7-f081-4203-ae9d-2839201d942d",
-            "amount": 225,
-            "unit": "g"
-        },
-        {
-            "id": "aa5dcdb3-f730-423b-af55-cbd991db7e15",
-            "ingredientId": "2e08f4d1-8c9c-479b-86f6-fb10d442543b",
-            "recipeId": "7ae7b1d7-f081-4203-ae9d-2839201d942d",
-            "amount": 2,
-            "unit": "EL"
-        },
-        {
-            "id": "eeafff1d-11a7-408d-9234-b03ee2485db0",
-            "ingredientId": "f4b82197-196a-4a06-8ec2-5ce2e34dac63",
-            "recipeId": "7ae7b1d7-f081-4203-ae9d-2839201d942d",
-            "amount": 1,
-            "unit": "TL"
-        },
-        {
-            "id": "11fd9c63-c102-4061-bb73-dac1ae815a4f",
-            "ingredientId": "ef781d66-1ba6-4ed5-9ce7-9f1ef9eaf504",
-            "recipeId": "7ae7b1d7-f081-4203-ae9d-2839201d942d",
-            "amount": 2,
-            "unit": "EL"
-        },
-        {
-            "id": "76813d57-c1ec-4e54-89f7-22a3545d8405",
-            "ingredientId": "a9003178-413d-4b17-a729-f2a8e5038863",
-            "recipeId": "7ae7b1d7-f081-4203-ae9d-2839201d942d",
-            "amount": 6,
-            "unit": "große"
-        },
-        {
-            "id": "1b40b54a-6027-4e34-a4dd-ec23392fe2b7",
-            "ingredientId": "663dee2b-0835-4ca0-9d40-63d0cd274dd5",
-            "recipeId": "7ae7b1d7-f081-4203-ae9d-2839201d942d",
-            "amount": 2,
-            "unit": ""
-        },
-        {
-            "id": "7a23f9c0-4098-452a-bb00-fccd9edcfbde",
-            "ingredientId": "981ca0b6-a694-474b-948e-2d07ff0b1526",
-            "recipeId": "7ae7b1d7-f081-4203-ae9d-2839201d942d",
-            "amount": 0,
-            "unit": "n.B."
-        },
-        {
-            "id": "16e06b60-456f-4ade-9908-653aac490ab6",
-            "ingredientId": "cb0e3ecb-77ec-4d76-90d3-1886bfcc756a",
-            "recipeId": "7ae7b1d7-f081-4203-ae9d-2839201d942d",
-            "amount": 2,
-            "unit": ""
-        },
-        {
-            "id": "838a24ff-a6b0-4680-a0d3-5838a15e339b",
-            "ingredientId": "874c14a1-1363-4a1f-98c8-15219daff441",
-            "recipeId": "7ae7b1d7-f081-4203-ae9d-2839201d942d",
-            "amount": 1,
-            "unit": "große"
-        },
-        {
-            "id": "d56453a7-165b-4d80-a061-c156309c6d91",
-            "ingredientId": "f8fd18e2-79de-46d1-ac70-c296d9524af7",
-            "recipeId": "7ae7b1d7-f081-4203-ae9d-2839201d942d",
-            "amount": 1,
-            "unit": "kleiner"
-        },
-        {
-            "id": "2c3c6c11-db83-44be-b091-10016f0ffaa1",
-            "ingredientId": "0178e59b-9015-4750-96fe-af95133a9bf6",
-            "recipeId": "7ae7b1d7-f081-4203-ae9d-2839201d942d",
-            "amount": 0,
-            "unit": "einige"
-        },
-        {
-            "id": "ce46ae2c-b833-4b52-b807-a14a90c18932",
-            "ingredientId": "137910cd-008d-41a5-9735-732bd3562711",
-            "recipeId": "7ae7b1d7-f081-4203-ae9d-2839201d942d",
-            "amount": 0,
-            "unit": "n.B."
-        },
-        {
-            "id": "9b488314-bf9e-4c5d-805e-0ef3899d1be0",
-            "ingredientId": "5378a803-73e7-4a75-b527-d96adc18a7ba",
-            "recipeId": "7ae7b1d7-f081-4203-ae9d-2839201d942d",
-            "amount": 0,
-            "unit": "n.B."
-        },
-        {
-            "id": "7f5d1702-915d-429b-873b-d05d877ae9d4",
-            "ingredientId": "dc9d08c9-b8dc-4dd2-aa5f-4b8c1c59e2b6",
-            "recipeId": "7ae7b1d7-f081-4203-ae9d-2839201d942d",
-            "amount": 1,
-            "unit": "Prise"
-        }
-    ],
-    "recipe_step": [
-        {
-            "id": "8dae1913-517f-4d5e-9c23-14cb1a5b3cb3",
-            "description": "Die Jackfruitstückchen in einem Sieb gut ausdrücken und dabei mit der Hand zerkleinern. Anschließend mit Wasser abbrausen. Die Jackfruit in eine Schüssel geben. Sojasauce, Paprikapulver, 2 EL Olivenöl, Tomatenmark, Salz und Pfeffer dazugeben. Alles durchmischen und mindestens 15 Minuten ziehen lassen.",
-            "rank": 0,
-            "recipeId": "7ae7b1d7-f081-4203-ae9d-2839201d942d"
-        },
-        {
-            "id": "dd56bc5a-e117-419d-b21b-2df7c034dec0",
-            "description": "Den Backofen auf 190 °C Ober-/Unterhitze vorheizen.",
-            "rank": 1,
-            "recipeId": "7ae7b1d7-f081-4203-ae9d-2839201d942d"
-        },
-        {
-            "id": "3d39d2df-228b-4f30-9957-6769b157d809",
-            "description": "Die Kartoffeln gründlich waschen, würfeln und beiseitelegen. Anschließend die Zwiebeln schälen, halbieren und in sechs Spalten schneiden. Den Knoblauch in grobe Stücke hacken. Die Kartoffeln, Zwiebeln und Knoblauch mit Thymian, Salz, Pfeffer und Olivenöl in eine Schüssel geben und alles gut vermengen. Alles auf ein Backblech geben.",
-            "rank": 2,
-            "recipeId": "7ae7b1d7-f081-4203-ae9d-2839201d942d"
-        },
-        {
-            "id": "867f7970-b08b-4e42-9fc4-be411956b24f",
-            "description": "Im vorgeheizten Backofen ca. 10 Minuten auf der mittleren Einschubleiste backen.",
-            "rank": 3,
-            "recipeId": "7ae7b1d7-f081-4203-ae9d-2839201d942d"
-        },
-        {
-            "id": "68904916-d981-44ab-9560-058e376ffae5",
-            "description": "Währenddessen die Enden der Süßkartoffel abschneiden und diese mit Schale in mundgerechte Stücke schneiden. Den Hokkaidokürbis waschen, halbieren und die Kerne mit einem Löffel herausschaben. Den Kürbis ebenfalls würfeln oder in Spalten schneiden. Süßkartoffel und Kürbis auf das Backblech zu den Kartoffeln und Zwiebeln geben und noch mal gut vermischen. Weitere 30 Minuten im Backofen backen.",
-            "rank": 4,
-            "recipeId": "7ae7b1d7-f081-4203-ae9d-2839201d942d"
-        },
-        {
-            "id": "3fd0894e-cd24-4a5a-b92a-364d8c8d4f67",
-            "description": "Die Cherrytomaten waschen, halbieren und mit der marinierten Jackfruit zum goldbraunen Gemüse geben. Alles noch mal 10 Minuten backen.",
-            "rank": 5,
-            "recipeId": "7ae7b1d7-f081-4203-ae9d-2839201d942d"
-        },
-        {
-            "id": "0c626c90-03a7-407d-bab8-89fee5c7c6e6",
-            "description": "Für die Zitronen-Kapern-Sauce die Kapern aus dem Glas abgießen und in eine Schüssel geben. Zitronensaft, eine klein geschnittene Knoblauchzehe, Ahornsirup, Olivenöl, Salz und Pfeffer dazugeben. Alles vermischen und abschmecken. Sobald das Gemüse gar ist, aus dem Ofen nehmen und mit der Sauce übergießen.",
-            "rank": 6,
-            "recipeId": "7ae7b1d7-f081-4203-ae9d-2839201d942d"
-        },
-        {
-            "id": "dc182319-40a9-4f8b-bf6d-903417f31fc2",
-            "description": "Eine Prise Rosmarin über das Ofengemüse streuen und servieren.",
-            "rank": 7,
-            "recipeId": "7ae7b1d7-f081-4203-ae9d-2839201d942d"
-        }
-    ]
+    }
 }

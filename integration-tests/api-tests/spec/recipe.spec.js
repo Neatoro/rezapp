@@ -40,7 +40,7 @@ describe('Recipe', () => {
                         name: 'Ofengemüse mit Jackfruit und Zitronen-Kapern-Sauce',
                         description:
                             'Ein schnelles Gericht, perfekt im Herbst und Winter.',
-                        image: false,
+                        image: true,
                         user: '0123456789',
                         portions: 2
                     }
