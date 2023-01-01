@@ -8,11 +8,11 @@ module.exports = class ViewPage {
     }
 
     async getDescription() {
-        return await this.browser.getInnerText('main h1 + p');
+        return await this.browser.getInnerText('main h1 ~ p');
     }
 
     async getPortions() {
-        const text = await this.browser.getInnerText('main h1 + p + p');
+        const text = await this.browser.getInnerText('main h1 ~ p ~ p');
         return Number(text.split(' ')[1]);
     }
 
@@ -54,5 +54,12 @@ module.exports = class ViewPage {
     async approveDelete() {
         await this.browser.waitForSelector('#modal');
         await this.browser.clickButton('Löschen');
+    }
+
+    async getLabels() {
+        return await this.browser.evaluate(() => {
+            const labelElements = document.querySelectorAll('.labels span');
+            return [...labelElements].map((element) => element.innerText);
+        });
     }
 };

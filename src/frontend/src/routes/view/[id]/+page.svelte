@@ -4,6 +4,7 @@
         P,
         SpeedDial,
         SpeedDialButton,
+        Badge,
         Button,
         Table,
         TableBody,
@@ -13,6 +14,7 @@
         TableHeadCell
     } from 'flowbite-svelte';
     import { goto } from '$app/navigation';
+    import { badgeColor } from '$lib/badge-color';
 
     export let data;
 
@@ -35,13 +37,19 @@
         />
     {/if}
 
-    <h1
-        class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
-    >
+    <h1 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
         {data.recipe.name}
     </h1>
 
-    <P>{data.recipe.description}</P>
+    {#if data.recipe.labels.length > 0}
+        <div class="labels mt-4">
+            {#each data.recipe.labels as label}
+                <Badge color={badgeColor(label.color)}>{label.name}</Badge>
+            {/each}
+        </div>
+    {/if}
+
+    <P class="mt-4">{data.recipe.description}</P>
     {#if data.recipe.portions !== 0}
         <P class="mt-4">Portionen: {data.recipe.portions}</P>
     {/if}

@@ -1,5 +1,6 @@
 <script>
-    import { Button, Card, Toolbar } from 'flowbite-svelte';
+    import { Button, Badge, Card, Toolbar } from 'flowbite-svelte';
+    import { badgeColor } from '$lib/badge-color';
 
     export let data;
 </script>
@@ -18,12 +19,21 @@
     {#each data.recipes as recipe}
         <Card img={recipe.image ? `/api/recipe/${recipe.id}/image` : ''}>
             <h5
-                class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
+                class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
             >
                 {recipe.name}
             </h5>
+            {#if recipe.labels.length > 0}
+                <div class="labels mt-2">
+                    {#each recipe.labels as label}
+                        <Badge color={badgeColor(label.color)}
+                            >{label.name}</Badge
+                        >
+                    {/each}
+                </div>
+            {/if}
             <p
-                class="font-normal text-gray-700 dark:text-gray-400 leading-tight"
+                class="mt-2 font-normal text-gray-700 dark:text-gray-400 leading-tight"
             >
                 {recipe.description}
             </p>
