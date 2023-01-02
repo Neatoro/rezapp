@@ -31,6 +31,18 @@ module.exports = class OverviewPage {
         await this.browser.waitForSelector('div:has(> h5)');
     }
 
+    async hasRecipe({ title }) {
+        return await this.browser.evaluate((title) => {
+            const recipe = [...document.querySelectorAll('div:has(> h5)')].find(
+                (recipe) => {
+                    const titleElement = recipe.querySelector('h5');
+                    return titleElement.innerText === title;
+                }
+            );
+            return !!recipe;
+        }, title);
+    }
+
     async viewRecipe({ title }) {
         await this.browser.evaluate((title) => {
             const recipe = [
@@ -77,5 +89,12 @@ module.exports = class OverviewPage {
             const labelElements = recipe.querySelectorAll('.labels span');
             return [...labelElements].map((element) => element.innerText);
         }, title);
+    }
+
+    async applyLabel({ label }) {
+        await this.browser.clickButton('Kategorien');
+        await this.browser.clickButton(label, 'label');
+        await this.browser.clickButton('Anwenden');
+        await this.browser.waitForNavigation();
     }
 };

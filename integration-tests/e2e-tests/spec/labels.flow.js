@@ -83,4 +83,22 @@ describe('Labels flow', () => {
 
         expect(hasLabel).toBe(true);
     });
+
+    it('should filter by a label', async () => {
+        await profileHelper.apply('test-recipes');
+
+        await overviewPage.open();
+        await overviewPage.waitForRecipes();
+
+        let count = await overviewPage.getRecipeCount();
+        expect(count).toBe(2);
+
+        await overviewPage.applyLabel({ label: 'Vegan' });
+
+        count = await overviewPage.getRecipeCount();
+        expect(count).toBe(1);
+
+        const correctRecipe = await overviewPage.hasRecipe({ title: 'Test' });
+        expect(correctRecipe).toBe(true);
+    });
 });
