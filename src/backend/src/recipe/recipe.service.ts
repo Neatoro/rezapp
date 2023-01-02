@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Like, Repository } from 'typeorm';
+import { In, Like, Repository } from 'typeorm';
 import { Recipe, RecipeIngredient, RecipeStep } from './recipe.entity';
 import { CreateRecipeRequestDto } from './recipe.interface';
 import { writeFile, readFile, access, rm } from 'fs/promises';
@@ -17,11 +17,24 @@ export class RecipeService {
         private readonly recipeIngredientRepository: Repository<RecipeIngredient>
     ) {}
 
-    async list(user: string, search: string): Promise<Recipe[]> {
+    async list(
+        user: string,
+        search: string,
+        labels: string[]
+    ): Promise<Recipe[]> {
+        const labelsFilter =
+            labels.length === 0
+                ? {}
+                : {
+                      labels: {
+                          id: In(labels)
+                      }
+                  };
         return await this.recipeRepository.find({
             where: {
                 user,
-                name: Like(`%${search}%`)
+                name: Like(`%${search}%`),
+                ...labelsFilter
             },
             relations: ['labels']
         });
