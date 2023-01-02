@@ -44,7 +44,9 @@
     {#if data.recipe.labels.length > 0}
         <div class="labels mt-4">
             {#each data.recipe.labels as label}
-                <Badge class="mr-2" color={badgeColor(label.color)}>{label.name}</Badge>
+                <Badge class="mr-2" color={badgeColor(label.color)}
+                    >{label.name}</Badge
+                >
             {/each}
         </div>
     {/if}
