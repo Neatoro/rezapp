@@ -1,8 +1,30 @@
 <script>
-    import { Button, Badge, Card, Toolbar } from 'flowbite-svelte';
+    import {
+        Button,
+        Badge,
+        Card,
+        Toolbar,
+        Chevron,
+        Dropdown,
+        Checkbox
+    } from 'flowbite-svelte';
     import { badgeColor } from '$lib/badge-color';
+    import { goto } from '$app/navigation';
 
     export let data;
+
+    let labelState = data.labels.reduce(
+        (acc, current) => ({
+            ...acc,
+            [current.id]: data.selectedLabels.includes(current.id)
+        }),
+        {}
+    );
+
+    function applyLabelFilters() {
+        const labels = Object.keys(labelState).filter((id) => labelState[id]);
+        goto(`/?search=${data.search}&labels=${labels.join(',')}`);
+    }
 </script>
 
 <Toolbar>
@@ -11,6 +33,25 @@
             ><use xlink:href="icons.svg#icon-plus" /></svg
         ><span class="sr-only">Neues Rezept</span></Button
     >
+    <div class="ml-4">
+        <Button><Chevron>Kategorien</Chevron></Button>
+        <Dropdown class="w-60 p-3 space-y-1 text-sm">
+            <div slot="header" class="p-3">
+                <Button on:click={applyLabelFilters}>Anwenden</Button>
+            </div>
+            {#each data.labels as label}
+                <li
+                    class="rounded p-2 hover:bg-gray-100 dark:hover:bg-gray-600"
+                >
+                    <Checkbox bind:checked={labelState[label.id]}
+                        ><Badge class="mr-2" color={badgeColor(label.color)}
+                            >{label.name}</Badge
+                        ></Checkbox
+                    >
+                </li>
+            {/each}
+        </Dropdown>
+    </div>
 </Toolbar>
 
 <div

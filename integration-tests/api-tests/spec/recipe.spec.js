@@ -1,4 +1,4 @@
-const executeRequest = require('./helpers/request-helper');
+const executeRequest = require('./helpers/request-helper.js');
 const ProfileHelper = require('../../shared/profile-helper');
 
 describe('Recipe', () => {
@@ -59,7 +59,31 @@ describe('Recipe', () => {
         it('should only return the searched recipes', async () => {
             await profileHelper.apply('test-recipes');
 
-            const response = await executeRequest('/recipe?search=Test');
+            const response = await executeRequest('/recipe?search=Foo');
+            const data = await response.json();
+
+            expect(response.status).toBe(200);
+            expect(data).toEqual({
+                recipes: [
+                    {
+                        id: '31b84439-0f9a-4c24-a9a5-927851a70c1d',
+                        name: 'Foo',
+                        description: 'Test',
+                        image: false,
+                        user: '0123456789',
+                        portions: 0,
+                        labels: []
+                    }
+                ]
+            });
+        });
+
+        it('should only return the recipes with a certain label', async () => {
+            await profileHelper.apply('test-recipes');
+
+            const response = await executeRequest(
+                '/recipe?labels=b838f03f-c9ad-4051-9ddc-c090887efeb3'
+            );
             const data = await response.json();
 
             expect(response.status).toBe(200);
@@ -72,7 +96,14 @@ describe('Recipe', () => {
                         image: false,
                         user: '0123456789',
                         portions: 0,
-                        labels: []
+                        labels: [
+                            {
+                                id: 'b838f03f-c9ad-4051-9ddc-c090887efeb3',
+                                name: 'Vegan',
+                                color: 'green',
+                                user: '0123456789'
+                            }
+                        ]
                     }
                 ]
             });

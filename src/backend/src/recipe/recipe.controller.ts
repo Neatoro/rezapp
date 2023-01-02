@@ -12,7 +12,8 @@ import {
     Delete,
     NotFoundException,
     UseGuards,
-    Query
+    Query,
+    ParseArrayPipe
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { RecipeOwnerGuard } from '../auth/recipe.guard';
@@ -31,10 +32,12 @@ export class RecipeController {
     @Get()
     async list(
         @User() user: string,
-        @Query('search') search: string
+        @Query('search') search: string,
+        @Query('labels') labelString: string
     ): Promise<ListRecipesResponse> {
+        const labels = labelString ? labelString.split(',') : [];
         return {
-            recipes: await this.recipeService.list(user, search || '')
+            recipes: await this.recipeService.list(user, search || '', labels)
         };
     }
 
