@@ -1,6 +1,11 @@
 _format_version: '3.0'
 _transform: true
 
+plugins:
+    - name: opentelemetry
+      config:
+          endpoint: http://rezapp-otel:4318/v1/traces
+
 services:
     - host: rezapp-backend
       name: backend

@@ -4,6 +4,8 @@ services:
     rezapp-backend:
         build: src/backend
         image: rezapp-backend
+        environment:
+            - OTEL_ACTIVE=true
         volumes:
             - database:/database
             - images:/app/images
@@ -25,6 +27,7 @@ services:
         environment:
             KONG_DATABASE: 'off'
             KONG_DECLARATIVE_CONFIG: /kong/declarative/kong.yaml
+            KONG_OPENTELEMETRY_TRACING: all
         ports:
             - 8000:8000
 
@@ -33,6 +36,17 @@ services:
         image: rezapp-auth-provider
         env_file:
             - .env
+
+    rezapp-zipkin:
+        image: openzipkin/zipkin
+        ports:
+            - 9411:9411
+
+    rezapp-otel:
+        image: otel/opentelemetry-collector-contrib
+        command: '--config=/etc/otelcol/config.yaml'
+        volumes:
+            - ./otel-local.yaml:/etc/otelcol/config.yaml
 
 volumes:
     database:

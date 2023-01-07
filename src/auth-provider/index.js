@@ -1,6 +1,8 @@
 const dotenv = require('dotenv');
 dotenv.config();
 
+require('./otel');
+
 const express = require('express');
 const helmet = require('helmet');
 const { auth } = require('express-openid-connect');
