@@ -25,7 +25,7 @@ services:
         networks:
             - rezapp
         volumes:
-            - ../../../src/proxy:/kong/declarative
+            - ./kong-e2e.yaml:/kong/declarative
         environment:
             KONG_DATABASE: 'off'
             KONG_DECLARATIVE_CONFIG: /kong/declarative/kong.yaml

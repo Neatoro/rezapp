@@ -3,6 +3,8 @@ version: '3.9'
 services:
     rezapp-backend:
         image: ghcr.io/neatoro/rezapp/rezapp-backend:latest
+        environment:
+            - OTEL_ACTIVE=true
         volumes:
             - database:/database
             - images:/app/images
@@ -17,10 +19,11 @@ services:
     rezapp-proxy:
         image: kong/kong-gateway:3.1.1.1
         volumes:
-            - ./proxy:/kong/declarative
+            - ./config/kong.yaml:/kong/kong.yaml
         environment:
             KONG_DATABASE: 'off'
-            KONG_DECLARATIVE_CONFIG: /kong/declarative/kong.yaml
+            KONG_DECLARATIVE_CONFIG: /kong/kong.yaml
+            KONG_OPENTELEMETRY_TRACING: all
         ports:
             - 8976:8000
 
@@ -28,6 +31,15 @@ services:
         image: ghcr.io/neatoro/rezapp/rezapp-auth-provider:latest
         env_file:
             - .env
+
+    rezapp-zipkin:
+        image: openzipkin/zipkin-slim
+
+    rezapp-otel:
+        image: otel/opentelemetry-collector-contrib
+        command: '--config=/etc/otelcol/config.yaml'
+        volumes:
+            - ./config/otel.yaml:/etc/otelcol/config.yaml
 
 volumes:
     database:

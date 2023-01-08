@@ -184,8 +184,29 @@ jobs:
               run: |
                   docker-compose -f pipeline/stages/e2e-tests/docker-compose.yaml logs
 
+    test:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout Repository
+              uses: actions/checkout@v3
+
+            - name: Get Service Configuration Values
+              shell: bash
+              run:
+                  echo "$SERVICE_CONFIG_VALUES" > pipeline/stages/deploy/values.jsonnet
+                  mkdir -p pipeline/stages/deploy/config
+              env:
+                  SERVICE_CONFIG_VALUES: ${{ secrets.SERVICE_CONFIG_VALUES }}
+
+            - name: Render Service Configuration
+              uses: alexdglover/jsonnet-render@v2
+              with:
+                  file: pipeline/stages/deploy/values.jsonnet
+                  output_dir: pipeline/stages/deploy/values.jsonnet
+
     release:
-        if: github.ref_name == 'main'
+        #if: github.ref_name == 'main'
         runs-on: ubuntu-latest
         needs: [api-tests, e2e-tests]
 
@@ -257,6 +278,23 @@ jobs:
         steps:
             - name: Checkout Repository
               uses: actions/checkout@v3
+
+            - name: Checkout Repository
+              uses: actions/checkout@v3
+
+            - name: Get Service Configuration Values
+              shell: bash
+              run:
+                  echo "$SERVICE_CONFIG_VALUES" > pipeline/stages/deploy/values.jsonnet
+                  mkdir -p pipeline/stages/deploy/config
+              env:
+                  SERVICE_CONFIG_VALUES: ${{ secrets.SERVICE_CONFIG_VALUES }}
+
+            - name: Render Service Configuration
+              uses: alexdglover/jsonnet-render@v2
+              with:
+                  file: pipeline/stages/deploy/values.jsonnet
+                  output_dir: pipeline/stages/deploy/values.jsonnet
 
             - name: Copy Files
               uses: garygrossgarten/github-action-scp@v0.8.0
