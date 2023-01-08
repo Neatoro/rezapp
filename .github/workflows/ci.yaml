@@ -185,7 +185,7 @@ jobs:
                   docker-compose -f pipeline/stages/e2e-tests/docker-compose.yaml logs
 
     release:
-        #if: github.ref_name == 'main'
+        if: github.ref_name == 'main'
         runs-on: ubuntu-latest
         needs: [api-tests, e2e-tests]
 
