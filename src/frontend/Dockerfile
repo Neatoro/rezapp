@@ -8,10 +8,12 @@ RUN npm ci
 COPY . .
 RUN npm run build
 
-FROM denoland/deno:alpine
+FROM node:18-alpine
 
 WORKDIR /app
 
 COPY --from=build /build/build .
+COPY --from=build /build/otel-server .
+RUN npm ci
 
-CMD [ "deno", "run", "--allow-env", "--allow-read", "--allow-net", "index.js" ]
+CMD [ "node", "otel.js" ]

@@ -258,6 +258,23 @@ jobs:
             - name: Checkout Repository
               uses: actions/checkout@v3
 
+            - name: Checkout Repository
+              uses: actions/checkout@v3
+
+            - name: Get Service Configuration Values
+              shell: bash
+              run:
+                  mkdir -p pipeline/stages/deploy/config && echo "$SERVICE_CONFIG_VALUES" > pipeline/stages/deploy/values.jsonnet
+              env:
+                  SERVICE_CONFIG_VALUES: ${{ secrets.SERVICE_CONFIG_VALUES }}
+
+            - name: Render Service Configuration
+              uses: alexdglover/jsonnet-render@v2
+              with:
+                  file: pipeline/stages/deploy/config.jsonnet
+                  output_dir: pipeline/stages/deploy
+                  plaintext: true
+
             - name: Copy Files
               uses: garygrossgarten/github-action-scp@v0.8.0
               with:

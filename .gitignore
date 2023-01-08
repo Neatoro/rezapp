@@ -14,3 +14,8 @@ package
 !.env.example
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+
+kong-local.yaml
+userprovided.jsonnet
+pipeline/stages/deploy/values.jsonnet
+pipeline/stages/deploy/config

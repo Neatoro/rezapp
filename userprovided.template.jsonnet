@@ -1,0 +1,6 @@
+{
+    zipkin: {
+        username: '',
+        password: ''
+    },
+}

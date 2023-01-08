@@ -1,19 +1,52 @@
-local usv = import 'userprovided.jsonnet';
+local usv = import 'values.jsonnet';
 
 {
-    "src/frontend/.env": |||
-        BACKEND_URL=http://localhost:3111
-        AUTH_PROVIDER_URL=http://localhost:3111/auth
-    |||,
-    "src/backend/ormconfig.json": std.manifestJson({
-        type: "sqlite",
-        database: "recipes.db",
-        synchronize: true
+    "config/otel.yaml": std.manifestYamlDoc({
+        receivers: {
+            otlp: {
+                protocols: {
+                    http: null
+                }
+            }
+        },
+        processors: {
+            batch: null
+        },
+        extensions: {
+            health_check: null,
+            pprof: null,
+            zpages: null
+        },
+        exporters: {
+            zipkin: {
+                endpoint: "http://rezapp-zipkin:9411/api/v2/spans",
+                tls: {
+                    insecure: true
+                }
+            }
+        },
+        service: {
+            extensions: [
+                "health_check",
+                "pprof",
+                "zpages"
+            ],
+            pipelines: {
+                traces: {
+                    receivers: [
+                        "otlp"
+                    ],
+                    processors: [
+                        "batch"
+                    ],
+                    exporters: [
+                        "zipkin"
+                    ]
+                }
+            }
+        }
     }),
-    "src/backend/.env": |||
-        AUTH_PROVIDER_BASE_URL=http://localhost:3111/auth
-    |||,
-    "kong-local.yaml": std.manifestYamlDoc(
+    "config/kong.yaml": std.manifestYamlDoc(
         {
             _format_version: "3.0",
             _transform: true,

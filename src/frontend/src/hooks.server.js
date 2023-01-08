@@ -9,6 +9,11 @@ export const handle = async ({ event, resolve }) => {
 };
 
 export async function handleFetch({ event, request, fetch }) {
+    if (event.request.headers.has('traceparent')) {
+        const parent = event.request.headers.get('traceparent');
+        request.headers.set('traceparent', parent);
+    }
+
     request.headers.set('cookie', event.request.headers.get('cookie'));
 
     return fetch(request);

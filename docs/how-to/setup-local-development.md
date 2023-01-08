@@ -10,6 +10,7 @@ Create a `images` folder inside `src/backend`. This is needed for the images upl
 
 ## Generating the Configuaration
 
+Copy `userprovided.template.json` to `userprovided.template.json` and provided all fields.
 Execute `npm run generate:config` from the root folder to setup all needed configuration files.
 
 ## Starting the local development landscape
