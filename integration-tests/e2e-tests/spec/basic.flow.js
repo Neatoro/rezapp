@@ -223,4 +223,44 @@ describe('Basic flow', () => {
         const labels = await viewPage.getLabels();
         expect(labels).toEqual(['Foo Bar']);
     });
+
+    it('should display max 12 recipes per page', async () => {
+        await profileHelper.apply('large-dataset');
+
+        await overviewPage.open();
+        await overviewPage.waitForRecipes();
+
+        let recipeCount = await overviewPage.getRecipeCount();
+        expect(recipeCount).toBe(12);
+
+        let pageInfo = await overviewPage.getPageInfo();
+        expect(pageInfo).toBe('Seite 1 von 9');
+
+        let hasCorrectRecipe = await overviewPage.hasRecipe({
+            title: 'Recipe 0'
+        });
+        expect(hasCorrectRecipe).toBe(true);
+
+        await overviewPage.nextPage();
+
+        recipeCount = await overviewPage.getRecipeCount();
+        expect(recipeCount).toBe(12);
+
+        pageInfo = await overviewPage.getPageInfo();
+        expect(pageInfo).toBe('Seite 2 von 9');
+
+        hasCorrectRecipe = await overviewPage.hasRecipe({ title: 'Recipe 12' });
+        expect(hasCorrectRecipe).toBe(true);
+
+        await overviewPage.prevPage();
+
+        recipeCount = await overviewPage.getRecipeCount();
+        expect(recipeCount).toBe(12);
+
+        pageInfo = await overviewPage.getPageInfo();
+        expect(pageInfo).toBe('Seite 1 von 9');
+
+        hasCorrectRecipe = await overviewPage.hasRecipe({ title: 'Recipe 0' });
+        expect(hasCorrectRecipe).toBe(true);
+    });
 });

@@ -97,4 +97,16 @@ module.exports = class OverviewPage {
         await this.browser.clickButton('Anwenden');
         await this.browser.waitForNavigation();
     }
+
+    async getPageInfo() {
+        return await this.browser.getInnerText('#pagenation-info');
+    }
+
+    async nextPage() {
+        await this.browser.clickButton('Nächste');
+    }
+
+    async prevPage() {
+        await this.browser.clickButton('Vorherige');
+    }
 };

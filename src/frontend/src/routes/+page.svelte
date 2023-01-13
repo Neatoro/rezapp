@@ -124,7 +124,7 @@
             </div>
             <div class="col-start-2 flex justify-center">
                 <Pagination on:previous={previousRecipes} on:next={nextRecipes}>
-                    <span slot="prev">Vorherig</span>
+                    <span slot="prev">Vorherige</span>
                     <span slot="next">Nächste</span>
                 </Pagination>
             </div>
