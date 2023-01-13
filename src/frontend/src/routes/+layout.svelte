@@ -106,7 +106,7 @@
             {/if}
         </NavUl>
     </Navbar>
-    <main class="p-4">
+    <main class="flex flex-col p-4 grow">
         <slot />
     </main>
 {/if}
