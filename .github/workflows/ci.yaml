@@ -263,8 +263,7 @@ jobs:
 
             - name: Get Service Configuration Values
               shell: bash
-              run:
-                  mkdir -p pipeline/stages/deploy/config && echo "$SERVICE_CONFIG_VALUES" > pipeline/stages/deploy/values.jsonnet
+              run: mkdir -p pipeline/stages/deploy/config && echo "$SERVICE_CONFIG_VALUES" > pipeline/stages/deploy/values.jsonnet
               env:
                   SERVICE_CONFIG_VALUES: ${{ secrets.SERVICE_CONFIG_VALUES }}
 
