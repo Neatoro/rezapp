@@ -158,4 +158,8 @@ module.exports = class CreatePage {
         await this.browser.waitForSelector(selector);
         return await this.browser.getInnerText(selector);
     }
+
+    async searchIngredient(text) {
+        await this.browser.type('#table-search', text);
+    }
 };
