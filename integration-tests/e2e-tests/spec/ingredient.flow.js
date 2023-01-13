@@ -51,4 +51,22 @@ describe('Ingredient flow', () => {
 
         expect(hasIngredient).toBe(true);
     });
+
+    it('should search for ingredient', async () => {
+        await profileHelper.apply('test-ingredient');
+
+        await overviewPage.open();
+        await overviewPage.newRecipe();
+
+        await createPage.changeTab('Zutaten');
+        await createPage.openIngredientModal();
+
+        await createPage.searchIngredient('Jack');
+
+        const hasIngredient = await createPage.hasIngredient('Jackfruit');
+        const hasNotIngredient = await createPage.hasIngredient('Sojasauce');
+
+        expect(hasIngredient).toBe(true);
+        expect(hasNotIngredient).toBe(false);
+    });
 });
