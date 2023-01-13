@@ -12,7 +12,7 @@
     >
         Login
     </h5>
-    <P class="mb-2">Herzlich Willkommen bei der Rezapp Alpha!</P>
+    <P class="mb-2">Herzlich Willkommen bei der Rezapp Beta!</P>
     <button
         on:click={signIn}
         type="button"
