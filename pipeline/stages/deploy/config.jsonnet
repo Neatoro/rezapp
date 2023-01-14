@@ -1,6 +1,17 @@
 local usv = import 'values.jsonnet';
 
 {
+    "config/ormconfig.json": std.manifestJson({
+        type: 'postgres',
+        host: 'rezapp-database',
+        username: usv.postgres.username,
+        password: usv.postgres.password,
+        database: usv.postgres.username
+    }),
+    "config/postgres.env": |||
+        POSTGRES_USER=%(username)s
+        POSTGRES_PASSWORD=%(password)s
+    ||| % {username: usv.postgres.username, password: usv.postgres.password},
     "config/otel.yaml": std.manifestYamlDoc({
         receivers: {
             otlp: {
