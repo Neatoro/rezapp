@@ -1,14 +1,20 @@
 version: '3.9'
 
 services:
+    rezapp-database:
+        image: postgres:15-alpine
+        env_file:
+            - config/postgres.env
+        volumes:
+            - database:/var/lib/postgresql/data
+
     rezapp-backend:
         image: ghcr.io/neatoro/rezapp/rezapp-backend:latest
         environment:
             - OTEL_ACTIVE=true
         volumes:
-            - database:/database
             - images:/app/images
-            - ./ormconfig.json:/app/ormconfig.json
+            - ./config/ormconfig.json:/app/ormconfig.json
 
     rezapp-frontend:
         image: ghcr.io/neatoro/rezapp/rezapp-frontend:latest
