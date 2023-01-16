@@ -11,7 +11,8 @@
         TableBodyCell,
         TableBodyRow,
         TableHead,
-        TableHeadCell
+        TableHeadCell,
+        Input
     } from 'flowbite-svelte';
     import { goto } from '$app/navigation';
     import { badgeColor } from '$lib/badge-color';
@@ -20,11 +21,21 @@
 
     let deleteModal = false;
 
+    let portions = data.recipe.portions;
+
     async function deleteRecipe() {
         await fetch(`/api/recipe/${data.recipe.id}`, {
             method: 'DELETE'
         });
         goto('/');
+    }
+
+    function formatAmount(amount, portions) {
+        if (data.recipe.portions !== 0) {
+            const value = (amount / data.recipe.portions) * portions;
+            return +parseFloat(value).toFixed(2);
+        }
+        return amount;
     }
 </script>
 
@@ -52,9 +63,6 @@
     {/if}
 
     <P class="mt-4">{data.recipe.description}</P>
-    {#if data.recipe.portions !== 0}
-        <P class="mt-4">Portionen: {data.recipe.portions}</P>
-    {/if}
 
     <section class="mt-8">
         <h2
@@ -63,16 +71,34 @@
             Zutaten
         </h2>
 
+        {#if portions !== 0}
+            <div class="mb-4">
+                <span class="mb-2 text-gray-900 dark:text-white"
+                    >Portionen:</span
+                >
+                <Input
+                    id="portionInput"
+                    min={1}
+                    type="number"
+                    defaultClass="inline"
+                    bind:value={portions}
+                />
+            </div>
+        {/if}
+
         <Table>
             <TableHead>
                 <TableHeadCell>Menge</TableHeadCell>
                 <TableHeadCell>Zutat</TableHeadCell>
             </TableHead>
-            <TableBody class="divide-y">
+            <TableBody>
                 {#each data.recipe.ingredients as recipeIngredient}
                     <TableBodyRow>
                         <TableBodyCell
-                            >{#if recipeIngredient.amount > 0}{recipeIngredient.amount}
+                            >{#if recipeIngredient.amount > 0}{formatAmount(
+                                    recipeIngredient.amount,
+                                    portions
+                                )}
                             {/if}{recipeIngredient.unit}</TableBodyCell
                         >
                         <TableBodyCell

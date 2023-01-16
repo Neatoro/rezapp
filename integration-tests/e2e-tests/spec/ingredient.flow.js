@@ -2,6 +2,7 @@ const ProfileHelper = require('../../shared/profile-helper');
 const PuppeteerHelper = require('./helper/puppeteer-helper');
 const CreatePage = require('./pages/CreatePage');
 const OverviewPage = require('./pages/OverviewPage');
+const ViewPage = require('./pages/ViewPage');
 
 describe('Ingredient flow', () => {
     let profileHelper;
@@ -9,6 +10,7 @@ describe('Ingredient flow', () => {
 
     let overviewPage;
     let createPage;
+    let viewPage;
 
     beforeAll(async () => {
         jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
@@ -19,6 +21,7 @@ describe('Ingredient flow', () => {
 
         overviewPage = new OverviewPage(browser);
         createPage = new CreatePage(browser);
+        viewPage = new ViewPage(browser);
     });
 
     beforeEach(async () => {
@@ -68,5 +71,39 @@ describe('Ingredient flow', () => {
 
         expect(hasIngredient).toBe(true);
         expect(hasNotIngredient).toBe(false);
+    });
+
+    it('should calculate ingredients', async () => {
+        await profileHelper.apply('test-recipe');
+
+        await overviewPage.open();
+        await overviewPage.waitForRecipes();
+
+        await overviewPage.viewRecipe({
+            title: 'Test'
+        });
+
+        const titleText = await viewPage.getTitle();
+        expect(titleText).toBe('Test');
+
+        const descriptionText = await viewPage.getDescription();
+        expect(descriptionText).toBe('Test');
+
+        let ingredients = await viewPage.getIngredients();
+        expect(ingredients).toEqual([{ name: 'Test', amount: '225 g' }]);
+
+        const steps = await viewPage.getSteps();
+        expect(steps).toEqual(['Test']);
+
+        let portions = await viewPage.getPortions();
+        expect(portions).toBe(1);
+
+        await viewPage.setPortions('2');
+
+        portions = await viewPage.getPortions();
+        expect(portions).toBe(2);
+
+        ingredients = await viewPage.getIngredients();
+        expect(ingredients).toEqual([{ name: 'Test', amount: '450 g' }]);
     });
 });

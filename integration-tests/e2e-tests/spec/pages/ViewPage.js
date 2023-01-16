@@ -12,8 +12,15 @@ module.exports = class ViewPage {
     }
 
     async getPortions() {
-        const text = await this.browser.getInnerText('main h1 ~ p ~ p');
-        return Number(text.split(' ')[1]);
+        const portions = await this.browser.evaluate(() => {
+            return document.querySelector('#portionInput').value;
+        });
+        return Number(portions);
+    }
+
+    async setPortions(portions) {
+        await this.browser.clearInput('#portionInput');
+        await this.browser.type('#portionInput', portions);
     }
 
     async getIngredients() {
