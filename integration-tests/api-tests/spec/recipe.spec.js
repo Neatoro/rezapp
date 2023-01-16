@@ -42,7 +42,7 @@ describe('Recipe', () => {
                             'Ein schnelles Gericht, perfekt im Herbst und Winter.',
                         image: true,
                         user: '0123456789',
-                        portions: 2,
+                        portions: 4,
                         labels: [
                             {
                                 id: 'b838f03f-c9ad-4051-9ddc-c090887efeb3',
