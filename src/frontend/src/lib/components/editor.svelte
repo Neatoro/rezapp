@@ -91,7 +91,10 @@
     }
 
     $: addableIngredients = ingredients.filter(
-        (ingredient) => !selectedIngredients.includes(ingredient)
+        (ingredient) =>
+            !selectedIngredients.find(
+                (selectedIngredient) => selectedIngredient.id === ingredient.id
+            )
     );
 
     function validate() {
