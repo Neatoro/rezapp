@@ -579,7 +579,7 @@ describe('Recipe', () => {
                     ingredients: [
                         {
                             ingredient: '6961db05-7a8a-40d8-ad9b-0873dc23e271',
-                            amount: 200,
+                            amount: 200.5,
                             unit: 'g'
                         }
                     ]
@@ -602,7 +602,7 @@ describe('Recipe', () => {
                         ingredient: {
                             id: '6961db05-7a8a-40d8-ad9b-0873dc23e271'
                         },
-                        amount: 200,
+                        amount: 200.5,
                         unit: 'g'
                     })
                 ],

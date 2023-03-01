@@ -64,7 +64,7 @@ export class RecipeIngredient {
     @PrimaryGeneratedColumn('uuid')
     id: string;
 
-    @Column()
+    @Column('float')
     amount: number;
 
     @Column()
