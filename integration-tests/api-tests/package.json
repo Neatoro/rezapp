@@ -9,6 +9,6 @@
         "form-data": "^4.0.0",
         "jasmine": "^4.5.0",
         "jasmine-console-reporter": "^3.1.0",
-        "node-fetch": "^3.3.0"
+        "node-fetch": "^3.3.1"
     }
 }
