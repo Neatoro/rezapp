@@ -3,6 +3,6 @@
     "version": "1.0.0",
     "license": "ISC",
     "devDependencies": {
-        "sqlite3": "^5.1.4"
+        "sqlite3": "^5.1.6"
     }
 }
