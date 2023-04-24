@@ -13,7 +13,7 @@
         "install:integration-tests": "npm ci --prefix integration-tests/shared && npm ci --prefix integration-tests/api-tests && npm ci --prefix integration-tests/e2e-tests"
     },
     "devDependencies": {
-        "prettier": "^2.8.4",
+        "prettier": "^2.8.8",
         "prettier-plugin-svelte": "^2.9.0",
         "uuid": "^9.0.0"
     },
