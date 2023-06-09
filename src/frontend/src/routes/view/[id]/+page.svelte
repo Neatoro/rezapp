@@ -138,7 +138,7 @@
     </SpeedDialButton>
 </SpeedDial>
 
-<Modal title="Löschen" bind:open={deleteModal} autoclose>
+<Modal title="Löschen" id="modalDeleteRecipe" bind:open={deleteModal} autoclose>
     <P>Möchtest du das Rezept "{data.recipe.name}" wirklich löschen?</P>
     <svelte:fragment slot="footer">
         <Button>Abbrechen</Button>

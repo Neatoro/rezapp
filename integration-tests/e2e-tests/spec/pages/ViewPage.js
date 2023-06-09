@@ -59,7 +59,7 @@ module.exports = class ViewPage {
     }
 
     async approveDelete() {
-        await this.browser.waitForSelector('#modal');
+        await this.browser.waitForSelector('#modalDeleteRecipe');
         await this.browser.clickButton('Löschen');
     }
 

@@ -95,7 +95,7 @@ module.exports = class CreatePage {
 
         return await this.browser.evaluate((name) => {
             const ingredient = [
-                ...document.querySelectorAll('#modal tbody tr')
+                ...document.querySelectorAll('#modalAddIngredient tbody tr')
             ].filter((row) => {
                 const cells = row.querySelectorAll('td');
                 const ingredientName = cells[1].innerText;
@@ -110,7 +110,7 @@ module.exports = class CreatePage {
 
         await this.browser.evaluate((name) => {
             const ingredient = [
-                ...document.querySelectorAll('#modal tbody tr')
+                ...document.querySelectorAll('#modalAddIngredient tbody tr')
             ].filter((row) => {
                 const cells = row.querySelectorAll('td');
                 const ingredientName = cells[1].innerText;
