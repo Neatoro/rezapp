@@ -1,34 +1,34 @@
 version: 2
 updates:
-  - package-ecosystem: "npm"
-    directory: "/"
-    schedule:
-      interval: "daily"
-  - package-ecosystem: "npm"
-    directory: "/mocks/proxy"
-    schedule:
-      interval: "daily"
-  - package-ecosystem: "npm"
-    directory: "/integration-tests/api-tests"
-    schedule:
-      interval: "daily"
-  - package-ecosystem: "npm"
-    directory: "/integration-tests/e2e-tests"
-    schedule:
-      interval: "daily"
-  - package-ecosystem: "npm"
-    directory: "/integration-tests/shared"
-    schedule:
-      interval: "daily"
-  - package-ecosystem: "npm"
-    directory: "/src/auth-provider"
-    schedule:
-      interval: "daily"
-  - package-ecosystem: "npm"
-    directory: "/src/backend"
-    schedule:
-      interval: "daily"
-  - package-ecosystem: "npm"
-    directory: "/src/frontend"
-    schedule:
-      interval: "daily"
+    - package-ecosystem: 'npm'
+      directory: '/'
+      schedule:
+          interval: 'daily'
+    - package-ecosystem: 'npm'
+      directory: '/mocks/proxy'
+      schedule:
+          interval: 'daily'
+    - package-ecosystem: 'npm'
+      directory: '/integration-tests/api-tests'
+      schedule:
+          interval: 'daily'
+    - package-ecosystem: 'npm'
+      directory: '/integration-tests/e2e-tests'
+      schedule:
+          interval: 'daily'
+    - package-ecosystem: 'npm'
+      directory: '/integration-tests/shared'
+      schedule:
+          interval: 'daily'
+    - package-ecosystem: 'npm'
+      directory: '/src/auth-provider'
+      schedule:
+          interval: 'daily'
+    - package-ecosystem: 'npm'
+      directory: '/src/backend'
+      schedule:
+          interval: 'daily'
+    - package-ecosystem: 'npm'
+      directory: '/src/frontend'
+      schedule:
+          interval: 'daily'
