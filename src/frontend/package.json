@@ -22,6 +22,6 @@
     },
     "type": "module",
     "dependencies": {
-        "@opentelemetry/sdk-trace-base": "^1.15.2"
+        "@opentelemetry/sdk-trace-base": "^1.16.0"
     }
 }
