@@ -7,7 +7,7 @@
     },
     "dependencies": {
         "@opentelemetry/exporter-trace-otlp-http": "^0.42.0",
-        "@opentelemetry/instrumentation": "^0.41.2",
+        "@opentelemetry/instrumentation": "^0.42.0",
         "@opentelemetry/instrumentation-express": "^0.33.1",
         "@opentelemetry/instrumentation-http": "^0.41.2",
         "@opentelemetry/resources": "^1.15.2",
