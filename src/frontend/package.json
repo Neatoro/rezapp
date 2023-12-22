@@ -9,7 +9,7 @@
     },
     "devDependencies": {
         "@sveltejs/adapter-node": "^2.0.2",
-        "@sveltejs/kit": "2.0.4",
+        "@sveltejs/kit": "2.0.6",
         "autoprefixer": "^10.4.16",
         "flowbite-svelte": "^0.44.20",
         "postcss": "^8.4.32",
