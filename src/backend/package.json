@@ -29,7 +29,7 @@
         "@opentelemetry/semantic-conventions": "^1.19.0",
         "axios": "^1.6.5",
         "class-transformer": "^0.5.1",
-        "class-validator": "^0.14.0",
+        "class-validator": "^0.14.1",
         "pg": "^8.11.3",
         "rxjs": "^7.8.1",
         "typeorm": "^0.3.19"
