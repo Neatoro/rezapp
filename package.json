@@ -14,7 +14,7 @@
     },
     "devDependencies": {
         "prettier": "^3.2.5",
-        "prettier-plugin-svelte": "^3.1.2",
+        "prettier-plugin-svelte": "^3.2.1",
         "uuid": "^9.0.1"
     },
     "dependencies": {
