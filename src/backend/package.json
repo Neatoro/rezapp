@@ -27,7 +27,7 @@
         "@opentelemetry/resources": "^1.21.0",
         "@opentelemetry/sdk-trace-node": "^1.22.0",
         "@opentelemetry/semantic-conventions": "^1.21.0",
-        "axios": "^1.6.7",
+        "axios": "^1.6.8",
         "class-transformer": "^0.5.1",
         "class-validator": "^0.14.1",
         "pg": "^8.11.3",
