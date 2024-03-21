@@ -12,7 +12,7 @@
         "@sveltejs/kit": "2.5.4",
         "autoprefixer": "^10.4.19",
         "flowbite-svelte": "^0.44.24",
-        "postcss": "^8.4.37",
+        "postcss": "^8.4.38",
         "postcss-load-config": "^5.0.3",
         "svelte": "^4.2.12",
         "svelte-i18n": "^4.0.0",
