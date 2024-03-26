@@ -6,7 +6,7 @@
         "start": "node ."
     },
     "dependencies": {
-        "express": "^4.19.1",
+        "express": "^4.19.2",
         "http-proxy-middleware": "^2.0.6"
     }
 }
