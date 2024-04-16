@@ -11,7 +11,7 @@
         "@sveltejs/adapter-node": "^5.0.1",
         "@sveltejs/kit": "2.5.6",
         "autoprefixer": "^10.4.19",
-        "flowbite-svelte": "^0.44.24",
+        "flowbite-svelte": "^0.45.0",
         "postcss": "^8.4.38",
         "postcss-load-config": "^5.0.3",
         "svelte": "^4.2.14",
