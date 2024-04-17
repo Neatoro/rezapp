@@ -14,7 +14,7 @@
         "flowbite-svelte": "^0.45.0",
         "postcss": "^8.4.38",
         "postcss-load-config": "^5.0.3",
-        "svelte": "^4.2.14",
+        "svelte": "^4.2.15",
         "svelte-i18n": "^4.0.0",
         "svelte-preprocess": "^5.1.4",
         "tailwindcss": "^3.4.3",
