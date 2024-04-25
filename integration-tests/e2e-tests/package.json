@@ -8,6 +8,6 @@
     "devDependencies": {
         "jasmine": "^5.1.0",
         "jasmine-console-reporter": "^3.1.0",
-        "puppeteer": "^22.7.0"
+        "puppeteer": "^22.7.1"
     }
 }
