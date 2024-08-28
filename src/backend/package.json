@@ -25,7 +25,7 @@
         "@opentelemetry/instrumentation-http": "^0.52.1",
         "@opentelemetry/instrumentation-nestjs-core": "^0.39.0",
         "@opentelemetry/resources": "^1.25.1",
-        "@opentelemetry/sdk-trace-node": "^1.25.1",
+        "@opentelemetry/sdk-trace-node": "^1.26.0",
         "@opentelemetry/semantic-conventions": "^1.26.0",
         "axios": "^1.7.5",
         "class-transformer": "^0.5.1",
