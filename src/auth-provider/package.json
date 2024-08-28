@@ -10,7 +10,7 @@
         "@opentelemetry/instrumentation": "^0.52.1",
         "@opentelemetry/instrumentation-express": "^0.41.1",
         "@opentelemetry/instrumentation-http": "^0.52.1",
-        "@opentelemetry/resources": "^1.25.1",
+        "@opentelemetry/resources": "^1.26.0",
         "@opentelemetry/sdk-trace-node": "^1.25.1",
         "@opentelemetry/semantic-conventions": "^1.26.0",
         "dotenv": "^16.4.5",
