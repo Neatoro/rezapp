@@ -6,7 +6,7 @@
         "start": "node --no-warnings ."
     },
     "devDependencies": {
-        "jasmine": "^5.2.0",
+        "jasmine": "^5.3.0",
         "jasmine-console-reporter": "^3.1.0",
         "puppeteer": "^23.3.0"
     }
