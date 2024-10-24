@@ -19,7 +19,7 @@
         "@nestjs/core": "^10.4.6",
         "@nestjs/platform-express": "^10.4.6",
         "@nestjs/typeorm": "^10.0.2",
-        "@opentelemetry/exporter-trace-otlp-http": "^0.53.0",
+        "@opentelemetry/exporter-trace-otlp-http": "^0.54.0",
         "@opentelemetry/instrumentation": "^0.53.0",
         "@opentelemetry/instrumentation-express": "^0.43.0",
         "@opentelemetry/instrumentation-http": "^0.53.0",
