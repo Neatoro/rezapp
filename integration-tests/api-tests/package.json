@@ -6,7 +6,7 @@
         "start": "node --no-warnings ."
     },
     "devDependencies": {
-        "form-data": "^4.0.1",
+        "form-data": "^4.0.2",
         "jasmine": "^5.6.0",
         "jasmine-console-reporter": "^3.1.0",
         "node-fetch": "^3.3.2"
