@@ -3,7 +3,7 @@
     "dependencies": {
         "@opentelemetry/exporter-trace-otlp-http": "^0.34.0",
         "@opentelemetry/resources": "^1.8.0",
-        "@opentelemetry/sdk-trace-base": "^1.8.0",
+        "@opentelemetry/sdk-trace-base": "^1.14.0",
         "@opentelemetry/sdk-trace-node": "^1.8.0",
         "@opentelemetry/semantic-conventions": "^1.8.0",
         "express": "^5.0.1"
