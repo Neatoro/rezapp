@@ -12,7 +12,7 @@
         "@opentelemetry/instrumentation-http": "^0.200.0",
         "@opentelemetry/resources": "^2.0.0",
         "@opentelemetry/sdk-trace-node": "^2.0.0",
-        "@opentelemetry/semantic-conventions": "^1.30.0",
+        "@opentelemetry/semantic-conventions": "^1.31.0",
         "dotenv": "^16.4.7",
         "express": "^5.1.0",
         "express-openid-connect": "^2.18.0",
